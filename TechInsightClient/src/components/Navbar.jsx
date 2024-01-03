@@ -13,13 +13,13 @@ const Navbar = () => {
         {path: "/", link: "Home"},
         {path: "/example", link: "Example"},
         {path: "/about", link: "About"},
-        {path: "/blogs", link: "Blogs"},
+        {path: "/blogs", link: "Blog Page"},
         {path: "/contact", link: "Contact"},
     ]
     return (
        <header className="bg-black text-white fixed top-0 left-0 right-0">
         <nav className="px-4 py-4 max-w-7xl mx-auto flex justify-between items-center ">
-            <a href="/" className="text-xl font-bold text-white "> Tech<span className="text-orange-500">Insight</span></a>
+            <a href="/" className="text-xl font-bold text-white "> Tech<span className="text-[#009bd6]">Insight</span></a>
             {/* nav items for large devies */}
             <ul className="md:flex gap-12 text-lg hidden">
                 {
@@ -39,7 +39,7 @@ const Navbar = () => {
                 <a href="/" className="hover:text-orange-500"> <FaFacebook/> </a>
                 <a href="/" className="hover:text-orange-500"> <FaDribbble/> </a>
                 <a href="/" className="hover:text-orange-500"> <FaTwitter/> </a>
-                <button className="bg-orange-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-orange-500
+                <button className="bg-[#009bd6] px-6 py-2 font-medium rounded hover:bg-white hover:text-[#009bd6]
                 transition-all duration-20 ease-in 
 
                 "> Log In</button>

@@ -1,42 +1,44 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.active{
+  @apply text-[#009bd6] 
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+.pagination{
+display: flex;
+justify-content: center;
+align-items: center;
+list-style-type: none;
+padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pagination li{
+margin: 0 5px;
+
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pagination a{
+display: flex;
+padding: 5px 10px;
+border: 1px solid  #ccc;
+border-radius: 4px;
+color: #000;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.pagination a:hover{
+background-color: #eee;
+
+
 }
 
-.card {
-  padding: 2em;
+.pagination li.activePagination{
+background:#009bd6;
+border-radius: 4px;
+color: #fff;
 }
 
-.read-the-docs {
-  color: #888;
+
+.active-button{
+color: #fc3c1a;
+
 }

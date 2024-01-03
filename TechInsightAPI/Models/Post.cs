@@ -18,6 +18,7 @@ namespace TechInsightAPI.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public int UserId { get; set; }
         public User? User { get; set; }
+        public string? UserName => User?.Username; // New property to get the username
         public int? CategoryId { get; set; }
         public Category? Category { get; set; } 
         public ICollection<Comment>? Comments { get; set; } = new List<Comment>();

@@ -8,6 +8,8 @@ import './index.css';
 import App from './App';
 import Home from './pages/Home';
 import Example from './pages/Example';
+import BlogPage from './pages/BlogPage';
+
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
     {
       path:"/example",
       element: <Example/>
-    },  
+    },
+    {
+      path:"/blogs",
+      element: <BlogPage/>
+    }  
     ]
   }
 ])

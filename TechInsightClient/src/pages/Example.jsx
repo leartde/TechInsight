@@ -28,7 +28,7 @@ const Example = () => {
   return (
     <div>
     {examples.map((example) => (
-        <div className='mt-12' key={example.id}>
+        <div key={example.id}>
             <h1 >{example.name}</h1>
             <p>{example.description}</p>
         </div>
