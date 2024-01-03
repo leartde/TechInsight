@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+
 const Example = () => {
 
     const [examples, setExamples] = useState([]);
@@ -27,8 +28,8 @@ const Example = () => {
   return (
     <div>
     {examples.map((example) => (
-        <div key={example.id}>
-            <h1>{example.name}</h1>
+        <div className='mt-12' key={example.id}>
+            <h1 >{example.name}</h1>
             <p>{example.description}</p>
         </div>
     ))}
