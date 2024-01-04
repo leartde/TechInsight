@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import GoogleLogo from '../assets/Google__G__logo.svg.png';
 import GitHubLogo from '../assets/github-mark-white.png';
 
@@ -7,6 +7,38 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [ConfirmPassword, setConfirmPassword] = useState('');
     const [Username, setUsername] = useState('');
+    const [user, setUser] = useState(null);
+    const [signupStatus, setSignupStatus] = useState(null);
+
+    useEffect(() => {
+        const signup = async () => {
+            try {
+                const response = await fetch('https://localhost:7265/api/User/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Success:', data);
+                    setSignupStatus('Success');
+                } else {
+                    console.log('Error:', response.statusText);
+                    setSignupStatus('Error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                setSignupStatus('Error');
+            }
+        };
+
+        if (user) {
+            signup();
+        }
+    }, [user]);
 
     const handleUserChange = (e) => {
         setUsername(e.target.value);
@@ -22,11 +54,23 @@ const SignUp = () => {
         setConfirmPassword(e.target.value);
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
+    
+        if (!Username || !email || !password || !ConfirmPassword) {
+            console.error('All fields must be filled');
+            return;
+        }
+    
+        setUser({
+            Username,
+            Email: email,
+            Password: password,
+            ConfirmPassword: ConfirmPassword,
+        });
     };
-
+    
+    
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center mt-12">
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
