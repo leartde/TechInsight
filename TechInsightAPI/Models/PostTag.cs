@@ -13,8 +13,8 @@ namespace TechInsightAPI.Models
         [Column(Order = 2)]
         public int TagId { get; set; }
 
-        public Post PostReference { get; set; }
-        public Tag TagReference { get; set; }
+        public virtual Post PostReference { get; set; }
+        public virtual Tag TagReference { get; set; }
     }
 
 }

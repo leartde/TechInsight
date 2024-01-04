@@ -24,17 +24,17 @@ namespace TechInsightAPI.Models
 
         public DateTime RegistrationTime { get; set; } = DateTime.Now;
 
-        public ICollection<Post> Posts { get; set; } = new List<Post>();
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        public ICollection<Like> Likes { get; set; } = new List<Like>();
-        public ICollection<UserClick> UserClicks { get; set; } = new List<UserClick>();
+        public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
+        public virtual ICollection<UserClick> UserClicks { get; set; } = new List<UserClick>();
     }
 
     public enum UserRole
     {
         Standard,
         Admin,
-        // Add more roles as needed
+        
     }
 
 }

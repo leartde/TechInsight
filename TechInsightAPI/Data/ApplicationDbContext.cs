@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TechInsightAPI.Models;
 using TechInsightAPI.Models.TechInsight.Models;
 
@@ -9,7 +10,13 @@ namespace TechInsightAPI.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
-
+            //this.ChangeTracker.LazyLoadingEnabled = false; disables lazy ladoing
+            
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies(); // Enable lazy loading
+                                                    // Other configuration options
         }
 
         public DbSet<Example> Examples { get; set; }

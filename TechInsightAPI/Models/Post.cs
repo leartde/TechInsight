@@ -17,14 +17,13 @@ namespace TechInsightAPI.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public int UserId { get; set; }
-        public User? User { get; set; }
-        public string? UserName => User?.Username; // New property to get the username
-        public int? CategoryId { get; set; }
-        public Category? Category { get; set; } 
-        public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
-        public ICollection<PostTag>? PostTags { get; set; } = new List<PostTag>();
-        public ICollection<Like>? Likes { get; set; } = new List<Like>();
-        public ICollection<UserClick>? UserClicks { get; set; } = new List<UserClick>();
+        public virtual User User { get; set; }
+        public int CategoryId { get; set; }
+        public virtual Category? Category { get; set; } 
+        public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<PostTag>? PostTags { get; set; } = new List<PostTag>();
+        public virtual ICollection<Like>? Likes { get; set; } = new List<Like>();
+        public  virtual ICollection<UserClick>? UserClicks { get; set; } = new List<UserClick>();
     }
 
 }

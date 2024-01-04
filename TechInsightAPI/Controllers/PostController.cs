@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using TechInsightAPI.Data;
 using TechInsightAPI.Interfaces;
 using TechInsightAPI.Models;
+using TechInsightAPI.DTOs;
+using System.Reflection;
 
 namespace TechInsightAPI.Controllers
 {
@@ -17,14 +22,28 @@ namespace TechInsightAPI.Controllers
         }
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ICollection<Example>))]
-        public IActionResult GetPosts()
+        public IQueryable<PostDto> GetPosts()
         {
-            var posts = _context.Posts.OrderBy(e => e.Id).ToList();
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(posts);
+            var posts = from p in _context.Posts
+                        select new PostDto()
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Content = p.Content,
+                            Author = p.User.Username,
+                            Category = p.Category.Name,
+                            ImageURL = p.ImageURL,
+                            CreatedAt = p.CreatedAt
+                        };
+            return posts;
         }
+
+
+        
+    
+    
+    
+    
+    
     }
 }

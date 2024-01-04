@@ -15,8 +15,8 @@
             [Column(Order = 2)]
             public int UserId { get; set; }
 
-            public Post ClickedPost { get; set; }
-            public User ClickingUser { get; set; }
+            public virtual Post ClickedPost { get; set; }
+            public virtual User ClickingUser { get; set; }
         }
     }
 }

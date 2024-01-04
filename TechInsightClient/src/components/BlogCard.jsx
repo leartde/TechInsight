@@ -18,7 +18,7 @@ const BlogCard = ({blogs, currentPage, selectedCategory, pageSize}) => {
                 </div>
                 
                 <h3 className='mt-4 mb-2 font-bold hover:text-blue-600 cursor-pointer'> {blog.title}</h3>
-                <p className='mb-2 text-gray-400'><FaUser className='inline-flex items-center m-2'/> {blog.user}</p>
+                <p className='mb-2 text-gray-400'><FaUser className='inline-flex items-center m-2'/> {blog.author}</p>
                 <p className='text-sm mb-2 text-gray-600'> Published: {new Date(blog.createdAt).toLocaleString()}</p>
 
             

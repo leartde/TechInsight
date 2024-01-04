@@ -8,6 +8,6 @@ namespace TechInsightAPI.Models
         [Required(ErrorMessage = "Category name is required")]
         public string Name { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

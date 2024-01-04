@@ -12,8 +12,8 @@ using TechInsightAPI.Data;
 namespace TechInsightAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240103172253_m2")]
-    partial class m2
+    [Migration("20240104000314_m")]
+    partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,7 +126,7 @@ namespace TechInsightAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -289,7 +289,8 @@ namespace TechInsightAPI.Migrations
                     b.HasOne("TechInsightAPI.Models.Category", "Category")
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("TechInsightAPI.Models.User", "User")
                         .WithMany("Posts")
