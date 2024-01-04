@@ -4,7 +4,7 @@ const CategorySelector = ({onSelectCategory, activeCategory}) => {
     const categories = ["Technology","AI", "Software","Cybersecurity", "Random","Random2","Random3"]; //testing purposes ,will add more
     console.log("category: ", activeCategory)
     return (
-        <div className=' pl-10 flex justify-start mb-8 space-x-8  lg:space-x-16 flex-wrap items-center border-b-2 py-5 text-gray-900 font-semibold'>
+        <div className='  flex justify-start pl-16 mb-8 space-x-8 lg:space-x-16 flex-wrap items-center border-b-2 py-5 text-gray-900 font-semibold'>
             <button className={`lg:ml-12 ${activeCategory?"":"active-button"}`} onClick={()=>onSelectCategory(null)}> All</button>
             {
                 categories.map((category)=>(
