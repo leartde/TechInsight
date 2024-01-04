@@ -8,6 +8,7 @@
         public string Author { get; set; }
         public string Category {  get; set; }
         public string ImageURL { get; set; }
+        public string UserImage { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

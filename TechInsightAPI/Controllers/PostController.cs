@@ -33,6 +33,7 @@ namespace TechInsightAPI.Controllers
                             Author = p.User.Username,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
             return posts;
