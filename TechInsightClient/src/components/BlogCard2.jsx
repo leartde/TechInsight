@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { FaFontAwesome, FaGear } from 'react-icons/fa6';
 import { Link } from 'react-router-dom'
 
 const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
@@ -21,7 +22,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
 
                          {/* body */}
                         <div className='flex flex-col gap-2 p-4'>
-                            <span className='px-4 py-2  text-sm rounded-2xl self-start ml-1 bg-gradient-to-b from-[#2F80ED] to-[#56CCF2] text-yellow-50	'> {blog.category}</span>
+                            <span className='px-4 py-2  text-sm rounded-2xl self-start ml-1 bg-gradient-to-b from-[#2F80ED] to-[#56CCF2] text-yellow-50	'>  {blog.category}</span>
                             <h3 className='text-xl font-medium px-1 w-full'> {blog.title}  </h3>
                         </div>
 
