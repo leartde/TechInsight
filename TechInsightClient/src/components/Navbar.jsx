@@ -39,7 +39,7 @@ const Navbar = () => {
                 <a href="/" className="hover:text-orange-500"> <FaFacebook/> </a>
                 <a href="/" className="hover:text-orange-500"> <FaDribbble/> </a>
                 <a href="/" className="hover:text-orange-500"> <FaTwitter/> </a>
-                <button className="bg-[#009bd6] px-6 py-2 font-medium rounded hover:bg-white hover:text-[#009bd6]
+                <button className="bg-indigo-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-[#009bd6]
                 transition-all duration-20 ease-in 
 
                 "> Log In</button>
