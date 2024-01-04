@@ -4,51 +4,68 @@ import BlogCard from '../components/BlogCard';
 import Pagination from '../components/Pagination';
 import CategorySelector from '../components/CategorySelector';
 import BlogCard2 from '../components/BlogCard2';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 12; //number of blogs per page;
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [activeCategory, setActiveCategory] = useState(null)
-    useEffect(()=>{
-        const fetchData = async () =>{
-            try{
-                const response = await fetch(`https://localhost:7265/api/Post?page=${currentPage}&limit=${pageSize}`);
-                if (selectedCategory) {
-                    url += `&category=${activeCategory}`;
+    const [activeCategory, setActiveCategory] = useState(null);
+    
+    const [searchParams, setSearchParams] = useSearchParams(); // useSearchParams without initial values
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let url = `https://localhost:7265/api/posts?page=${currentPage}&limit=${pageSize}`;
+
+                if (searchParams.get('category')) {
+                    url += `&category=${searchParams.get('category')}`;
+                    setSelectedCategory(searchParams.get('category'));
+                    setActiveCategory(searchParams.get('category'));
                 }
-                if(response.ok){
+
+                const response = await fetch(url);
+
+                if (response.ok) {
                     const data = await response.json();
                     setBlogs(data);
                     console.log(data);
-                }
-                else{
+                } else {
                     console.log('Error fetching blogs:', response.statusText);
                 }
-
-            }
-            catch(error){
+            } catch (error) {
                 console.log('Error fetching blogs', error);
-
             }
-            
+        };
 
-        }
         fetchData();
+    }, [currentPage, pageSize, searchParams]);
 
-    },[currentPage, pageSize, selectedCategory, activeCategory]);
-
-    const handlePageChange = (pageNumber) =>{
+    const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
 
-    }
-    const handleCategoryChange = (category) =>{
-            setSelectedCategory(category);
-            setCurrentPage(1);
-            setActiveCategory(category)
-            
-    }
+    };
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setActiveCategory(category);
+    
+        // Construct the new searchParams object based on the category
+        const newSearchParams = { ...searchParams};
+    
+        if (category !== null) {
+            newSearchParams.category = category;
+        } else {
+            delete newSearchParams.category; // Remove the category property
+        }
+    
+        setSearchParams(newSearchParams);
+
+    };
+
   return (
     <div className='my-20'>
         <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
