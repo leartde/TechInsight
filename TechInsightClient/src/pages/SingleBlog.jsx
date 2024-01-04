@@ -1,9 +1,77 @@
-import React from 'react'
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useLoaderData } from 'react-router-dom';
+import axios from 'axios';
+import { FaUser } from 'react-icons/fa';
 
 const SingleBlog = () => {
     const blog = useLoaderData();
-    console.log('data', blog);
+    // console.log('data', blog);
+
+    const [categories, setCategories] = useState([]);
+    useEffect(()=>{
+        const fetchCategories = async()=>{
+            try{
+                const url = `https://localhost:7265/api/categories`;
+                const categoryResponse = await fetch(url);
+                
+                if (categoryResponse.ok) {
+                    const data = await categoryResponse.json();
+                    setCategories(data);
+                    console.log(data);
+                } else {
+                    console.log('Error fetching categories:', categoryResponse.statusText);
+                }
+
+
+            }
+            catch(error)
+            {
+                console.log("error fetching categories", error)
+            }
+        }
+        fetchCategories();
+
+    },[])
+    // console.log("categories ", categories);
+    
+    const [relatedBlogs, setRelatedBlogs]= useState([]);
+    useEffect(()=>{
+       const fetchRelatedBlogs = async () =>{
+        try{
+            const url = `https://localhost:7265/api/posts/category/${blog.category}`;
+                const relatedBlogsResponse = await fetch(url);
+                const data = await relatedBlogsResponse.json();
+                data;
+                setRelatedBlogs(data.slice(0, 5))
+
+        }
+        catch(error){
+            console.log('error fetching related blogs ', error)
+        }
+       }
+       fetchRelatedBlogs();
+
+    },[])
+    // console.log('related blogs ', relatedBlogs);
+
+    const [blogsBySameUser, setblogsBySameUser]= useState([]);
+    useEffect(()=>{
+       const fetchOtherBlogs = async () =>{
+        try{
+            const url = `https://localhost:7265/api/posts/user/${blog.userId}`;
+                const otherBlogsResponse = await fetch(url);
+                const data = await otherBlogsResponse.json();
+                setblogsBySameUser(data.slice(0, 4));
+
+        }
+        catch(error){
+            console.log('error fetching related blogs ', error)
+        }
+       }
+       fetchOtherBlogs();
+
+    },[])
+    console.log('blogsBySameUser ', blogsBySameUser)
 
     
   return (
@@ -22,138 +90,46 @@ const SingleBlog = () => {
             <div class="w-full bg-white shadow-sm rounded-sm p-4 ">
                 <h3 class="text-xl font-semibold text-gray-700 mb-3 font-roboto">Categories</h3>
                 <div class="space-y-2">
-                    <a href="#"
+                    {
+                        categories.map((category)=>(
+                            <Link to={`/blogs?category=${category.name}`} href="#" key={category.id}
                         class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Beauti</span>
-                        <p class="ml-auto font-normal">(12)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Business</span>
-                        <p class="ml-auto font-normal">(15)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Fashion</span>
-                        <p class="ml-auto font-normal">(5)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Food</span>
-                        <p class="ml-auto font-normal">(10)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Learn</span>
-                        <p class="ml-auto font-normal">(3)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Music</span>
-                        <p class="ml-auto font-normal">(7)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Nature</span>
-                        <p class="ml-auto font-normal">(0)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>People</span>
-                        <p class="ml-auto font-normal">(13)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Sports</span>
-                        <p class="ml-auto font-normal">(7)</p>
-                    </a>
-                    <a href="#"
-                        class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
-                        <span class="mr-2">
-                            <i class="far fa-folder-open"></i>
-                        </span>
-                        <span>Technology</span>
-                        <p class="ml-auto font-normal">(17)</p>
-                    </a>
+                       
+                        <span>{category.name}</span>
+                        <p class="ml-auto font-normal">{category.nrPosts}</p>
+                    </Link>
+                        ))
+                    }
+                   
                 </div>
             </div>
 
             {/* <!-- random posts --> */}
             <div class="w-full mt-8 bg-white shadow-sm rounded-sm p-4 ">
-                <h3 class="text-xl font-semibold text-gray-700 mb-3 font-roboto">Random Posts</h3>
+                <h3 class="text-xl font-semibold text-gray-700 mb-3 font-roboto">Other blogs by the same author</h3>
                 <div class="space-y-4">
-                    <a href="#" class="flex group">
+                  {
+                    blogsBySameUser.map((blog)=>(
+                        <Link key={blog.id} to={`/blogs/${blog.id}`} class="flex group">
                         <div class="flex-shrink-0">
-                            <img src="src/images/img-1.jpg" class="h-14 w-20 rounded object-cover"/>
+                            <img src={blog.imageURL} class="h-14 w-20 rounded object-cover"/>
                         </div>
                         <div class="flex-grow pl-3">
                             <h5
                                 class="text-md leading-5 block font-roboto font-semibold  transition group-hover:text-blue-500">
-                                Team Bitbose geared up to attend Blockchain
+                                {blog.title}
                             </h5>
                             <div class="flex text-gray-400 text-sm items-center">
                                 <span class="mr-1 text-xs"><i class="far fa-clock"></i></span>
                                 June 11, 2021
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="flex group">
-                        <div class="flex-shrink-0">
-                            <img src="src/images/img-2.jpg" class="h-14 w-20 rounded object-cover"/>
-                        </div>
-                        <div class="flex-grow pl-3">
-                            <h5
-                                class="text-md leading-5 block font-roboto font-semibold  transition group-hover:text-blue-500">
-                                After a Caribbean Hurricane, the Battle
-                            </h5>
-                            <div class="flex text-gray-400 text-sm items-center">
-                                <span class="mr-1 text-xs"><i class="far fa-clock"></i></span>
-                                March 27, 2021
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="flex group">
-                        <div class="flex-shrink-0">
-                            <img src="src/images/img-3.jpg" class="h-14 w-20 rounded object-cover"/>
-                        </div>
-                        <div class="flex-grow pl-3">
-                            <h5
-                                class="text-md leading-5 block font-roboto font-semibold  transition group-hover:text-blue-500">
-                                California sheriff’s deputy shot during ‘ambush’
-                            </h5>
-                            <div class="flex text-gray-400 text-sm items-center">
-                                <span class="mr-1 text-xs"><i class="far fa-clock"></i></span>
-                                Aprile 17, 2021
-                            </div>
-                        </div>
-                    </a>
+                    </Link>
+
+                    ))
+                  }
+                  
+                  
                 </div>
             </div>
         </div>
@@ -164,16 +140,16 @@ const SingleBlog = () => {
             {/* <!-- post view --> */}
             <div class="rounded-sm overflow-hidden bg-white shadow-sm">
                 <div class="">
-                    <img src={blog.imageURL} class="w-full h-96 object-cover"/>
+                    <img src={blog.imageURL} class="w-full h-96 object-contain"/>
                 </div>
                 <div class="p-4 pb-5">
                     <h2 class="block text-2xl font-semibold text-gray-700 font-roboto">
                         {blog.title}
                     </h2>
                     <div class="mt-2 flex space-x-4">
-                        <div class="flex text-gray-400 text-sm items-center">
+                        <div class="flex text-gray-400 text-md items-center">
                             <span class="mr-2 text-xs">
-                                <i class="far fa-user"></i>
+                                <FaUser/>
                             </span>
                             {blog.author}
                         </div>
@@ -185,7 +161,7 @@ const SingleBlog = () => {
                         </div>
                     </div>
 
-                    <p class="text-gray-500 text-sm mt-5">
+                    <p class="text-gray-500 text-base mt-5">
                        {blog.content}
                     </p>
 
@@ -198,25 +174,27 @@ const SingleBlog = () => {
 
             {/* <!-- title --> */}
             <div class="flex bg-white px-3 py-2 justify-between items-center rounded-sm mt-8">
-                <h5 class="text-base uppercase font-semibold font-roboto">Related posts</h5>
-                <a href="#"
+                <h5 class="text-base uppercase font-semibold font-roboto">Related blogs</h5>
+                <Link to={`/blogs?category=${blog.category}`}
                     class="text-white py-1 px-3 rounded-sm uppercase text-sm bg-blue-500 border border-blue-500 hover:text-blue-500 hover:bg-transparent transition">
                     see more
-                </a>
+                </Link>
             </div>
 
             {/* <!-- similer post --> */}
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4">
-                <div class="rounded-sm bg-white p-3 pb-5 shadow-sm">
+                {
+                    relatedBlogs.map((relatedBlog)=>(
+                        <div key={relatedBlog.id} class="rounded-sm bg-white p-3 pb-5 shadow-sm">
                     <a href="#" class="block rounded-md overflow-hidden">
-                        <img src="src/images/img-7.jpg"
+                        <img src={relatedBlog.imageURL}
                             class="w-full h-40 object-cover transform hover:scale-110 transition duration-500"/>
                     </a>
                     <div class="mt-3">
                         <a href="#">
                             <h2
                                 class="block text-base font-semibold text-gray-700 hover:text-blue-500 transition font-roboto">
-                                Lorem, ipsum dolor amet sit consec tetur elit.
+                                {relatedBlog.title}
                             </h2>
                         </a>
                         <div class="mt-2 flex space-x-3">
@@ -224,73 +202,21 @@ const SingleBlog = () => {
                                 <span class="mr-1 text-xs">
                                     <i class="far fa-user"></i>
                                 </span>
-                                Blogging Tips
+                                {relatedBlog.author}
                             </div>
                             <div class="flex text-gray-400 text-xs items-center">
                                 <span class="mr-1 text-xs">
                                     <i class="far fa-clock"></i>
                                 </span>
-                                June 11, 2021
+                                {new Date(relatedBlog.createdAt).toLocaleString()}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="rounded-sm bg-white p-3 pb-5 shadow-sm">
-                    <a href="#" class="block rounded-md overflow-hidden">
-                        <img src="src/images/img-5.jpg"
-                            class="w-full h-40 object-cover transform hover:scale-110 transition duration-500"/>
-                    </a>
-                    <div class="mt-3">
-                        <a href="#">
-                            <h2
-                                class="block text-base font-semibold text-gray-700 hover:text-blue-500 transition font-roboto">
-                                Lorem, ipsum dolor amet sit consec tetur elit.
-                            </h2>
-                        </a>
-                        <div class="mt-2 flex space-x-3">
-                            <div class="flex text-gray-400 text-xs items-center">
-                                <span class="mr-1 text-xs">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                Blogging Tips
-                            </div>
-                            <div class="flex text-gray-400 text-xs items-center">
-                                <span class="mr-1 text-xs">
-                                    <i class="far fa-clock"></i>
-                                </span>
-                                June 11, 2021
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded-sm bg-white p-3 pb-5 shadow-sm hidden md:block">
-                    <a href="#" class="block rounded-md overflow-hidden">
-                        <img src="src/images/img-6.jpg"
-                            class="w-full h-40 object-cover transform hover:scale-110 transition duration-500"/>
-                    </a>
-                    <div class="mt-3">
-                        <a href="#">
-                            <h2
-                                class="block text-base font-semibold text-gray-700 hover:text-blue-500 transition font-roboto">
-                                Lorem, ipsum dolor amet sit consec tetur elit.
-                            </h2>
-                        </a>
-                        <div class="mt-2 flex space-x-3">
-                            <div class="flex text-gray-400 text-xs items-center">
-                                <span class="mr-1 text-xs">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                Blogging Tips
-                            </div>
-                            <div class="flex text-gray-400 text-xs items-center">
-                                <span class="mr-1 text-xs">
-                                    <i class="far fa-clock"></i>
-                                </span>
-                                June 11, 2021
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    ))
+                }
+              
+                  
             </div>
 
             {/* <!-- comment --> */}
@@ -528,7 +454,7 @@ const SingleBlog = () => {
                     <span class="mr-2">
                         <i class="far fa-folder-open"></i>
                     </span>
-                    <span>Beauti</span>
+                    <span>Tagg</span>
                     <p class="ml-auto font-normal">(12)</p>
                 </a>
                 <a href="#"

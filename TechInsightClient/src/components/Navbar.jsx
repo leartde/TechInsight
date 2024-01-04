@@ -13,7 +13,7 @@ const Navbar = () => {
         {path: "/", link: "Home"},
         {path: "/example", link: "Example"},
         {path: "/about", link: "About"},
-        {path: "/blogs", link: "Blog Page"},
+        {path: "/blogs", link: "Blogs"},
         {path: "/contact", link: "Contact"},
     ]
     return (

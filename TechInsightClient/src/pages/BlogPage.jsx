@@ -46,12 +46,14 @@ const BlogPage = () => {
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+        
 
     };
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setActiveCategory(category);
+        setCurrentPage(1)
     
         // Construct the new searchParams object based on the category
         const newSearchParams = { ...searchParams};

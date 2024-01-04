@@ -21,8 +21,9 @@ namespace TechInsightAPI.Controllers
             _context = context;
         }
         [HttpGet]
-        
-        public IQueryable<PostDto> GetPosts()
+        [ProducesResponseType(200, Type = typeof(Post))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPosts()
         {
             var posts = from p in _context.Posts
                         select new PostDto()
@@ -31,12 +32,13 @@ namespace TechInsightAPI.Controllers
                             Title = p.Title,
                             Content = p.Content,
                             Author = p.User.Username,
+                            UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
-            return posts;
+            return Ok(posts);
         }
 
         [HttpGet("{postId}")]
@@ -55,6 +57,7 @@ namespace TechInsightAPI.Controllers
                             Title = p.Title,
                             Content = p.Content,
                             Author = p.User.Username,
+                            UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
                             UserImage = p.User.ProfilePicUrl,
@@ -78,6 +81,7 @@ namespace TechInsightAPI.Controllers
                             Title = p.Title,
                             Content = p.Content,
                             Author = p.User.Username,
+                            UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
                             UserImage = p.User.ProfilePicUrl,
@@ -93,6 +97,36 @@ namespace TechInsightAPI.Controllers
 
             return Ok(selectedPosts);
         }
+
+        [HttpGet("user/{userId}")]
+        [ProducesResponseType(200, Type = typeof(Post))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPosts(int userId)
+        {
+            var posts = from p in _context.Posts
+                        select new PostDto()
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Content = p.Content,
+                            Author = p.User.Username,
+                            UserId = p.User.Id,
+                            Category = p.Category.Name,
+                            ImageURL = p.ImageURL,
+                            UserImage = p.User.ProfilePicUrl,
+                            CreatedAt = p.CreatedAt
+                        };
+
+            var selectedPosts = posts.Where(p => p.UserId == userId).ToList();
+
+            if (selectedPosts.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(selectedPosts);
+        }
+
 
 
 

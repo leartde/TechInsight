@@ -24,6 +24,7 @@ namespace TechInsightAPI.Controllers
                              {
                                  Id = c.Id,
                                  Name = c.Name,
+                                 nrPosts = _context.Posts.Count(p => p.CategoryId == c.Id)
                              };
             return categories;
         }
