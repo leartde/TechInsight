@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Example from './pages/Example';
 import BlogPage from './pages/BlogPage';
 import Login from './components/Login';
-import Test from './pages/Test';
+import SingleBlog from './pages/SingleBlog';
 import SignUp from './components/SignUp';
 
 
@@ -40,8 +40,9 @@ const router = createBrowserRouter([
       element: <SignUp/>
     },
     {
-      path:"/test",
-      element:<Test/>
+      path:"/blogs/:id",
+      element:<SingleBlog/>,
+      loader:({params})=> fetch(`https://localhost:7265/api/Post/${params.id}`)
     }
     ]
   }
