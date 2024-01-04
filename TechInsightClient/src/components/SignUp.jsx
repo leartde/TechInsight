@@ -5,10 +5,11 @@ import GitHubLogo from '../assets/github-mark-white.png';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [ConfirmPassword, setConfirmPassword] = useState('');
-    const [Username, setUsername] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [user, setUser] = useState(null);
     const [signupStatus, setSignupStatus] = useState(null);
+    const [emailError, setEmailError] = useState('');
 
     useEffect(() => {
         const signup = async () => {
@@ -40,34 +41,42 @@ const SignUp = () => {
         }
     }, [user]);
 
-    const handleUserChange = (e) => {
+    const handleUsernameChange = (e) => {
         setUsername(e.target.value);
     };
+
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+        const enteredEmail = e.target.value;
+        setEmail(enteredEmail);
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        setEmailError(emailRegex.test(enteredEmail) ? '' : 'Invalid email format');
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
-        if (!Username || !email || !password || !ConfirmPassword) {
-            console.error('All fields must be filled');
+
+        if (!username || !email || !password || !confirmPassword || emailError) {
+            console.error('All fields must be filled and email must be valid');
             return;
         }
-    
+
         setUser({
-            Username,
+            Username: username,
             Email: email,
             Password: password,
-            ConfirmPassword: ConfirmPassword,
+            ConfirmPassword: confirmPassword,
         });
+        
     };
     
     
@@ -117,7 +126,7 @@ const SignUp = () => {
                             <div className="mx-auto max-w-xs">
                                 <input
                                     className="w-full px-6 py-3 mb-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="name" placeholder="Username" value={Username} onChange={handleUserChange} />
+                                    type="name" placeholder="Username" value={username} onChange={handleUsernameChange} />
                                 <input
                                     className="w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
@@ -126,7 +135,7 @@ const SignUp = () => {
                                     type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                                 <input
                                     className="w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" placeholder="ConfirmPassword" value={ConfirmPassword} onChange={handleConfirmPasswordChange} />
+                                    type="password" placeholder="ConfirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} />
                                     
                                 <button
                                     className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"

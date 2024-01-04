@@ -3,7 +3,6 @@ import { FaBars, FaFacebook, FaXmark } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa6";
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 
-
 const Footer = () => {
     return (
         <div className="bg-gray-100">
@@ -45,16 +44,16 @@ const Footer = () => {
             <div className="flex py-5 m-auto text-gray-800 text-lg flex-col items-center border-t max-w-screen-xl">
                 <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
                     <a href="#" className="w-6 mx-1">
-                    <a href="/" className="hover:text-indigo-600"> <FaTwitter/> </a>
+                        <FaTwitter className="hover:text-indigo-600" />
                     </a>
                     <a href="#" className="w-6 mx-1">
-                    <a href="/" className="hover:text-indigo-600"> <FaFacebook/> </a>
+                        <FaFacebook className="hover:text-indigo-600" />
                     </a>
                     <a href="#" className="w-6 mx-1">
-                    <a href="/" className="hover:text-indigo-600"> <FaLinkedin/> </a>
+                        <FaLinkedin className="hover:text-indigo-600" />
                     </a>
                     <a href="#" className="w-6 mx-1">
-                    <a href="/" className="hover:text-indigo-600"> <FaInstagram/> </a>
+                        <FaInstagram className="hover:text-indigo-600" />
                     </a>
                 </div>
                 <div className="my-5">© Copyright 2023. All Rights Reserved.</div>
