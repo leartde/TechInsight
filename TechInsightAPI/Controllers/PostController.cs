@@ -39,12 +39,38 @@ namespace TechInsightAPI.Controllers
             return posts;
         }
 
+        [HttpGet("{postId}")]
+        [ProducesResponseType(200, Type = typeof(Post))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPost(int postId)
+        {
+            if (!_context.Posts.Any(p => p.Id == postId))
+            {
+                return NotFound();
+            }
+            var posts = from p in _context.Posts
+                        select new PostDto()
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Content = p.Content,
+                            Author = p.User.Username,
+                            Category = p.Category.Name,
+                            ImageURL = p.ImageURL,
+                            UserImage = p.User.ProfilePicUrl,
+                            CreatedAt = p.CreatedAt
+                        };
+            var selectedPost = posts.Where(p => p.Id == postId).FirstOrDefault();
 
-        
-    
-    
-    
-    
-    
+            return Ok(selectedPost);
+
+        }
+
+
+
+
+
+
+
     }
 }
