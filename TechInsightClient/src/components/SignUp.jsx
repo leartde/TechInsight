@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect} from 'react';
 import GoogleLogo from '../assets/Google__G__logo.svg.png';
 import GitHubLogo from '../assets/github-mark-white.png';
 
@@ -21,7 +21,6 @@ const SignUp = () => {
                     },
                     body: JSON.stringify(user),
                 });
-
                 if (response.ok) {
                     const data = await response.json();
                     console.log('Success:', data);
@@ -35,7 +34,6 @@ const SignUp = () => {
                 setSignupStatus('Error');
             }
         };
-
         if (user) {
             signup();
         }
@@ -76,10 +74,8 @@ const SignUp = () => {
             Password: password,
             ConfirmPassword: confirmPassword,
         });
-        
+
     };
-    
-    
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center mt-12">
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
