@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import BlogCard from '../components/BlogCard';
 import Pagination from '../components/Pagination';
+import CategorySelector from '../components/CategorySelector';
 
 const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
@@ -48,8 +49,9 @@ const BlogPage = () => {
             
     }
   return (
-    <div>
-         <div className='flex flex-col lg:flex-row max-w-7xl mx-auto gap-12 my-20'> 
+    <div className='my-20'>
+        <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
+         <div className='flex flex-col lg:flex-row max-w-7xl mx-auto gap-12 '> 
                 <BlogCard blogs={blogs} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
             </div>
             <div>
