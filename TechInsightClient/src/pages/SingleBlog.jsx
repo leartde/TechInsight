@@ -3,7 +3,9 @@ import { useLoaderData } from 'react-router-dom';
 
 const SingleBlog = () => {
     const blog = useLoaderData();
-    console.log('data', blog)
+    console.log('data', blog);
+
+    
   return (
 
     
