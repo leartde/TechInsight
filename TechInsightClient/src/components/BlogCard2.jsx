@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
     const filteredBlogs = blogs.filter((blogs)=> !selectedCategory || blogs.category === selectedCategory )
-    .slice((currentPage - 1) * pageSize, currentPage * pageSize )
-    
+    .slice((currentPage - 1) * pageSize, currentPage * pageSize );
+
+   
   return (
     <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8'>
         {
             filteredBlogs.map((blog)=>(
+                
                 
                 
                     <div className='flex flex-col rounded-2xl p-5 shadow-lg  cursor-pointer ' >
@@ -20,7 +22,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
                          {/* body */}
                         <div className='flex flex-col gap-2 p-4'>
                             <span className='px-4 py-2  text-sm rounded-2xl self-start ml-1 bg-gradient-to-b from-[#2F80ED] to-[#56CCF2] text-yellow-50	'> {blog.category}</span>
-                            <p className='text-base font-medium px-1 w-full'> {blog.content} Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates consequatur, maiores, ducimu </p>
+                            <h3 className='text-xl font-medium px-1 w-full'> {blog.title}  </h3>
                         </div>
 
                            {/* footer */}

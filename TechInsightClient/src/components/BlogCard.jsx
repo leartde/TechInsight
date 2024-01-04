@@ -4,7 +4,8 @@ import {FaUser} from 'react-icons/fa'
 
 const BlogCard = ({blogs, currentPage, selectedCategory, pageSize}) => {
     const filteredBlogs = blogs.filter((blogs)=> !selectedCategory || blogs.category === selectedCategory )
-    .slice((currentPage - 1) * pageSize, currentPage * pageSize )
+    .slice((currentPage - 1) * pageSize, currentPage * pageSize );
+
     
     
   return (
