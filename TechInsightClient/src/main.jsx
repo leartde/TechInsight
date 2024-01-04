@@ -9,6 +9,8 @@ import App from './App';
 import Home from './pages/Home';
 import Example from './pages/Example';
 import BlogPage from './pages/BlogPage';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 
 const router = createBrowserRouter([
@@ -27,7 +29,15 @@ const router = createBrowserRouter([
     {
       path:"/blogs",
       element: <BlogPage/>
-    }  
+    },
+    {
+      path:"/login",
+      element: <Login/>
+    },
+    {
+      path:"/signup",
+      element: <SignUp/>
+    }
     ]
   }
 ])
