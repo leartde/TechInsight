@@ -16,6 +16,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
                 
                 
                 
+                  <Link to={`/blogs/${blog.id}`} key={blog.id}>
                     <div className='flex flex-col rounded-2xl p-5 shadow-lg  cursor-pointer ' >
                         {/* image */}
                         <div>
@@ -46,6 +47,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
 
 
                     </div>
+                  </Link>
 
 
 
