@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CategorySelector = ({onSelectCategory, activeCategory}) => {
-    const categories = ["Technology","AI", "Software","Cybersecurity", "Random","Random2","Random3"]; //testing purposes ,will add more
+    const categories = ["Devices","Code", "Innovation","Cybersecurity", "Trends","AI"]; //testing purposes ,will add more
     console.log("category: ", activeCategory)
     return (
         <div className='  flex justify-start pl-16 mb-8 space-x-8 lg:space-x-16 flex-wrap items-center border-b-2 py-5 text-gray-900 font-semibold'>

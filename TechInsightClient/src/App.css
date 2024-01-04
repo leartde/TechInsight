@@ -42,3 +42,33 @@ color: #fff;
 color: #fc3c1a;
 
 }
+
+.Devices{
+  background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+color: #fff; 
+}
+
+.Code{
+  background: linear-gradient(to bottom, #424769, #7077A1);
+color: #fff; 
+}
+
+.Innovation{
+  background: linear-gradient(to bottom, #C6A969, #F1E4C3);
+color: #fff; 
+}
+
+.Cybersecurity{
+  background: linear-gradient(to bottom, #EA906C, #EEE2DE);
+color: #fff; 
+}
+
+.Trends{
+  background: linear-gradient(to bottom, #820300, #B80000);
+color: #fff; 
+}
+
+.AI{
+  background: linear-gradient(to bottom, #65B741, #C1F2B0);
+color: #fff; 
+}
