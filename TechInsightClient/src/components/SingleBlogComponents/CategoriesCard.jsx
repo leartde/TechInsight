@@ -12,7 +12,7 @@ const CategoriesCard = () => {
                 if (categoryResponse.ok) {
                     const data = await categoryResponse.json();
                     setCategories(data);
-                    console.log(data);
+                    // console.log(data);
                 } else {
                     console.log('Error fetching categories:', categoryResponse.statusText);
                 }
@@ -28,16 +28,16 @@ const CategoriesCard = () => {
 
     },[])
   return (
-    <div class="w-full bg-white shadow-sm rounded-sm p-4 ">
-    <h3 class="text-xl font-semibold text-gray-700 mb-3 font-roboto">Categories</h3>
-    <div class="space-y-2">
+    <div className="w-full bg-white shadow-sm rounded-sm p-4 ">
+    <h3 className="text-xl font-semibold text-gray-700 mb-3 font-roboto">Categories</h3>
+    <div className="space-y-2">
         {
             categories.map((category)=>(
                 <Link to={`/blogs?category=${category.name}`}  key={category.id}
-            class="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
+            className="flex leading-4 items-center text-gray-700 font-semibold text-sm uppercase transition hover:text-blue-500">
            
             <span>{category.name}</span>
-            <p class="ml-auto font-normal">{category.nrPosts}</p>
+            <p className="ml-auto font-normal">{category.nrPosts}</p>
         </Link>
             ))
         }

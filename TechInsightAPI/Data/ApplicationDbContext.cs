@@ -54,9 +54,7 @@ namespace TechInsightAPI.Data
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(pt => pt.TagId);
 
-            // Continue configuring other relationships...
-            modelBuilder.Entity<UserClick>()
-                .HasKey(pt => new { pt.PostId, pt.UserId });
+          
 
 
             modelBuilder.Entity<UserClick>()

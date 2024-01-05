@@ -10,6 +10,8 @@
         public string Category {  get; set; }
         public string ImageURL { get; set; }
         public string UserImage { get; set; }
+
+        public int? NrClicks { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

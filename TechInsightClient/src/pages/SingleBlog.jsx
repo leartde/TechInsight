@@ -7,7 +7,7 @@ import OtherBlogsByUserCard from '../components/SingleBlogComponents/OtherBlogsB
 import BlogView from '../components/SingleBlogComponents/BlogView';
 import RelatedBlogsCard from '../components/SingleBlogComponents/RelatedBlogsCard';
 import CommentSection from '../components/SingleBlogComponents/CommentSection';
-import PopularPostsCard from '../components/SingleBlogComponents/PopularPostsCard';
+import PopularBlogsCard from '../components/SingleBlogComponents/PopularBlogsCard';
 import TagsCard from '../components/SingleBlogComponents/TagsCard';
 
 const SingleBlog = () => {
@@ -44,7 +44,7 @@ const SingleBlog = () => {
             </div>
 
             {/*  similer post  */}
-           <RelatedBlogsCard blog={blog}/>
+           <RelatedBlogsCard blog={blog} blogId={blog.id}/>
 
             {/*  comment  */}
             <CommentSection blog={blog}/>
@@ -82,7 +82,7 @@ const SingleBlog = () => {
             </div> */}
 
             {/*  Popular posts  */}
-            <PopularPostsCard/>
+            <PopularBlogsCard />
 
             {/*  tag 
              categories  */}

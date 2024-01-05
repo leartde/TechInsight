@@ -127,6 +127,33 @@ namespace TechInsightAPI.Controllers
             return Ok(selectedPosts);
         }
 
+        [HttpGet("popularPosts")]
+        [ProducesResponseType(200, Type = typeof(Post))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPostsByClicks()
+        {
+            var posts = from p in _context.Posts
+                        select new PostDto()
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Content = p.Content,
+                            Author = p.User.Username,
+                            UserId = p.User.Id,
+                            Category = p.Category.Name,
+                            ImageURL = p.ImageURL,
+                            UserImage = p.User.ProfilePicUrl,
+                            NrClicks = _context.UserClicks.Count(c => c.PostId == p.Id),
+                            CreatedAt = p.CreatedAt
+                        };
+
+            var selectedPosts = posts.OrderByDescending(p => p.NrClicks);
+
+          
+
+            return Ok(selectedPosts);
+        }
+
 
 
 
