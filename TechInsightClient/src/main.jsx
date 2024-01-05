@@ -12,6 +12,7 @@ import BlogPage from './pages/BlogPage';
 import Login from './components/Login';
 import SingleBlog from './pages/SingleBlog';
 import SignUp from './components/SignUp';
+import Blogs from './pages/Blogs';
 
 
 const router = createBrowserRouter([
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     },
     {
       path:"/blogs",
-      element: <BlogPage/>
+      element: <Blogs/>
     },
     {
       path:"/login",

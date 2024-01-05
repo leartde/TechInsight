@@ -96,7 +96,7 @@ import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-route
     };
 
   return (
-    <div className='my-20'>
+    <div className='py-20'>
         <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
          <div className='flex flex-col lg:flex-row max-w-7xl mx-auto gap-12 '> 
                 <BlogCard2 blogs={blogs} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
