@@ -35,6 +35,10 @@ namespace TechInsightAPI.Controllers
                             UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
@@ -60,6 +64,10 @@ namespace TechInsightAPI.Controllers
                             UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
@@ -84,6 +92,10 @@ namespace TechInsightAPI.Controllers
                             UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
@@ -113,6 +125,10 @@ namespace TechInsightAPI.Controllers
                             UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };
@@ -142,6 +158,10 @@ namespace TechInsightAPI.Controllers
                             UserId = p.User.Id,
                             Category = p.Category.Name,
                             ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
                             UserImage = p.User.ProfilePicUrl,
                             NrClicks = _context.UserClicks.Count(c => c.PostId == p.Id),
                             CreatedAt = p.CreatedAt
@@ -150,6 +170,39 @@ namespace TechInsightAPI.Controllers
             var selectedPosts = posts.OrderByDescending(p => p.NrClicks);
 
           
+
+            return Ok(selectedPosts);
+        }
+
+        [HttpGet("tag/{tag}")]
+        [ProducesResponseType(200, Type = typeof(Post))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPostsByTag(string tag)
+        {
+            var posts = from p in _context.Posts
+                        select new PostDto()
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Content = p.Content,
+                            Author = p.User.Username,
+                            UserId = p.User.Id,
+                            Category = p.Category.Name,
+                            ImageURL = p.ImageURL,
+                            Tags = _context.PostTags
+                                .Where(t => t.PostId == p.Id)
+                                .Select(pt => pt.TagReference.Name)
+                                .ToList(),
+                            UserImage = p.User.ProfilePicUrl,
+                            CreatedAt = p.CreatedAt
+                        };
+
+            var selectedPosts = posts.Where(p => p.Tags.Contains(tag)).ToList();
+
+            if (selectedPosts.Count == 0)
+            {
+                return NotFound();
+            }
 
             return Ok(selectedPosts);
         }

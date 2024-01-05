@@ -1,4 +1,6 @@
-﻿namespace TechInsightAPI.DTOs
+﻿using System.Collections;
+
+namespace TechInsightAPI.DTOs
 {
     public class PostDto
     {
@@ -10,7 +12,7 @@
         public string Category {  get; set; }
         public string ImageURL { get; set; }
         public string UserImage { get; set; }
-
+        public List<string> Tags { get; set; }
         public int? NrClicks { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

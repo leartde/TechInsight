@@ -4,64 +4,91 @@ import BlogCard from '../components/BlogCard';
 import Pagination from '../components/Pagination';
 import CategorySelector from '../components/CategorySelector';
 import BlogCard2 from '../components/BlogCard2';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-const BlogPage = () => {
-    const [blogs, setBlogs] = useState([]);
-    const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 12; //number of blogs per page;
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [activeCategory, setActiveCategory] = useState(null);
-    
-    const [searchParams, setSearchParams] = useSearchParams(); // useSearchParams without initial values
+    const BlogPage = () => {
+        const [blogs, setBlogs] = useState([]);
+        const navigate = useNavigate();
+        const location = useLocation();
+        const [tag, setTag] = useState('');
+        const [currentPage, setCurrentPage] = useState(1);
+        const pageSize = 12; //number of blogs per page;
+        const [selectedCategory, setSelectedCategory] = useState(null);
+        const [activeCategory, setActiveCategory] = useState(null);
+        
+        const [searchParams, setSearchParams] = useSearchParams(); // useSearchParams without initial values
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let url = `https://localhost:7265/api/posts?page=${currentPage}&limit=${pageSize}`;
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    let url = `https://localhost:7265/api/posts?page=${currentPage}&limit=${pageSize}`;
 
-                if (searchParams.get('category')) {
-                    url += `&category=${searchParams.get('category')}`;
-                    setSelectedCategory(searchParams.get('category'));
-                    setActiveCategory(searchParams.get('category'));
+                    if (searchParams.get('category')) {
+                        url += `&category=${searchParams.get('category')}`;
+                        setSelectedCategory(searchParams.get('category'));
+                        setActiveCategory(searchParams.get('category'));
+                    }
+
+                    const response = await fetch(url);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setBlogs(data);
+                        console.log(data);
+                    } else {
+                        console.log('Error fetching blogs:', response.statusText);
+                    }
+                } catch (error) {
+                    console.log('Error fetching blogs', error);
                 }
+            };
 
-                const response = await fetch(url);
+            fetchData();
+        }, [currentPage, pageSize, searchParams]);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setBlogs(data);
-                    console.log(data);
-                } else {
-                    console.log('Error fetching blogs:', response.statusText);
-                }
-            } catch (error) {
-                console.log('Error fetching blogs', error);
-            }
+        const handlePageChange = (pageNumber) => {
+            setCurrentPage(pageNumber);
+            
+
         };
 
-        fetchData();
-    }, [currentPage, pageSize, searchParams]);
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
+        useEffect(() => {
+            const fetchBlogsByTag = async () => {
+              try {
+                const tagParam = new URLSearchParams(location.search).get('tag');
+                setTag(tagParam || '');
         
-
-    };
+                let url = `https://localhost:7265/api/posts/tag/${tagParam}`;
+                const response = await fetch(url);
+        
+                if (response.ok) {
+                  const data = await response.json();
+                  setBlogs(data);
+                } else {
+                  console.log('Error fetching blogs by tag. Status:', response.status);
+                  const errorData = await response.text();
+                  console.log('Error data:', errorData);
+                }
+              } catch (error) {
+                console.error('Error fetching blogs by tag: ', error);
+              }
+            };
+        
+            fetchBlogsByTag();
+          }, [location.search]);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setActiveCategory(category);
         setCurrentPage(1)
     
-        // Construct the new searchParams object based on the category
+       
         const newSearchParams = { ...searchParams};
     
         if (category !== null) {
             newSearchParams.category = category;
         } else {
-            delete newSearchParams.category; // Remove the category property
+            delete newSearchParams.category; 
         }
     
         setSearchParams(newSearchParams);

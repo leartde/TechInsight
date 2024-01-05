@@ -26,7 +26,7 @@ const RelatedBlogsCard = ({blog, blogId}) => {
             <div key={relatedBlog.id} className="rounded-sm bg-white p-3 pb-5 shadow-sm">
         <Link to={`/blogs/${relatedBlog.id}`} className="block rounded-md overflow-hidden">
             <img src={relatedBlog.imageURL}
-                className="w-full h-40 object-cover transform hover:scale-110 transition duration-500"/>
+                className="  w-full h-40 object-cover  hover:scale-110 transition duration-500"/>
         </Link>
         <div className="mt-3">
             <a href="#">
