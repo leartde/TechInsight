@@ -56,10 +56,10 @@ namespace TechInsightAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProfilePicUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserRole = table.Column<int>(type: "int", nullable: false),
                     RegistrationTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -181,12 +181,15 @@ namespace TechInsightAPI.Migrations
                 name: "UserClicks",
                 columns: table => new
                 {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClickedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserClicks", x => new { x.PostId, x.UserId });
+                    table.PrimaryKey("PK_UserClicks", x => x.id);
                     table.ForeignKey(
                         name: "FK_UserClicks_Posts_PostId",
                         column: x => x.PostId,
@@ -235,6 +238,11 @@ namespace TechInsightAPI.Migrations
                 name: "IX_PostTags_TagId",
                 table: "PostTags",
                 column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClicks_PostId",
+                table: "UserClicks",
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClicks_UserId",

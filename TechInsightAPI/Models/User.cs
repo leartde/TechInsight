@@ -9,13 +9,14 @@ namespace TechInsightAPI.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
-        public string ?Username { get; set; }
+        public string Username { get; set; }
 
         [EmailAddress]
         public string ?Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        public string ?Password { get; set; }
+        public string? PasswordHash { get; set; }
+        //public string ?Password { get; set; }
 
         public string ?Bio { get; set; }
         public string ?ProfilePicUrl { get; set; }

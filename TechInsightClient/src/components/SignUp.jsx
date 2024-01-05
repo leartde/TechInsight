@@ -60,21 +60,42 @@ const SignUp = () => {
         setConfirmPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!username || !email || !password || !confirmPassword || emailError) {
-            console.error('All fields must be filled and email must be valid');
+            console.error('All fields must be filled, and email must be valid');
             return;
         }
-
-        setUser({
-            Username: username,
-            Email: email,
-            Password: password,
-            ConfirmPassword: confirmPassword,
-        });
-
+    
+        try {
+            const response = await fetch('https://localhost:7265/api/User/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    Username: username,
+                    Email: email,
+                    Password: password,  // Send plain text password to the server
+                    ConfirmPassword: confirmPassword,
+                }),
+            });
+    
+            if (response.ok) {
+                // Success handling
+                const data = await response.json();
+                console.log('Success:', data);
+                setSignupStatus('Success');
+            } else {
+                // Error handling
+                console.log('Error:', response.statusText);
+                setSignupStatus('Error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setSignupStatus('Error');
+        }
     };
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center mt-12">

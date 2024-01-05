@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechInsightAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8507684a01ac1a8e00bd0e2216ed19acbb2a5a97")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechInsightAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechInsightAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
