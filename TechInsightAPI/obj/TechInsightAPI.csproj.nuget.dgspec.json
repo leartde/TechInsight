@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\leart\\OneDrive\\Desktop\\TechInsight-WebDesign\\TechInsightAPI\\TechInsightAPI.csproj": {}
+    "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\leart\\OneDrive\\Desktop\\TechInsight-WebDesign\\TechInsightAPI\\TechInsightAPI.csproj": {
+    "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\leart\\OneDrive\\Desktop\\TechInsight-WebDesign\\TechInsightAPI\\TechInsightAPI.csproj",
+        "projectUniqueName": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
         "projectName": "TechInsightAPI",
-        "projectPath": "C:\\Users\\leart\\OneDrive\\Desktop\\TechInsight-WebDesign\\TechInsightAPI\\TechInsightAPI.csproj",
-        "packagesPath": "C:\\Users\\leart\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\leart\\OneDrive\\Desktop\\TechInsight-WebDesign\\TechInsightAPI\\obj\\",
+        "projectPath": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
+        "packagesPath": "C:\\Users\\drinv\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\leart\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\drinv\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BCrypt.Net": {
+              "target": "Package",
+              "version": "[0.1.0, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.1.1, )"
@@ -68,6 +72,10 @@
               "target": "Package",
               "version": "[6.0.25, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -92,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

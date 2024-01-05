@@ -12,7 +12,7 @@ using TechInsightAPI.Data;
 namespace TechInsightAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240104000314_m")]
+    [Migration("20240105214335_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,15 +192,24 @@ namespace TechInsightAPI.Migrations
 
             modelBuilder.Entity("TechInsightAPI.Models.TechInsight.Models.UserClick", b =>
                 {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<DateTime>("ClickedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PostId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
+                        .HasColumnType("int");
 
-                    b.HasKey("PostId", "UserId");
+                    b.HasKey("id");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -216,19 +225,16 @@ namespace TechInsightAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePicUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationTime")
