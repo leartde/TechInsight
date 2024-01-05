@@ -8,7 +8,6 @@ const RelatedBlogsCard = ({blog}) => {
             const url = `https://localhost:7265/api/posts/category/${blog.category}`;
                 const relatedBlogsResponse = await fetch(url);
                 const data = await relatedBlogsResponse.json();
-                data;
                 setRelatedBlogs(data.slice(0, 5))
 
         }

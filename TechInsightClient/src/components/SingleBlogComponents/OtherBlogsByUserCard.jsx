@@ -19,7 +19,7 @@ const OtherBlogsByUserCard = ({userId, currentPostId}) => {
        fetchOtherBlogs();
 
     },[])
-    console.log('blogsBySameUser ', blogsBySameUser)
+    // console.log('blogsBySameUser ', blogsBySameUser)
   return (
     <div class="w-full mt-8 bg-white shadow-sm rounded-sm p-4 ">
     <h3 class="text-xl font-semibold text-gray-700 mb-3 font-roboto">Other blogs by the same author</h3>

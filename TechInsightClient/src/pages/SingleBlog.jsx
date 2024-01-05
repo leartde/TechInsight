@@ -12,7 +12,7 @@ import TagsCard from '../components/SingleBlogComponents/TagsCard';
 
 const SingleBlog = () => {
     const blog = useLoaderData();
-    // console.log('data', blog);
+    console.log('data', blog);
   return (
 
 <div className="font-poppins text-gray-600 mt-16" >
@@ -47,7 +47,7 @@ const SingleBlog = () => {
            <RelatedBlogsCard blog={blog}/>
 
             {/*  comment  */}
-            <CommentSection/>
+            <CommentSection blog={blog}/>
             
 
         </div>

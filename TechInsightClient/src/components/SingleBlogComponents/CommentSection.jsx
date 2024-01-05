@@ -1,20 +1,48 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const CommentSection = () => {
+
+const CommentSection = ({blog}) => {
+    const [comments, setComments] = useState([]);
+    useEffect(()=>{
+        const fetchComments = async () =>{
+            try{
+                let url = `https://localhost:7265/api/comments/post/${blog.id}`;
+                const response = await fetch(url);
+                if (response.ok) {
+                    const data = await response.json();
+                    setComments(data);
+                    console.log(data);
+                } else {
+                    console.log('Error fetching comments:', response.statusText);
+                }
+
+            }
+            catch(error){
+                console.log("Error fetching comments ", error)
+            }
+            
+
+        }
+        fetchComments();
+        console.log("Comments ", comments)
+    },[])
   return (
     <div className="p-4 bg-white rounded-sm shadow-sm mt-8">
                 <h4 className="text-base uppercase  font-semibold mb-4 font-roboto">Post a comment</h4>
-                <p className="text-sm text-gray-500 mb-4">12 comments</p>
+                {/* <p className="text-sm text-gray-500 mb-4">12 comments</p> */}
 
                 <div className="space-y-5">
-                    <div className="flex items-start border-b  pb-5 border-gray-200">
+                    {
+                        comments.map((comment)=>(
+                            <div className="flex items-start border-b  pb-5 border-gray-200">
                         <div className="w-12 h-12 flex-shrink-0">
-                            <img src="src/images/avatar.png" className="w-full"/>
+                            <img src={comment.userImage} className="w-full h-full rounded  "/>
                         </div>
                         <div className="flex-grow pl-4">
-                            <h4 className="text-base  font-roboto">Rasel Ahmed</h4>
-                            <p className="text-xs text-gray-400">9 Aprile 2021 at 12:34 AM</p>
-                            <p className="text-sm font-600 mt-2">Great article. Thanks</p>
+                            <h4 className="text-base  font-roboto">{comment.username}</h4>
+                            <p className="text-xs text-gray-400">{new Date(comment.createdAt).toLocaleString()}</p>
+                            <p className="text-sm font-600 mt-2">{comment.content}s</p>
                             <div className="flex gap-2 mt-2">
                                 <button
                                     className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Reply</button>
@@ -23,38 +51,9 @@ const CommentSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-start border-b  pb-5 border-gray-200">
-                        <div className="w-12 h-12 flex-shrink-0">
-                            <img src="src/images/avatar-2.png" className="w-full"/>
-                        </div>
-                        <div className="flex-grow pl-4">
-                            <h4 className="text-base  font-roboto">John Doe</h4>
-                            <p className="text-xs text-gray-400">9 Aprile 2021 at 12:34 AM</p>
-                            <p className="text-sm font-600 mt-2">Great article. Thanks</p>
-                            <div className="flex gap-2 mt-2">
-                                <button
-                                    className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Reply</button>
-                                <button
-                                    className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex items-start">
-                        <div className="w-12 h-12 flex-shrink-0">
-                            <img src="src/images/avatar.png" className="w-full"/>
-                        </div>
-                        <div className="flex-grow pl-4">
-                            <h4 className="text-base  font-roboto">Rasel Ahmed</h4>
-                            <p className="text-xs text-gray-400">9 Aprile 2021 at 12:34 AM</p>
-                            <p className="text-sm font-600 mt-2">Great article. Thanks</p>
-                            <div className="flex gap-2 mt-2">
-                                <button
-                                    className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Reply</button>
-                                <button
-                                    className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+                        ))
+                    }
+                
                 </div>
 
                 <form action="#" className="mt-8">
