@@ -5,6 +5,7 @@ import Pagination from '../components/Pagination';
 import CategorySelector from '../components/CategorySelector';
 import BlogCard2 from '../components/BlogCard2';
 import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
     const BlogPage = () => {
         const [blogs, setBlogs] = useState([]);
@@ -96,10 +97,16 @@ import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-route
     };
 
   return (
-    <div className='py-20'>
+    //ja kom qi nanen jan prish diqka po i ndreqi
+    <div className='max-w-7xl mx-auto py-20'>
         <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
-         <div className='flex flex-col lg:flex-row max-w-7xl mx-auto gap-12 '> 
+         <div className='flex flex-col lg:flex-row  gap-12 '> 
+
+
+                <div className='flex flex-col lg:flex-row gap-12'>
                 <BlogCard2 blogs={blogs} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
+                <div className='w-1/2 w-full mt-8 lg:mt-0'> <Sidebar blogs={blogs}/> </div>
+                </div>
             </div>
             <div>
             <Pagination onPageChange={handlePageChange} currentPage={currentPage} blogs={blogs} pageSize={pageSize}/>

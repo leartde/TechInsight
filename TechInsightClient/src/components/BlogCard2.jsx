@@ -10,17 +10,18 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
 
    
   return (
+    
     <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8'>
         {
             filteredBlogs.map((blog)=>(
                 
                 
                 
-                  <Link to={`/blogs/${blog.id}`} key={blog.id}>
-                    <div className='flex flex-col rounded-2xl p-5 shadow-lg  cursor-pointer ' >
+                  <Link className='flex flex-col rounded-2xl p-5 shadow-lg max-h-[28rem]  cursor-pointer' to={`/blogs/${blog.id}`} key={blog.id}>
+                    
                         {/* image */}
                         <div>
-                            <img src={blog.imageURL} alt="blog image" className='w-full object-cover' />
+                            <img src={blog.imageURL} alt="blog image" className='w-full h-56  object-cover' />
                         </div>
 
 
@@ -46,7 +47,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
 
 
 
-                    </div>
+                    
                   </Link>
 
 
