@@ -60,9 +60,9 @@ const Sidebar = ({blogs}) => {
       },[])
 
       const getMostPopularTags = (tags) => {
-        // Sort tags based on postCount in descending order and take the top 8
+       
         const sortedTags = tags
-          .slice() // Create a copy to avoid mutating the original array
+          .slice() 
           .sort((a, b) => b.postCount - a.postCount)
           .slice(0, 8);
       

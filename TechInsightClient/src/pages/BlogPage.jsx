@@ -103,9 +103,9 @@ import Sidebar from '../components/Sidebar';
          <div className='flex flex-col lg:flex-row  gap-12 '> 
 
 
-                <div className='flex flex-col lg:flex-row gap-12'>
+                <div className='flex flex-row gap-12'>
                 <BlogCard2 blogs={blogs} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
-                <div className='w-1/2 w-full mt-8 lg:mt-0'> <Sidebar blogs={blogs}/> </div>
+                <div className=' max-xl:hidden max-w-80 mt-8 lg:mt-0'> <Sidebar blogs={blogs}/> </div>
                 </div>
             </div>
             <div>

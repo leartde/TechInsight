@@ -15,40 +15,35 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
         {
             filteredBlogs.map((blog)=>(
                 
+                <div key={blog.id} className=" max-h-80 rounded-sm bg-white p-3 pb-5 shadow-sm">
+        <Link to={`/blogs/${blog.id}`} className="block rounded-md overflow-hidden">
+            <img src={blog.imageURL}
+                className="  w-full h-40 object-cover  hover:scale-110 transition duration-500"/>
+        </Link>
+        <div className="mt-3">
+            
                 
-                
-                  <Link className='flex flex-col rounded-2xl p-5 shadow-lg max-h-[28rem]  cursor-pointer' to={`/blogs/${blog.id}`} key={blog.id}>
-                    
-                        {/* image */}
-                        <div>
-                            <img src={blog.imageURL} alt="blog image" className='w-full h-56  object-cover' />
-                        </div>
-
-
-                         {/* body */}
-                        <div className='flex flex-col gap-2 p-4'>
-                            <span className={` px-4 py-2  text-sm rounded-2xl self-start ml-1 ${blog.category}	`}>   {blog.category}</span>
-                            <h3 className='text-xl font-medium px-1 w-full'> {blog.title}  </h3>
-                        </div>
-
-                           {/* footer */}
-                        <div className='flex flex-row w-full px-4'>
-                            <div className='self-start '>
-                                <img className='h-11 w-11 rounded-full' src={blog.userImage} alt="user img" />
-                            </div>
-                            <div className='block pl-4'>
-                                <h2 className='text-lg'> {blog.author}</h2>
-                                <span className='text-sm text-gray-400'> {new Date(blog.createdAt).toLocaleString()} </span>
-                            </div>
-
-                        </div>
-
-
-
-
-
-                    
-                  </Link>
+                <h2
+                    className="block text-base font-semibold text-gray-700 hover:text-blue-500 transition font-roboto">
+                    {blog.title}
+                </h2>
+           
+            <div className="mt-2 flex space-x-3">
+                <div className="flex text-gray-600 text-md items-center">
+                    <span className="mr-1 text-xs">
+                    <img src={blog.userImage} className='h-8 w-8' />
+                    </span>
+                    {blog.author}
+                </div>
+                <div className="flex text-gray-400 text-xs items-center">
+                    <span className="mr-1 text-xs">
+                        <i className="far fa-clock"></i>
+                    </span>
+                    {new Date(blog.createdAt).toLocaleString()}
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
