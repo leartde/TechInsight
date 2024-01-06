@@ -61,7 +61,7 @@ const SingleBlog = () => {
 
             {/*  tag 
              categories  */}
-            <TagsCard  blog={blog}/>
+            <TagsCard header={'Tags'}  tags={blog.tags}/>
         </div>
 
     </div>

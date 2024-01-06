@@ -1,12 +1,15 @@
 import { DatePicker } from '@mui/x-date-pickers';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import TagsCard from './SingleBlogComponents/TagsCard';
 
 
 const Sidebar = ({blogs}) => {
     const [cleared, setCleared] = useState(false);
     const [date, setDate] = useState(null);
     const [blogsByDate, setBlogsByDate] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [topTags, setTopTags] = useState([]);
 
     useEffect(() => {
         const filterBlogsByDate = () => {
@@ -30,9 +33,52 @@ const Sidebar = ({blogs}) => {
         };
     
         filterBlogsByDate();
-      }, [date, blogs]); // Include date and blogs as dependencies
+      }, [date, blogs]); 
     
-      console.log('selected date', date ? new Date(date).toLocaleString() : 'No date selected');
+  
+
+      useEffect(()=>{
+        const fetchTags = async () => {
+            try {
+                let url = `https://localhost:7265/api/tags`;
+                const response = await fetch(url);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setTags(data);
+                    // console.log(data);
+                } else {
+                    console.log('Error fetching tags:', response.statusText);
+                }
+            } catch (error) {
+                console.log('Error fetching tags', error);
+            }
+        };
+
+        fetchTags();
+
+      },[])
+
+      const getMostPopularTags = (tags) => {
+        // Sort tags based on postCount in descending order and take the top 8
+        const sortedTags = tags
+          .slice() // Create a copy to avoid mutating the original array
+          .sort((a, b) => b.postCount - a.postCount)
+          .slice(0, 8);
+      
+        return sortedTags;
+      };
+
+      const mostPopularTags = getMostPopularTags(tags);
+        const popularTagNames = mostPopularTags.map((tag) => tag.name);
+
+        console.log("popular tag names ", popularTagNames)
+
+   
+
+
+
+      
 
   return (
     <div className="w-full  bg-white shadow-sm rounded-sm p-4 space-y-2 ">
@@ -64,9 +110,12 @@ const Sidebar = ({blogs}) => {
                    
                    
                 </div>
+                <TagsCard header={'Popular tags'} tags={popularTagNames}/>
 
 
-                <div></div>
+                <div>
+                   
+                </div>
             </div>
     
   )
