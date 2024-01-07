@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
 import BlogCard2 from '../components/BlogCard2';
+import {useLocation} from 'react-router-dom';
+
 
 const Profile = () => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
+    const state = history.state.usr;
+    console.log(state);
 
-    const profilePicUrl = "https://via.placeholder.com/150";
-    const username = "John Doe";
-    const email = "john.doe@example.com";
-    const bio = "Software developer with a passion for learning new technologies.";
-
+    const { username, email, bio, profilePicUrl } = state.user;
 
     const login = () => {
         setUser({
@@ -24,11 +24,11 @@ const Profile = () => {
     useEffect(() => {
         login();
 
-
         fetch('https://localhost:7265/api/posts') 
             .then(response => response.json())
             .then(data => {
-                setPosts(data);
+                const userPosts = data.filter(post => post.author === username);
+                setPosts(userPosts);
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
