@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('https://localhost:7265/api/User/login', {
         method: 'POST',
@@ -27,24 +27,23 @@ const Login = () => {
           Password: password,
         }),
       });
-  
+
       if (!response.ok) {
         const errorResponse = await response.json();
         setError(`Login failed: ${errorResponse.title}`);
         return;
       }
-  
 
-      console.log('Login successful');
+      const user = await response.json();
+      console.log('Login successful', user);
       setError('');
-  
+      onLogin(user); // Pass the user information to the parent component
 
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while processing your request.');
     }
   };
-  
   
 
     return (
