@@ -9,11 +9,12 @@ import App from './App';
 import Home from './pages/Home';
 import Example from './pages/Example';
 import BlogPage from './pages/BlogPage';
-import Login from './components/Login';
+import Login from './pages/Login';
 import SingleBlog from './pages/SingleBlog';
 import SignUp from './components/SignUp';
 import Blogs from './pages/Blogs';
 import AddBlog from './pages/AddBlog';
+import Profile from './pages/Profile';
 
 
 const router = createBrowserRouter([
@@ -49,7 +50,11 @@ const router = createBrowserRouter([
     {
       path:"/addBlog",
       element: <AddBlog/>
-    }
+    },
+    {
+      path:"/profile",
+      element: <Profile/>
+    },
     ]
   }
 ])

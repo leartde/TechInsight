@@ -46,7 +46,7 @@ const Navbar = () => {
             </div>
 
             {/* mobile menu button */}
-            <div className="text-white md:hidden">
+            <div className="text-gray-400 md:hidden">
                 <button onClick={()=>setIsMenuOpen(!isMenuOpen)} className="cursors-pointer">
                     {
                         isMenuOpen? <FaXmark className="w-5 h-5"/> : <FaBars className="w-5 h-5"/>

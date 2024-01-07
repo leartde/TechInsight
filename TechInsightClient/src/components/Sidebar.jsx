@@ -81,7 +81,7 @@ const Sidebar = ({blogs}) => {
       
 
   return (
-    <div className="w-full  bg-[#eef8fe] shadow-sm rounded-sm p-4 space-y-2 ">
+    <div className="w-full  bg-white shadow-sm rounded-md p-4 space-y-2 ">
                 <h3 className="text-lg font-semibold text-gray-700 mb-3 font-roboto">Sort blogs by month and year</h3>
                 <DatePicker
                 views={['month', 'year']}
