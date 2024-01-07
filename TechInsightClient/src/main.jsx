@@ -9,9 +9,9 @@ import App from './App';
 import Home from './pages/Home';
 import Example from './pages/Example';
 import BlogPage from './pages/BlogPage';
-import Login from './components/Login';
+import Login from './pages/Login';
 import SingleBlog from './pages/SingleBlog';
-import SignUp from './components/SignUp';
+import SignUp from './pages/SignUp';
 import Blogs from './pages/Blogs';
 import AddBlog from './pages/AddBlog';
 
@@ -57,5 +57,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router}/>
+
   </React.StrictMode >,
 )

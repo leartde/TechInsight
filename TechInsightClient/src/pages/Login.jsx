@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import Cookies from "universal-cookie";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [remember, setRemember] = useState(false);
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+ 
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -13,9 +18,14 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const handleRemember = () => {
+    setRemember((prev) => !prev);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+   
     try {
       const response = await fetch('https://localhost:7265/api/User/login', {
         method: 'POST',
@@ -27,23 +37,37 @@ const Login = () => {
           Password: password,
         }),
       });
-  
+    
       if (!response.ok) {
         const errorResponse = await response.json();
         setError(`Login failed: ${errorResponse.title}`);
         return;
       }
-  
-
+    
+      // Log the entire response data
+      const responseData = await response.json();
+      console.log("Response Data:", responseData);
+    
+      // Assuming the response data has a property named "token"
+      const token = JSON.stringify(responseData);
+    
+      cookies.set("token", token, {
+        path: "/",
+        expires: remember ? undefined : new Date(Date.now() + 86400000),
+      });
+    
+      console.log("LOG IN COOKIES ", cookies);
+      navigate('/');
       console.log('Login successful');
       setError('');
-  
-
+    
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while processing your request.');
     }
-  };
+  }
+    
+  
   
   
 
@@ -56,7 +80,7 @@ const Login = () => {
                         <p className="mt-2 text-gray-500">Sign in below to access your account</p>
                     </div>
                     <div className="mt-5">
-                        <form onSubmit={handleSubmit}>
+                        <form onChange={handleRemember} onSubmit={handleSubmit}>
                             <div className="relative mt-6">
                                 <input 
                                     type="email" 

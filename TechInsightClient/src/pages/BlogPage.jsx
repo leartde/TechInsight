@@ -6,6 +6,8 @@ import CategorySelector from '../components/CategorySelector';
 import BlogCard2 from '../components/BlogCard2';
 import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+import Cookies from 'universal-cookie';
+
 
     const BlogPage = () => {
         const [blogs, setBlogs] = useState([]);
@@ -16,6 +18,16 @@ import Sidebar from '../components/Sidebar';
         const pageSize = 12; //number of blogs per page;
         const [selectedCategory, setSelectedCategory] = useState(null);
         const [activeCategory, setActiveCategory] = useState(null);
+        const cookies = new Cookies();
+        const token = cookies.get("token");
+        if(token){
+          console.log(" token " , token)
+       console.log("USER ID" , token.id);
+        }
+        else{
+          console.log("User is not logged in")
+        }
+
         
         const [searchParams, setSearchParams] = useSearchParams(); // useSearchParams without initial values
 

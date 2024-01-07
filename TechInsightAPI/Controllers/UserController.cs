@@ -103,7 +103,7 @@ namespace TechInsightAPI.Controllers
                     };
 
                     // Set a cookie for the user
-                    Response.Cookies.Append("UserId", user.Id.ToString());
+                    //Response.Cookies.Append("UserId", user.Id.ToString());
 
                     return userDtoResponse;
                 }

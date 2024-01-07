@@ -260,11 +260,11 @@ namespace TechInsightAPI.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception and return an error response
+                
                 return StatusCode(500, "An error occurred while saving the post");
             }
 
-            // Convert the created post to a PostDto and return it
+           
             var createdPostDto = new PostDto
             {
                 Id = post.Id,
@@ -274,7 +274,7 @@ namespace TechInsightAPI.Controllers
                 UserId = post.UserId,
                 ImageURL = post.ImageURL,
                 CreatedAt = post.CreatedAt,
-                // Add other properties as needed
+                
             };
 
             return Ok(createdPostDto);
