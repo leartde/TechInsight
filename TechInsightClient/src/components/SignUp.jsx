@@ -155,7 +155,7 @@ const SignUp = () => {
                                     type="password" placeholder="ConfirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} />
                                     
                                 <button
-                                    className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                    className="mt-5 tracking-wide font-semibold bg-[#009bd6] text-gray-100 w-full py-4 rounded-lg hover:bg-[#4597b8] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                     onClick={handleSubmit}>
                                 
                                     <span className="ml-3">
