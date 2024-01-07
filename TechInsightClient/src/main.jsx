@@ -13,6 +13,7 @@ import Login from './components/Login';
 import SingleBlog from './pages/SingleBlog';
 import SignUp from './components/SignUp';
 import Blogs from './pages/Blogs';
+import AddBlog from './pages/AddBlog';
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       path:"/blogs/:id",
       element:<SingleBlog/>,
       loader:({params})=> fetch(`https://localhost:7265/api/posts/${params.id}`)
+    },
+    {
+      path:"/addBlog",
+      element: <AddBlog/>
     }
     ]
   }

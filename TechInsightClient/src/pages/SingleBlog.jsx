@@ -61,7 +61,7 @@ const SingleBlog = () => {
 
             {/*  tag 
              categories  */}
-            <TagsCard header={'Tags'}  tags={blog.tags}/>
+            <TagsCard className='bg-white' header={'Tags'}  tags={blog.tags}/>
         </div>
 
     </div>
