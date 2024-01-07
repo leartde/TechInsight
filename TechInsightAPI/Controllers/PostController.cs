@@ -207,6 +207,51 @@ namespace TechInsightAPI.Controllers
             return Ok(selectedPosts);
         }
 
+        [HttpPost]
+        [Route("AddPost")]
+        public ActionResult<PostDto> AddPost(PostDto postDto)
+        {
+            // Validate the input data (you may want to add additional validation logic)
+            if (postDto == null)
+            {
+                return BadRequest("Invalid input data");
+            }
+
+            var post = new Post
+            {
+                Title = postDto.Title,
+                Content = postDto.Content,
+                UserId = postDto.UserId,
+                CreatedAt = postDto.CreatedAt,
+
+                PostTags = postDto.Tags.Select(tagName => new PostTag
+                {
+                    TagReference = new Tag { Name = tagName } 
+                }).ToList()
+            };
+
+            
+            if (!string.IsNullOrEmpty(postDto.Category))
+            {
+                var existingCategory = _context.Categories.FirstOrDefault(c => c.Name == postDto.Category);
+
+                if (existingCategory == null)
+                {
+                    
+                    existingCategory = new Category { Name = postDto.Category };
+                    _context.Categories.Add(existingCategory);
+                }
+
+                post.Category = existingCategory;
+            }
+
+            _context.Posts.Add(post);
+            _context.SaveChanges();
+
+            // For demonstration purposes, just return the received postDto
+            return Ok(postDto);
+        }
+
 
 
 

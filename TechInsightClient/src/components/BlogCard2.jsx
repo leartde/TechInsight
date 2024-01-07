@@ -15,7 +15,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
         {
             filteredBlogs.map((blog)=>(
                 
-                <div key={blog.id} className=" max-h-80 rounded-sm bg-white p-3 pb-5 shadow-sm">
+                <div key={blog.id} className=" max-h-80 rounded-sm bg-[#eef8fe] p-3 pb-5 shadow-sm">
         <Link to={`/blogs/${blog.id}`} className="block rounded-md overflow-hidden">
             <img src={blog.imageURL}
                 className="  w-full h-40 object-cover  hover:scale-110 transition duration-500"/>
