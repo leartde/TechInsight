@@ -14,6 +14,7 @@ import SingleBlog from './pages/SingleBlog';
 import SignUp from './pages/SignUp';
 import Blogs from './pages/Blogs';
 import AddBlog from './pages/AddBlog';
+import Profile from './pages/Profile';
 
 
 const router = createBrowserRouter([
@@ -49,7 +50,11 @@ const router = createBrowserRouter([
     {
       path:"/addBlog",
       element: <AddBlog/>
-    }
+    },
+    {
+      path:"/profile",
+      element: <Profile/>
+    },
     ]
   }
 ])
