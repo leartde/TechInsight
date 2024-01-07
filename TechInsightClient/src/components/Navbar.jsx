@@ -17,13 +17,13 @@ const Navbar = () => {
         {path: "/contact", link: "Contact"},
     ]
     return (
-       <header className="bg-black text-white fixed top-0 left-0 right-0">
+       <header className="bg-white text-gray-400 fixed top-0 left-0 right-0 shadow">
         <nav className="px-4 py-4 max-w-7xl mx-auto flex justify-between items-center ">
-            <a href="/" className="text-xl font-bold text-white "> Tech<span className="text-[#009bd6]">Insight</span></a>
+            <a href="/" className="text-xl font-bold text-gray-400 "> Tech<span className="text-[#009bd6]">Insight</span></a>
             {/* nav items for large devies */}
             <ul className="md:flex gap-12 text-lg hidden">
                 {
-                    navItems.map((item)=><li key={item.link} className="text-white"> <NavLink className={({ isActive, isPending, isTransitioning }) =>
+                    navItems.map((item)=><li key={item.link} className="text-gray-400 hover:text-gray-600"> <NavLink className={({ isActive, isPending, isTransitioning }) =>
     [
       isPending ? "pending" : "",
       isActive ? "active" : "",
@@ -35,14 +35,14 @@ const Navbar = () => {
                 }
             </ul>
             {/* {menu icons} */}
-            <div className="text-white md:flex gap-4 items-center hidden">
-                <a href="/" className="hover:text-orange-500"> <FaFacebook/> </a>
-                <a href="/" className="hover:text-orange-500"> <FaDribbble/> </a>
-                <a href="/" className="hover:text-orange-500"> <FaTwitter/> </a>
-                <button className="bg-indigo-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-[#009bd6]
-                transition-all duration-20 ease-in 
+            <div className="text-gray-600 md:flex gap-4 items-center hidden">
+                <a href="https://www.facebook.com" className="hover:text-[#009bd6]"> <FaFacebook/> </a>
+                <a href="https://dribbble.com" className="hover:text-[#009bd6]"> <FaDribbble/> </a>
+                <a href="https://x.com/" className="hover:text-[#009bd6]"> <FaTwitter/> </a>
+                <a className="bg-[#009bd6] px-6 py-2 font-medium rounded hover:bg-[#4597b8]
+                transition-all duration-20 ease-in text-white
 
-                "> Log In</button>
+                " href="/login"> Log In</a>
             </div>
 
             {/* mobile menu button */}
