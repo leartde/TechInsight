@@ -66,7 +66,6 @@ namespace TechInsightAPI.Controllers
 
         }
 
-
         [HttpPost("login")]
         public ActionResult<UserDto> Login(UserDto userDto)
         {
@@ -91,8 +90,8 @@ namespace TechInsightAPI.Controllers
                 // Use BCrypt to compare the hashed password
                 if (BCrypt.Net.BCrypt.Verify(userDto.Password, user.PasswordHash))
                 {
-                    // Password is correct, return the user data (you might want to exclude sensitive info)
-                    return new UserDto
+                    // Password is correct, create a user DTO
+                    var userDtoResponse = new UserDto
                     {
                         Id = user.Id,
                         Username = user.Username,
@@ -102,6 +101,11 @@ namespace TechInsightAPI.Controllers
                         UserRole = user.UserRole,
                         RegistrationTime = user.RegistrationTime
                     };
+
+                    // Set a cookie for the user
+                    Response.Cookies.Append("UserId", user.Id.ToString());
+
+                    return userDtoResponse;
                 }
                 else
                 {
@@ -119,6 +123,7 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
         }
+
 
 
         [HttpGet("{id}")]
