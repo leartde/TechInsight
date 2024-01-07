@@ -27,6 +27,10 @@ const handleTitleChange = (e) => {
     setContent(e.target.value);
   };
 
+  const handleImageChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -39,27 +43,32 @@ const handleTitleChange = (e) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
   }
+
+  const Blog = {
+    id: 1,
+    title: title,
+    content: content,
+    userId: 1,
+    author :'author',
+    category: category,
+    tags: tags,
+    imageURL: imageUrl,
+    createdAt: new Date(),
+  };
+  console.log("BLOG ", JSON.stringify(Blog));
+
+  // Rest of the code...
 
   useEffect(() => {
     const createBlogPost = async () => {
-      // Validate the input data
       if (!title || !content || !category || !tags) {
         alert('Please fill in all fields.');
         return;
       }
 
-      // Create your blog object
-      const Blog = {
-        blogUserId : 1,
-        blogTitle : title,
-        blogContent : content,
-        blogCategory : category,
-        blogTags : tags,
-        blodDate : new Date(),
-    }
-    console.log("Bloog ", Blog)
-    
+     
 
       // Set submitting to true to show a loading indicator if needed
       setSubmitting(true);
@@ -71,8 +80,10 @@ const handleTitleChange = (e) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(Blog),
+          body: JSON.stringify(Blog)
         });
+
+        
 
         if (response.ok) {
           alert('Blog post created successfully!');
@@ -95,24 +106,26 @@ const handleTitleChange = (e) => {
     }
   }, [submitting, title, content, category, tags]);
   return (
-    <div className='mt-[200px] block w-3/4 mx-auto border border-black'>
-        <form className='flex flex-col space-y-4 w-1/2 mx-auto' method="post">
-            <input type="text" placeholder='Title' value={title} onChange={handleTitleChange}  />
-            <textarea  placeholder='Content' value={content} onChange={handleContentChange}  > </textarea>
-          <select value={category} onChange={handleCategoryChange}  placeholder='SELECT A CATEGORY'>
+    <div className='mt-[200px] block w-3/4 mx-auto '>
+      <h1 className='text-center text-blue-400 text-3xl font-bold mb-4'>Create your blog</h1>
+      <form className='flex flex-col space-y-4 w-1/2 mx-auto' method="post" onSubmit={handleSubmit}>
+        <input type="text" placeholder='Title' value={title} onChange={handleTitleChange} className='p-2 border border-gray-300 rounded' />
+        <textarea placeholder='Content' value={content} onChange={handleContentChange} className='p-2 border border-gray-300 rounded'></textarea>
+        <input type="text" placeholder='Image Url' value={imageUrl} onChange={handleImageChange} className='p-2 border border-gray-300 rounded' />
+        <select value={category} onChange={handleCategoryChange} placeholder='SELECT A CATEGORY' className='p-2 border border-gray-300 rounded'>
           {categories.map((element, index) => (
             <option value={element} key={index}>{element}</option>
           ))}
-          </select>
-
-          <input
+        </select>
+        <input
           type="text"
           placeholder="Add tags (maximum 4)"
           value={tags.join(',')}
           onChange={handleTagsChange}
+          className='p-2 border border-gray-300 rounded'
         />
-        <input type="submit" onSubmit={handleSubmit} />
-        </form>
+        <input type="submit" className='p-2 bg-blue-500 text-white rounded cursor-pointer' />
+      </form>
     </div>
   )
 }

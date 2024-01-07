@@ -211,8 +211,7 @@ namespace TechInsightAPI.Controllers
         [Route("AddPost")]
         public ActionResult<PostDto> AddPost(PostDto postDto)
         {
-            // Validate the input data (you may want to add additional validation logic)
-            if (postDto == null)
+            if (postDto == null || string.IsNullOrEmpty(postDto.Title) || string.IsNullOrEmpty(postDto.Content))
             {
                 return BadRequest("Invalid input data");
             }
@@ -222,22 +221,31 @@ namespace TechInsightAPI.Controllers
                 Title = postDto.Title,
                 Content = postDto.Content,
                 UserId = postDto.UserId,
+                Author = postDto.Author,
+                ImageURL = postDto.ImageURL,
                 CreatedAt = postDto.CreatedAt,
-
-                PostTags = postDto.Tags.Select(tagName => new PostTag
-                {
-                    TagReference = new Tag { Name = tagName } 
-                }).ToList()
+                
             };
+            var existingTags = _context.Tags.Where(t => postDto.Tags.Contains(t.Name)).ToList();
+            foreach (var tagName in postDto.Tags)
+            {
+                var existingTag = existingTags.FirstOrDefault(t => t.Name == tagName);
+                if (existingTag != null)
+                {
+                    post.PostTags.Add(new PostTag { TagReference = existingTag });
+                }
+                else
+                {
+                    post.PostTags.Add(new PostTag { TagReference = new Tag { Name = tagName } });
+                }
+            }
 
-            
             if (!string.IsNullOrEmpty(postDto.Category))
             {
                 var existingCategory = _context.Categories.FirstOrDefault(c => c.Name == postDto.Category);
 
                 if (existingCategory == null)
                 {
-                    
                     existingCategory = new Category { Name = postDto.Category };
                     _context.Categories.Add(existingCategory);
                 }
@@ -245,12 +253,33 @@ namespace TechInsightAPI.Controllers
                 post.Category = existingCategory;
             }
 
-            _context.Posts.Add(post);
-            _context.SaveChanges();
+            try
+            {
+                _context.Posts.Add(post);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return an error response
+                return StatusCode(500, "An error occurred while saving the post");
+            }
 
-            // For demonstration purposes, just return the received postDto
-            return Ok(postDto);
+            // Convert the created post to a PostDto and return it
+            var createdPostDto = new PostDto
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content,
+                Author = post.Author,
+                UserId = post.UserId,
+                ImageURL = post.ImageURL,
+                CreatedAt = post.CreatedAt,
+                // Add other properties as needed
+            };
+
+            return Ok(createdPostDto);
         }
+
 
 
 
