@@ -59,7 +59,7 @@ const handleTitleChange = (e) => {
   };
   console.log("BLOG ", JSON.stringify(Blog));
 
-  // Rest of the code...
+ 
 
   useEffect(() => {
     const createBlogPost = async () => {
@@ -87,7 +87,7 @@ const handleTitleChange = (e) => {
 
         if (response.ok) {
           alert('Blog post created successfully!');
-          // You can also redirect or perform any other action after successful creation
+        
         } else {
           alert('Failed to create blog post.');
         }
@@ -95,12 +95,12 @@ const handleTitleChange = (e) => {
         console.error('Error creating blog post:', error);
         alert('Error creating blog post. Please try again.');
       } finally {
-        // Reset submitting status after the request is completed
+      
         setSubmitting(false);
       }
     };
 
-    // Check if submitting is true, meaning the form was submitted
+    
     if (submitting) {
       createBlogPost();
     }

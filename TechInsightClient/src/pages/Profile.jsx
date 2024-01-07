@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
 import BlogCard2 from '../components/BlogCard2';
-import {useLocation} from 'react-router-dom';
+import {useLoaderData, useLocation} from 'react-router-dom';
+import ProfileBlogs from '../components/ProfileComponents/ProfileBlogs';
 
 
 const Profile = () => {
     const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState(null);
     const state = history.state.usr;
     console.log(state);
 
-    const { username, email, bio, profilePicUrl } = state.user;
+    const user = useLoaderData();
+    console.log('user data ', user)
 
-    const login = () => {
-        setUser({
-            username,
-            email,
-            bio,
-            profilePicUrl
-        });
-    };
+   
 
     useEffect(() => {
-        login();
+        
 
-        fetch('https://localhost:7265/api/posts') 
+        fetch(`https://localhost:7265/api/posts`) 
             .then(response => response.json())
             .then(data => {
-                const userPosts = data.filter(post => post.author === username);
+                const userPosts = data.filter(post => post.userId === user.id);
                 setPosts(userPosts);
             })
             .catch(error => {
@@ -59,7 +53,12 @@ const Profile = () => {
             </div>
             <hr className="my-5 w-full" />
             {/* Display posts */}
-            <BlogCard2 blogs={posts} currentPage={currentPage} selectedCategory={selectedCategory} pageSize={pageSize} />
+        <div className='shadow-lg'>
+            {/* <h2 className='text-xl font-bold text-blue-500 text-center'>Checkout my blogs</h2> */}
+            <div className='max-w-4xl'>
+                <ProfileBlogs blogs={posts}/>
+            </div>
+        </div>
         </div>
     );
 }

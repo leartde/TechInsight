@@ -52,8 +52,9 @@ const router = createBrowserRouter([
       element: <AddBlog/>
     },
     {
-      path:"/profile",
-      element: <Profile/>
+      path:"/profile/:id",
+      element: <Profile/>,
+      loader:({params})=> fetch(`https://localhost:7265/api/User/${params.id}`)
     },
     ]
   }
