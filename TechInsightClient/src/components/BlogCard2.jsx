@@ -29,12 +29,16 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
                 </h2>
            
             <div className="mt-2 flex space-x-3">
+            <Link to={`/profile/${blog.userId}`}>
                 <div className="flex text-gray-600 text-md items-center">
+                    
                     <span className="mr-1 text-xs">
                     <img src={blog.userImage} className='h-8 w-8 rounded-full' />
                     </span>
                     {blog.author}
+                   
                 </div>
+                </Link>
                 <div className="flex text-gray-400 text-xs items-center">
                     <span className="mr-1 text-xs">
                         <i className="far fa-clock"></i>

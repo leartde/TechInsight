@@ -152,7 +152,7 @@ const SignUp = () => {
                                     type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                                 <input
                                     className="w-full px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" placeholder="ConfirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} />
+                                    type="password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
                                     
                                 <button
                                     className="mt-5 tracking-wide font-semibold bg-[#009bd6] text-gray-100 w-full py-4 rounded-lg hover:bg-[#4597b8] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
