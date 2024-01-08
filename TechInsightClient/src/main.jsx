@@ -16,6 +16,7 @@ import AddBlog from './pages/AddBlog';
 import Profile from './pages/Profile';
 import About1 from './pages/About';
 import DiscoverUsers from './pages/DiscoverUsers';
+import AddBlog2 from './pages/AddBlog2';
 
 
 
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     },
     {
       path:"/addBlog",
-      element: <AddBlog/>
+      element: <AddBlog2/>
     },
     {
       path:"/profile/:id",
@@ -65,7 +66,8 @@ const router = createBrowserRouter([
     {
       path:"/discover",
       element: <DiscoverUsers/>,
-    }
+    },
+
     ]
   }
 ])

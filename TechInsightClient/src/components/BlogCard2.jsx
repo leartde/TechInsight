@@ -20,7 +20,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
             <img src={blog.imageURL}
                 className="  w-full h-40 object-cover hover:scale-110 transition duration-500"/>
         </Link>
-        <div className="mt-3">
+        <div className="mt-3 ">
             
                 
                 <h2
@@ -40,10 +40,10 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
                 </div>
                 </Link>
                 <div className="flex text-gray-400 text-xs items-center">
-                    <span className="mr-1 text-xs">
-                        <i className="far fa-clock"></i>
-                    </span>
-                    {new Date(blog.createdAt).toLocaleString()}
+                    
+                    {new Date(blog.createdAt).toLocaleDateString()}
+
+                    
                 </div>
             </div>
         </div>

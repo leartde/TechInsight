@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 
 
 const AddBlog = () => {
-    const [id, userId] = useState(1);
+const [id, userId] = useState(1);
 const [title, setTitle] = useState('');
 const [content, setContent] = useState('');
 const [image, setImage] = useState({});

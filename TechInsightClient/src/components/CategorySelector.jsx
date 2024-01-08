@@ -8,7 +8,7 @@ const CategorySelector = ({ onSelectCategory, activeCategory }) => {
       <span className="mr-2">Select Category:</span>
       <select
         className="mr-2"
-        value={activeCategory || "All"} // Default to "All" if no category is selected
+        value={activeCategory || "All"} 
         onChange={(e) => onSelectCategory(e.target.value === "All" ? null : e.target.value)}
       >
         <option value="All">All</option>
