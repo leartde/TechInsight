@@ -15,6 +15,7 @@ import SignUp from './pages/SignUp';
 import Blogs from './pages/Blogs';
 import AddBlog from './pages/AddBlog';
 import Profile from './pages/Profile';
+import DiscoverUsersPage from './components/ProfileComponents/DiscoverUserProfile';
 
 
 const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       element: <Profile/>,
       loader:({params})=> fetch(`https://localhost:7265/api/User/${params.id}`)
     },
+    {
+      path:"/discover",
+      element: <DiscoverUsersPage/>,
+    }
     ]
   }
 ])
