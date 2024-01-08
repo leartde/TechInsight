@@ -15,7 +15,7 @@ const Navbar = () => {
     console.log(isMenuOpen);
     const navItems = [
         {path: "/", link: "Home"},
-        {path: "/example", link: "Example"},
+        {path: "/discoverUsers", link: "Discover"},
         {path: "/about", link: "About"},
         {path: "/blogs", link: "Blogs"},
         {path: "/contact", link: "Contact"},
