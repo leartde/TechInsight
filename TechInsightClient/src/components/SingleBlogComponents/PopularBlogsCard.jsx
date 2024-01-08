@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom';
             fetchPopularBlogs();
         }, []);
     
-    console.log("Popular blogs", popularBlogs);
+    // console.log("Popular blogs", popularBlogs);
   return (
     <div className="w-full  bg-white shadow-sm rounded-sm p-4 ">
                 <h3 className="text-xl font-semibold text-gray-700 mb-3 font-roboto">Popular Blogs</h3>

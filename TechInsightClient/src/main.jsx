@@ -12,7 +12,6 @@ import BlogPage from './pages/BlogPage';
 import Login from './pages/Login';
 import SingleBlog from './pages/SingleBlog';
 import SignUp from './pages/SignUp';
-import Blogs from './pages/Blogs';
 import AddBlog from './pages/AddBlog';
 import Profile from './pages/Profile';
 import DiscoverUsersPage from './components/ProfileComponents/DiscoverUserProfile';
