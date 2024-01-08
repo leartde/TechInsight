@@ -29,9 +29,6 @@ const Profile = () => {
             });
     }, []);
 
-    const currentPage = 1;
-    const selectedCategory = null;
-    const pageSize = 10;
 
     return (
         <div className="flex justify-center items-center flex-col mt-28">
@@ -53,11 +50,8 @@ const Profile = () => {
             </div>
             <hr className="my-5 w-full" />
             {/* Display posts */}
-        <div className='shadow-lg'>
-            {/*      */}
             <div className='max-w-4xl'>
                 <ProfileBlogs blogs={posts}/>
-            </div>
         </div>
         </div>
     );
