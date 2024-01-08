@@ -123,7 +123,7 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
         }
-        // UserController.cs
+
 
         [HttpGet("discover/user-profiles")]
         public ActionResult<IEnumerable<UserDto>> GetDiscoverUserProfiles(int currentUserId)
