@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 
-const DisocoverUsers = () => {
+const DiscoverUsers = () => {
   const [users, setUsers] = useState([]);
   const cookies = new Cookies();
   const token = cookies.get("token");
@@ -42,4 +42,4 @@ const DisocoverUsers = () => {
   )
 }
 
-export default DisocoverUsers
+export default DiscoverUsers;
