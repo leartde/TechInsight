@@ -15,6 +15,7 @@ import SignUp from './pages/SignUp';
 import AddBlog from './pages/AddBlog';
 import Profile from './pages/Profile';
 import DiscoverUsersPage from './components/ProfileComponents/DiscoverUserProfile';
+import About from './pages/About';
 
 
 const router = createBrowserRouter([
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
     {
       path:"/discover",
       element: <DiscoverUsersPage/>,
-    }
+    },
+    {
+      path:"/about",
+      element: <About/>,
+    },
     ]
   }
 ])
