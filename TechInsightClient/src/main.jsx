@@ -57,8 +57,8 @@ const router = createBrowserRouter([
       loader:({params})=> fetch(`https://localhost:7265/api/User/${params.id}`)
     },
     {
-      path:"/discoverUsers",
-      element: <DisocoverUsers/>
+      path:"/discover",
+      element: <DiscoverUsersPage/>,
     }
     ]
   }

@@ -32,6 +32,12 @@ namespace TechInsightAPI.Controllers
                     return BadRequest(ModelState);
                 }
 
+                // Check if the email already exists
+                if (_context.Users.Any(u => u.Email == userDto.Email))
+                {
+                    return BadRequest("Email is already taken.");
+                }
+
                 // Hash the password using BCrypt
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
 
@@ -63,7 +69,6 @@ namespace TechInsightAPI.Controllers
                 // Return a detailed error response
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
-
         }
 
         [HttpPost("login")]
