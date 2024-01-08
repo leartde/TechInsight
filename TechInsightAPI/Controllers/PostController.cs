@@ -224,7 +224,7 @@ namespace TechInsightAPI.Controllers
                 Author = postDto.Author,
                 ImageURL = postDto.ImageURL,
                 CreatedAt = postDto.CreatedAt,
-                
+
             };
             var existingTags = _context.Tags.Where(t => postDto.Tags.Contains(t.Name)).ToList();
             foreach (var tagName in postDto.Tags)

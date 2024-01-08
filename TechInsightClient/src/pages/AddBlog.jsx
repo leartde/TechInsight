@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 
 
 const AddBlog = () => {
@@ -9,6 +10,9 @@ const [imageUrl, setImageUrl] = useState('');
 const [category, setCategory] = useState('');
 const [tags, setTags] = useState([]);
 const [submitting, setSubmitting] = useState(false);
+
+const cookies = new Cookies();
+const token = cookies.get("token");
 
 
 
@@ -47,11 +51,10 @@ const handleTitleChange = (e) => {
   }
 
   const Blog = {
-    id: 1,
     title: title,
     content: content,
-    userId: 1,
-    author :'author',
+    userId: token.id,
+    author :token.username,
     category: category,
     tags: tags,
     imageURL: imageUrl,
@@ -70,10 +73,9 @@ const handleTitleChange = (e) => {
 
      
 
-      // Set submitting to true to show a loading indicator if needed
+
       setSubmitting(true);
 
-      // Call your API endpoint to create a new blog post
       try {
         const response = await fetch('https://localhost:7265/api/posts/AddPost', {
           method: 'POST',
@@ -82,6 +84,7 @@ const handleTitleChange = (e) => {
           },
           body: JSON.stringify(Blog)
         });
+        console.log("Blog", JSON.stringify(Blog));
 
         
 

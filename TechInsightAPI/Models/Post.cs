@@ -14,7 +14,7 @@ namespace TechInsightAPI.Models
         [Required(ErrorMessage = "Content is required")]
 
         public string Content { get; set; }
-        public string ImageURL { get; set; }
+        public string? ImageURL { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public int UserId { get; set; }

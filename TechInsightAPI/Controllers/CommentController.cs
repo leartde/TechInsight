@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using TechInsightAPI.Data;
 using TechInsightAPI.DTOs;
 using TechInsightAPI.Models;
@@ -64,6 +65,47 @@ namespace TechInsightAPI.Controllers
             }
 
             return Ok(selectedComments);
+        }
+
+
+        [HttpPost]
+        [Route("AddComment")]
+        public ActionResult<CommentDto> AddComment(CommentDto commentDto)
+        {
+          
+
+            var comment = new Comment
+            {
+                Content = commentDto.Content,
+                UserId = commentDto.UserId,
+                PostId = commentDto.PostId,
+                CreatedAt = commentDto.CreatedAt,
+                
+            };
+
+
+            try
+            {
+                _context.Comments.Add(comment);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while saving the post");
+            }
+
+
+            var createdCommentDto = new PostDto
+            {
+                Content = commentDto.Content,
+                UserId = commentDto.UserId,
+                PostId = commentDto.PostId,
+                CreatedAt = commentDto.CreatedAt,
+
+            };
+
+            return Ok(createdCommentDto);
         }
 
 
