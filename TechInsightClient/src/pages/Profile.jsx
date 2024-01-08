@@ -53,12 +53,7 @@ const Profile = () => {
             </div>
             <hr className="my-5 w-full" />
             {/* Display posts */}
-        <div className='shadow-lg'>
-            {/* <h2 className='text-xl font-bold text-blue-500 text-center'>Checkout my blogs</h2> */}
-            <div className='max-w-4xl'>
-                <ProfileBlogs blogs={posts}/>
-            </div>
-        </div>
+            <BlogCard2 blogs={posts} currentPage={currentPage} selectedCategory={selectedCategory} pageSize={pageSize} />
         </div>
     );
 }

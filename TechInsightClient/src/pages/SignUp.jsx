@@ -111,7 +111,7 @@ const SignUp = () => {
                         <div className="w-full flex-1 mt-8 text-sm">
                             <div className="flex flex-col items-center">
                                 <button
-                                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-gray-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                                     <div className="bg-white p-1 rounded-full">
                                         <a href="https://www.google.com">
                                             <img src={GoogleLogo} alt="Google Logo" className="w-6 h-6"/>
@@ -123,7 +123,7 @@ const SignUp = () => {
                                 </button>
 
                                 <button
-                                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
+                                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-gray-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
                                     <div className="bg-black p-1 rounded-full">
                                     <img src={GitHubLogo} alt="GitHub Logo" className="w-6 h-6"/>
                                     </div>

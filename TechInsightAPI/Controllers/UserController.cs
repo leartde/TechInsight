@@ -123,6 +123,34 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
         }
+        // UserController.cs
+
+        [HttpGet("discover/user-profiles")]
+        public ActionResult<IEnumerable<UserDto>> GetDiscoverUserProfiles(int currentUserId)
+        {
+            try
+            {
+                var discoverUserProfiles = _context.Users
+                    .Where(u => u.Id != currentUserId)
+                    .Select(user => new UserDto
+                    {
+                        Id = user.Id,
+                        Username = user.Username,
+                        Bio = user.Bio,
+                        ProfilePicUrl = user.ProfilePicUrl,
+                    })
+                    .ToList();
+
+                return discoverUserProfiles;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetDiscoverUserProfiles method: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+
+                return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
+            }
+        }
 
 
 
