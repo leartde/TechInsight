@@ -15,10 +15,12 @@ namespace TechInsightAPI.Controllers
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPhotoService _photoService;
 
-        public PostController(ApplicationDbContext context)
+        public PostController(ApplicationDbContext context, IPhotoService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Post))]
@@ -54,6 +56,7 @@ namespace TechInsightAPI.Controllers
             {
                 return NotFound();
             }
+
             var posts = from p in _context.Posts
                         select new PostDto()
                         {
@@ -209,20 +212,20 @@ namespace TechInsightAPI.Controllers
 
         [HttpPost]
         [Route("AddPost")]
-        public ActionResult<PostDto> AddPost(PostDto postDto)
+        public async Task<IActionResult> AddPost([FromForm] PostDto postDto)
+
         {
             if (postDto == null || string.IsNullOrEmpty(postDto.Title) || string.IsNullOrEmpty(postDto.Content))
             {
                 return BadRequest("Invalid input data");
             }
-
+            var imgResult =  await _photoService.AddPhotoAsync(postDto.Image);
             var post = new Post
             {
                 Title = postDto.Title,
                 Content = postDto.Content,
                 UserId = postDto.UserId,
-                Author = postDto.Author,
-                ImageURL = postDto.ImageURL,
+                ImageURL = imgResult.Url.ToString(),
                 CreatedAt = postDto.CreatedAt,
 
             };
@@ -256,7 +259,7 @@ namespace TechInsightAPI.Controllers
             try
             {
                 _context.Posts.Add(post);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -270,14 +273,13 @@ namespace TechInsightAPI.Controllers
                 Id = post.Id,
                 Title = post.Title,
                 Content = post.Content,
-                Author = post.Author,
                 UserId = post.UserId,
                 ImageURL = post.ImageURL,
                 CreatedAt = post.CreatedAt,
                 
             };
 
-            return Ok(createdPostDto);
+            return CreatedAtAction(nameof(AddPost), new { id = createdPostDto.Id }, createdPostDto);
         }
 
 

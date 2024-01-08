@@ -11,6 +11,8 @@ namespace TechInsightAPI.DTOs
         public int PostId { get; set; }
         public string? Author { get; set; }
         public string? Category {  get; set; }
+
+        public IFormFile? Image { get; set; }
         public string? ImageURL { get; set; }
         public string? UserImage { get; set; }
         public List<string> Tags { get; set; }

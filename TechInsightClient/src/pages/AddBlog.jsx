@@ -6,18 +6,15 @@ const AddBlog = () => {
     const [id, userId] = useState(1);
 const [title, setTitle] = useState('');
 const [content, setContent] = useState('');
-const [imageUrl, setImageUrl] = useState('');
-const [category, setCategory] = useState('');
+const [image, setImage] = useState({});
+const [category, setCategory] = useState('Devices');
 const [tags, setTags] = useState([]);
 const [submitting, setSubmitting] = useState(false);
 
 const cookies = new Cookies();
 const token = cookies.get("token");
 
-
-
-
-
+const [loading, setLoading] = useState(false)
 
 
 
@@ -32,7 +29,10 @@ const handleTitleChange = (e) => {
   };
 
   const handleImageChange = (e) => {
-    setImageUrl(e.target.value);
+    const selectedFile = e.target.files && e.target.files[0];
+    if (selectedFile) {
+      setImage(selectedFile);
+    }
   };
 
   const handleCategoryChange = (e) => {
@@ -50,18 +50,18 @@ const handleTitleChange = (e) => {
     setSubmitting(true);
   }
 
-  const Blog = {
-    title: title,
-    content: content,
-    userId: token.id,
-    author :token.username,
-    category: category,
-    tags: tags,
-    imageURL: imageUrl,
-    createdAt: new Date(),
-  };
-  console.log("BLOG ", JSON.stringify(Blog));
+  const formData = new FormData();
 
+  formData.append('Title', title);
+  formData.append('Content', content);
+  formData.append('UserId', token.id);
+  formData.append('Author', token.username); // Assuming you want to include the username from the token
+  formData.append('Category', category);
+  formData.append('Tags', JSON.stringify(tags));
+  formData.append('Image', image);
+  formData.append('CreatedAt', new Date().toISOString()); 
+ 
+  
  
 
   useEffect(() => {
@@ -73,24 +73,19 @@ const handleTitleChange = (e) => {
 
      
 
-
+      setLoading(true);
       setSubmitting(true);
 
+   
       try {
         const response = await fetch('https://localhost:7265/api/posts/AddPost', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(Blog)
+          body: formData 
         });
-        console.log("Blog", JSON.stringify(Blog));
-
-        
+        console.log("FORM DATA ", JSON.stringify(formData ));
 
         if (response.ok) {
           alert('Blog post created successfully!');
-        
         } else {
           alert('Failed to create blog post.');
         }
@@ -100,6 +95,7 @@ const handleTitleChange = (e) => {
       } finally {
       
         setSubmitting(false);
+        setLoading(false)
       }
     };
 
@@ -111,10 +107,17 @@ const handleTitleChange = (e) => {
   return (
     <div className='mt-[200px] block w-3/4 mx-auto '>
       <h1 className='text-center text-blue-400 text-3xl font-bold mb-4'>Create your blog</h1>
-      <form className='flex flex-col space-y-4 w-1/2 mx-auto' method="post" onSubmit={handleSubmit}>
-        <input type="text" placeholder='Title' value={title} onChange={handleTitleChange} className='p-2 border border-gray-300 rounded' />
+      {loading && <p className='text-2xl text-center text-blue-950'>Loading...</p>} 
+      <form encType="multipart/form-data" className='flex flex-col space-y-4 w-1/2 mx-auto' method="post" onSubmit={handleSubmit}>
+        <input type="text" placeholder='Title'  onChange={handleTitleChange} className='p-2 border border-gray-300 rounded' />
         <textarea placeholder='Content' value={content} onChange={handleContentChange} className='p-2 border border-gray-300 rounded'></textarea>
-        <input type="text" placeholder='Image Url' value={imageUrl} onChange={handleImageChange} className='p-2 border border-gray-300 rounded' />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="p-2 border border-gray-300 rounded"
+        />
+        {image && <p>{image.name}</p>}
         <select value={category} onChange={handleCategoryChange} placeholder='SELECT A CATEGORY' className='p-2 border border-gray-300 rounded'>
           {categories.map((element, index) => (
             <option value={element} key={index}>{element}</option>
@@ -127,7 +130,7 @@ const handleTitleChange = (e) => {
           onChange={handleTagsChange}
           className='p-2 border border-gray-300 rounded'
         />
-        <input type="submit" className='p-2 bg-blue-500 text-white rounded cursor-pointer' />
+        <input type="submit" value="Submit" className='p-2 bg-blue-500 text-white rounded cursor-pointer' />
       </form>
     </div>
   )

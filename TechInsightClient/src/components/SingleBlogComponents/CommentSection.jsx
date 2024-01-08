@@ -89,6 +89,7 @@ const token = cookies.get("token");
     
             if (response.ok) {
               alert('Comment posted successfully!');
+              setContent("");
             
             } else {
               alert('Failed to post comment.');
@@ -125,7 +126,7 @@ const token = cookies.get("token");
                         <div className="flex-grow pl-4">
                             <h4 className="text-base  font-roboto">{comment.username}</h4>
                             <p className="text-xs text-gray-400">{new Date(comment.createdAt).toLocaleString()}</p>
-                            <p className="text-sm font-600 mt-2">{comment.content}s</p>
+                            <p className="text-sm font-600 mt-2">{comment.content}</p>
                             <div className="flex gap-2 mt-2">
                                 {/* <button
                                     className="text-gray-500 px-1 text-xs border border-gray-200 rounded-sm shadow-sm hover:bg-blue-500 hover:text-white transition">Reply</button>
@@ -139,7 +140,7 @@ const token = cookies.get("token");
                 
                 </div>
 
-                <form onSubmit={handleSubmit} method="post" className="mt-8">
+                <form   onSubmit={handleSubmit} method="post" className="mt-8">
                     <h5 className="text-base  mb-1">Comment:</h5>
                     <textarea type="text" value={content} onChange={handleContentChange}
                         className="w-full border border-gray-200 py-3 px-5 text-sm  rounded-sm h-20 focus:outline-none focus:border-gray-400"
