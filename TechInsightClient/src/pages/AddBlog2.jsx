@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 const AddBlog2 = () => {
@@ -118,7 +119,7 @@ const handleTitleChange = (e) => {
   }, [submitting, title, content, category, tags]);
   return (
     <div className='mt-24 mx-auto max-w-7xl  '>
-        <div className='pt-24 border bg-stone-50  flex flex-row pb-24 '>
+        { token && <div className='pt-24 border bg-stone-50  flex flex-row pb-24 '>
             <div className='mx-32  w-1/3 '>
               {loading && <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center"> Loading </div>}
             <h2 className='text-3xl font-semibold text-cyan-900'> Create your blog</h2>
@@ -167,6 +168,11 @@ const handleTitleChange = (e) => {
             
 
 
+        </div>}
+        <div className='py-24 border text-center' >
+          <h1 className=' text-4xl font-bold text-blue-400 text-center'>
+            You have to <Link to='/login' > <span className='text-blue-700'> Login</span></Link> to create a blog
+             </h1>
         </div>
 
     </div>
