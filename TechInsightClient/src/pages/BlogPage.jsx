@@ -41,6 +41,11 @@ import Cookies from 'universal-cookie';
                         setSelectedCategory(searchParams.get('category'));
                         setActiveCategory(searchParams.get('category'));
                     }
+                    const tagParam = searchParams.get('tag');
+                    if (tagParam) {
+                      handleTagChange();
+                      url += `&tag=${tagParam.trim()}`;
+                    }
 
                     const response = await fetch(url);
 
@@ -66,8 +71,11 @@ import Cookies from 'universal-cookie';
         };
 
         useEffect(() => {
+          let isMounted = true;
             const fetchBlogsByTag = async () => {
+              
               try {
+               
                 const tagParam = new URLSearchParams(location.search).get('tag');
                 setTag(tagParam || '');
         
@@ -88,6 +96,10 @@ import Cookies from 'universal-cookie';
             };
         
             fetchBlogsByTag();
+            
+            return () => {
+              isMounted = false;
+            };
           }, [location.search]);
 
     const handleCategoryChange = (category) => {
@@ -96,17 +108,35 @@ import Cookies from 'universal-cookie';
         setCurrentPage(1)
     
        
-        const newSearchParams = { ...searchParams};
-    
-        if (category !== null) {
-            newSearchParams.category = category;
-        } else {
-            delete newSearchParams.category; 
-        }
-    
-        setSearchParams(newSearchParams);
+        setSearchParams((prevParams) => {
+          const newSearchParams = new URLSearchParams(prevParams);
+  
+          if (category !== null) {
+              newSearchParams.set('category', category);
+          } else {
+              newSearchParams.delete('category');
+          }
+  
+          return newSearchParams;
+      });
+    }
 
-    };
+      const handleTagChange = (tag)=>{
+        setTag(tag);
+        setSearchParams((prevParams) => {
+          const newSearchParams = new URLSearchParams(prevParams);
+  
+          if (category !== null) {
+              newSearchParams.set('category', category);
+          } else {
+              newSearchParams.delete('category');
+          }
+  
+          return newSearchParams;
+      });
+      }
+
+    
 
   return (
 
