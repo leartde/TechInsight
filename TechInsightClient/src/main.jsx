@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import About1 from './pages/About';
 import DiscoverUsers from './pages/DiscoverUsers';
 import AddBlog2 from './pages/AddBlog2';
+import Contact from './pages/Contact';
 
 
 
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
         element:<Home/>
       },
     {
-      path:"/example",
-      element: <Example/>
+      path:"/contact",
+      element: <Contact/>
     },
     {
       path:"/blogs",

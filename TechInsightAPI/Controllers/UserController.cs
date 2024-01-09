@@ -156,6 +156,41 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
         }
+        [HttpPost("submit")]
+        public async Task<IActionResult> SubmitContactForm(ContactDto contactDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var contact = new Contact
+            {
+                Name = contactDto.Name,
+                Email = contactDto.Email,
+                Subject = contactDto.Subject,
+                Message = contactDto.Message,
+                SubmissionTime = DateTime.Now,
+                // Assuming you have a logged-in user, set UserId accordingly
+                // You can modify this based on your authentication logic
+                UserId = 1 // Replace with actual user ID or fetch from authentication
+            };
+
+            try
+            {
+                _context.Contacts.Add(contact);
+                _context.SaveChanges();
+
+                // You can customize the response based on your needs
+                return Ok(new { Message = "Contact form submitted successfully." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
 
 
 

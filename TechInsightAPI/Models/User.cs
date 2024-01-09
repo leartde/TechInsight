@@ -29,6 +29,7 @@ namespace TechInsightAPI.Models
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
         public virtual ICollection<UserClick> UserClicks { get; set; } = new List<UserClick>();
+        public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
     }
 
     public enum UserRole

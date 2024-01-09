@@ -11,14 +11,14 @@ const About1 = () => {
           <div className="w-full px-3 sm:px-4 xl:w-1/2">
             <div className="py-3 sm:py-4">
               <img
-                src="https://i.ibb.co/gFb3ns6/image-1.jpg"
+                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className="w-full h-auto max-w-xs max-h-xs rounded-2xl"
               />
             </div>
             <div className="py-3 sm:py-4">
               <img
-                src="https://i.ibb.co/rfHFq15/image-2.jpg"
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className="w-full h-auto max-w-xs max-h-xs rounded-2xl"
               />
