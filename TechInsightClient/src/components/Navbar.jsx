@@ -33,7 +33,7 @@ const Navbar = () => {
     console.log(isMenuOpen);
     const navItems = [
         {path: "/", link: "Home"},
-        {path: "/discover", link: "Discover"},
+        {path: "/discover", link: "Discover Users"},
         {path: "/about", link: "About"},
         {path: "/blogs", link: "Blogs"},
         {path: "/contact", link: "Contact"},
@@ -86,6 +86,11 @@ const Navbar = () => {
         <div className="py-2 ">
             <Link to={`/profile/${token.id}`} className="block px-4 py-2 text-sm text-gray-700   hover:bg-gray-600  hover:text-white"> Profile Page </Link>
         </div>
+        {
+          token.userRole == 1 && <div className="py-2">
+          <Link className="block px-4 py-2 text-sm text-gray-700   hover:bg-gray-600  hover:text-white" to ={`/dashboard`}> Dashboard </Link>
+        </div>
+        }
 
         <div className="py-1  w-full">
           <button onClick={() => {
