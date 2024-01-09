@@ -12,7 +12,7 @@ const Contact = () => {
         const enteredEmail = e.target.value;
         setEmail(enteredEmail);
     
-        // Validate email format
+        
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setEmailError(emailRegex.test(enteredEmail) ? '' : 'Invalid email format');
     };
@@ -20,13 +20,13 @@ const Contact = () => {
     
     
     const handleSubmit = async () => {
-        // Check if any of the required fields are empty
+       
         if (!name || !email || !subject || !message) {
             console.error('Please fill in all the required fields.');
             return;
         }
     
-        // Check if there is an email error
+       
         if (emailError) {
             console.error('Invalid email format. Please correct the email.');
             return;
@@ -52,14 +52,14 @@ const Contact = () => {
     
             if (response.ok) {
                 console.log('Contact form submitted successfully');
-                // Optionally, you can reset the form fields or show a success message
+                
             } else {
                 console.error('Error submitting contact form:', response.statusText);
-                // Optionally, you can handle the error or show an error message
+                
             }
         } catch (error) {
             console.error('Error submitting contact form:', error);
-            // Optionally, you can handle the error or show an error message
+            
         }
     };
     

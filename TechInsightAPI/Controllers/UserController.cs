@@ -156,6 +156,25 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { Message = "Internal Server Error", Details = ex.ToString() });
             }
         }
+
+
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            var users = from u in _context.Users
+                        select new UserDto()
+                        {
+                            Id = u.Id,
+                            Username = u.Username,
+                            Bio = u.Bio,
+                            ProfilePicUrl = u.ProfilePicUrl,
+                        };
+
+            return Ok(users);
+
+        }
+
+
         [HttpPost("submit")]
         public async Task<IActionResult> SubmitContactForm(ContactDto contactDto)
         {

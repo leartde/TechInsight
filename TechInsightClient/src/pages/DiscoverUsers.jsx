@@ -8,14 +8,21 @@ const DiscoverUsers = () => {
   const [users, setUsers] = useState([]);
   const cookies = new Cookies();
   const token = cookies.get("token");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://localhost:7265/api/User/discover/user-profiles?currentUserId=${token.id}`);
+        const response = await fetch(`https://localhost:7265/api/User`);
+
         if (response.ok) {
           const data = await response.json();
-          setUsers(data);
-          console.log('data ', data);
+          if (token && token.id) {
+            const filteredData = data.filter((user) => user.id !== token.id);
+            setUsers(filteredData);
+            console.log('filteredData ', filteredData);
+          } else {
+            setUsers(data);
+          };
         } else {
           console.log('Error fetching users:', response.statusText);
         }
