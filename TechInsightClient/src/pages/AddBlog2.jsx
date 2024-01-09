@@ -30,11 +30,11 @@ const handleTitleChange = (e) => {
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files && e.target.files[0];
-    // Create a FileReader to read the file as a data URL
+
   const reader = new FileReader();
 
   reader.onloadend = () => {
-    // Set the data URL as the preview image source
+
     setImagePreview(reader.result);
   };
     if (selectedFile) {
@@ -127,7 +127,7 @@ const handleTitleChange = (e) => {
 
             <form encType="multipart/form-data" method='post' onSubmit={handleSubmit} className='flex flex-col mt-4 space-y-4 mx-auto rounded' action="">
                 <input type="text"  onChange={handleTitleChange} className='border-2 border-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-white placeholder-gray-400 text-black focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400'  name="title" id="title" placeholder='Enter your blog title' />
-                <textarea value={content} onChange={handleContentChange} className='border-2 border-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-white placeholder-gray-400 text-black dark:focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400' name="content" id="content" cols="30" rows="10" placeholder='Enter your blog content'></textarea>
+                <textarea value={content} onChange={handleContentChange} className='border-2 border-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-white placeholder-gray-400 text-black focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400' name="content" id="content" cols="30" rows="10" placeholder='Enter your blog content'></textarea>
                 <div className='border-2 border-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-white placeholder-gray-400 text-black dark:focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400'>
                     <input type="file"  onChange={handleImageChange} name="image" id="image" placeholder='Enter your blog image'
               accept="image/*" />

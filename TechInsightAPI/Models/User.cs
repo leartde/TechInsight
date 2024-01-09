@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using TechInsightAPI.Models.TechInsight.Models;
 
 namespace TechInsightAPI.Models
@@ -25,10 +26,15 @@ namespace TechInsightAPI.Models
 
         public DateTime RegistrationTime { get; set; } = DateTime.Now;
 
+        [JsonIgnore]
         public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
+        [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        [JsonIgnore]
         public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
+        [JsonIgnore]
         public virtual ICollection<UserClick> UserClicks { get; set; } = new List<UserClick>();
+        [JsonIgnore]
         public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
     }
 

@@ -18,6 +18,7 @@ import About1 from './pages/About';
 import DiscoverUsers from './pages/DiscoverUsers';
 import AddBlog2 from './pages/AddBlog2';
 import Contact from './pages/Contact';
+import EditProfile from './pages/EditProfile';
 
 
 
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
     {
       path:"/discover",
       element: <DiscoverUsers/>,
+    },
+    {
+      path:"/editProfile",
+      element: <EditProfile/>
     },
 
     ]

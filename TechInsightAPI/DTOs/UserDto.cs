@@ -11,15 +11,15 @@ namespace TechInsightAPI.DTOs
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public string ?Bio { get; set; }
-        public string ?ProfilePicUrl { get; set; }
+        public string? Bio { get; set; }
+        public IFormFile? Image { get; set; }
+        public string? ProfilePicUrl { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         public UserRole UserRole { get; set; }
-        public DateTime RegistrationTime { get; set; }
+        public DateTime? RegistrationTime { get; set; }
     }
 }

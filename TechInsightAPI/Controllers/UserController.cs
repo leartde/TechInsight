@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
+using TechInsightAPI.Interfaces;
 
 namespace TechInsightAPI.Controllers
 {
@@ -15,10 +16,12 @@ namespace TechInsightAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPhotoService _photoService;
 
-        public UserController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context, IPhotoService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
 
         [HttpPost("signup")]
@@ -234,5 +237,53 @@ namespace TechInsightAPI.Controllers
                 RegistrationTime = user.RegistrationTime
             };
         }
+
+        [HttpPut("update")]
+
+        public async Task<IActionResult> UpdateUser([FromForm]UserDto userDto)
+        {
+            if (userDto == null || userDto.Id <= 0)
+            {
+                return BadRequest("Invalid user data");
+            }
+
+            var user = await _context.Users.FindAsync(userDto.Id);
+
+            if (user == null)
+            {
+                return NotFound($"User with ID {userDto.Id} not found");
+            }
+
+            try
+            {
+                
+               
+
+                user.Username = userDto.Username;
+                user.Bio = userDto.Bio;
+                if (userDto.Image != null)
+                {
+                    var imgResult = await _photoService.AddPhotoAsync(userDto.Image);
+                    if (imgResult.Url == null)
+                    {
+                        return BadRequest("Error uploading user image");
+                    }
+
+                    user.ProfilePicUrl = imgResult.Url.ToString();
+                }
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "User updated successfully", updatedUser = user });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+               
+                return StatusCode(500, $"An error occurred while updating the user: {ex.Message}");
+            }
+        }
+
     }
 }

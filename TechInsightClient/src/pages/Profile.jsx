@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { FaFacebook, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaTwitter, FaGithub, FaEdit } from 'react-icons/fa';
 import BlogCard2 from '../components/BlogCard2';
-import {useLoaderData, useLocation} from 'react-router-dom';
+import {Link, useLoaderData, useLocation} from 'react-router-dom';
 import ProfileBlogs from '../components/ProfileComponents/ProfileBlogs';
-
+import Cookies from 'universal-cookie';
 
 const Profile = () => {
     const [posts, setPosts] = useState([]);
-    const state = history.state.usr;
-    console.log(state);
-
     const user = useLoaderData();
-    console.log('user data ', user)
+    console.log('user data ', user);
+    const cookies = new Cookies();
+    const token = cookies.get("token");
+    
 
    
 
     useEffect(() => {
-        
+       
 
         fetch(`https://localhost:7265/api/posts`) 
             .then(response => response.json())
@@ -39,12 +39,18 @@ const Profile = () => {
                         <h1 className="text-2xl font-bold mb-2">{user.username}</h1>
                         <p className="text-gray-600">{user.email}</p>
                         <p className="text-gray-600 mt-4">{user.bio}</p>
+                      {
+                        token.id === user.id && (
+                            <Link to={'/editProfile'}> <FaEdit className="text-gray-600 mt-4 text-3xl cursor-pointer text-center mx-auto"/></Link>
+                        )
+                      }
                         <div className="mt-4 flex justify-center space-x-4">
                             <a href="https://www.facebook.com" className="hover:text-[#009bd6]"> <FaFacebook/> </a>
                             <a href="https://www.linkedin.com" className="hover:text-[#009bd6]"> <FaLinkedin/> </a>
                             <a href="https://x.com/" className="hover:text-[#009bd6]"> <FaTwitter/> </a>
                             <a href="https://github.com/" className="hover:text-[#009bd6]"> <FaGithub/> </a>
                         </div>
+
                     </>
                 )}
             </div>
