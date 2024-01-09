@@ -2,31 +2,44 @@ import React from 'react'
 
 function Pagination({onPageChange, currentPage, blogs, pageSize}) {
     const totalPages = Math.ceil(blogs.length / pageSize);
-    // console.log(totalPages)
-    const renderPaginationLinks = () =>{
-
+    const renderPaginationLinks = () => {
         return Array.from({length : totalPages},  (_, i)=> i+1).map((pageNumber)=>(
-            <li className={pageNumber === currentPage? "activePagination": ""} key={pageNumber}>
-                <a href="#" onClick={()=>onPageChange(pageNumber)}>{pageNumber}</a>
+            <li 
+                className={`border-gray-200 shadow p-2 w-8 bg-white item-center ${pageNumber === currentPage? "activePagination": ""}`} 
+                key={pageNumber}
+            >
+                <button 
+                    className="w-full h-full"
+                    onClick={()=>onPageChange(pageNumber)}
+                >
+                    {pageNumber}
+                </button>
             </li>
-        
         ))
     } 
-  return (
-    <ul className='pagination  my-10 flex-wrap gap-4 '>
+    return (
+        <ul className='pagination  my-10 flex-wrap gap-4 '>
             <li>
-                <button className={currentPage === 1 ? "hidden" : ""}  onClick={()=>onPageChange(currentPage - 1) }>Previous</button>
-
+                <button 
+                    className={`border-gray-200 shadow p-2 bg-white ${currentPage === 1 ? "hidden" : ""}`}  
+                    onClick={()=>onPageChange(currentPage - 1)}
+                >
+                    Previous
+                </button>
             </li>
             <div className='flex gap-1'>
                 {renderPaginationLinks()}
             </div>
             <li> 
-                <button className={currentPage === totalPages ? "hidden" : ""}  onClick={()=>onPageChange(currentPage + 1)}>Next</button>
+                <button 
+                    className={`border-gray-200 shadow p-2 bg-white ${currentPage === totalPages ? "hidden" : ""}`}  
+                    onClick={()=>onPageChange(currentPage + 1)}
+                >
+                    Next
+                </button>
             </li>
-    </ul>
-
-  )
+        </ul>
+    )
 }
 
 export default Pagination
