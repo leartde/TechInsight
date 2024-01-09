@@ -7,6 +7,7 @@ using TechInsightAPI.Interfaces;
 using TechInsightAPI.Models;
 using TechInsightAPI.DTOs;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace TechInsightAPI.Controllers
 {
@@ -213,13 +214,16 @@ namespace TechInsightAPI.Controllers
         [HttpPost]
         [Route("AddPost")]
         public async Task<IActionResult> AddPost([FromForm] PostDto postDto)
-
         {
             if (postDto == null || string.IsNullOrEmpty(postDto.Title) || string.IsNullOrEmpty(postDto.Content))
             {
                 return BadRequest("Invalid input data");
             }
-            var imgResult =  await _photoService.AddPhotoAsync(postDto.Image);
+
+            
+            List<string> tags = JsonConvert.DeserializeObject<List<string>>(postDto.TagsJson);
+
+            var imgResult = await _photoService.AddPhotoAsync(postDto.Image);
             var post = new Post
             {
                 Title = postDto.Title,
@@ -227,19 +231,25 @@ namespace TechInsightAPI.Controllers
                 UserId = postDto.UserId,
                 ImageURL = imgResult.Url.ToString(),
                 CreatedAt = postDto.CreatedAt,
-
             };
-            var existingTags = _context.Tags.Where(t => postDto.Tags.Contains(t.Name)).ToList();
-            foreach (var tagName in postDto.Tags)
+
+            var existingTags = _context.Tags
+                .Where(t => tags.Contains(t.Name))
+                .ToList();
+
+            foreach (var tagName in tags)
             {
                 var existingTag = existingTags.FirstOrDefault(t => t.Name == tagName);
+
                 if (existingTag != null)
                 {
                     post.PostTags.Add(new PostTag { TagReference = existingTag });
                 }
                 else
                 {
-                    post.PostTags.Add(new PostTag { TagReference = new Tag { Name = tagName } });
+                    var newTag = new Tag { Name = tagName };
+                    post.PostTags.Add(new PostTag { TagReference = newTag });
+                    existingTags.Add(newTag);
                 }
             }
 
@@ -260,27 +270,28 @@ namespace TechInsightAPI.Controllers
             {
                 _context.Posts.Add(post);
                 await _context.SaveChangesAsync();
+
+               
+                var createdPostDto = new PostDto
+                {
+                    Id = post.Id,
+                    Title = post.Title,
+                    Content = post.Content,
+                    UserId = post.UserId,
+                    ImageURL = post.ImageURL,
+                    CreatedAt = post.CreatedAt,
+                };
+
+                return Ok(new { Message = "Post added successfully", Post = createdPostDto });
             }
             catch (Exception ex)
             {
-                
-                return StatusCode(500, "An error occurred while saving the post");
+                return StatusCode(500, new { ErrorMessage = "An error occurred while saving the post" });
             }
 
-           
-            var createdPostDto = new PostDto
-            {
-                Id = post.Id,
-                Title = post.Title,
-                Content = post.Content,
-                UserId = post.UserId,
-                ImageURL = post.ImageURL,
-                CreatedAt = post.CreatedAt,
-                
-            };
 
-            return CreatedAtAction(nameof(AddPost), new { id = createdPostDto.Id }, createdPostDto);
         }
+
 
 
 
