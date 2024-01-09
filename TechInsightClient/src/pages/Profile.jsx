@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaLinkedin, FaTwitter, FaGithub, FaEdit } from 'react-icons/fa';
 import BlogCard2 from '../components/BlogCard2';
-import {Link, useLoaderData, useLocation} from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import ProfileBlogs from '../components/ProfileComponents/ProfileBlogs';
 import Cookies from 'universal-cookie';
+import Pagination from '../components/Pagination';
 
 const Profile = () => {
-    const [posts, setPosts] = useState([]);
-    const user = useLoaderData();
-    console.log('user data ', user);
-    const cookies = new Cookies();
-    const token = cookies.get("token");
-    
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
+  const user = useLoaderData();
+  const cookies = new Cookies();
+  const token = cookies.get("token");
 
-   
+  useEffect(() => {
+    fetch(`https://localhost:7265/api/posts`)
+      .then(response => response.json())
+      .then(data => {
+        const userPosts = data.filter(post => post.userId === user.id);
+        setPosts(userPosts);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []);
 
-    useEffect(() => {
-       
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-        fetch(`https://localhost:7265/api/posts`) 
-            .then(response => response.json())
-            .then(data => {
-                const userPosts = data.filter(post => post.userId === user.id);
-                setPosts(userPosts);
-            })
-            .catch(error => {
-                console.error('Error fetching data: ', error);
-            });
-    }, []);
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
     return (
@@ -58,7 +63,15 @@ const Profile = () => {
             <hr className="my-5 w-full" />
             {/* Display posts */}
             <div className='max-w-4xl'>
-                <ProfileBlogs blogs={posts}/>
+            <ProfileBlogs blogs={posts} currentPage={currentPage} postsPerPage={postsPerPage} />
+            </div>
+            <div>
+            <Pagination
+            onPageChange={paginate}
+            currentPage={currentPage}
+            blogs={posts}
+            pageSize={postsPerPage}
+             />
             </div>
         </div>
     );
