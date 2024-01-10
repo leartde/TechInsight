@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { FaArrowsUpDown, FaTrash, FaUpDown } from 'react-icons/fa6';
-import EditUserModal from './EditUserModal';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,7 +12,6 @@ const UsersTable = () => {
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortColumn, setSortColumn] = useState('username');
     const [searchTerm, setSearchTerm] = useState('');
-    const [editModal, setEditModal] = useState(false);
     const navigate = useNavigate();
 
   
