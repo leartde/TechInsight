@@ -170,7 +170,10 @@ namespace TechInsightAPI.Controllers
                             Id = u.Id,
                             Username = u.Username,
                             Bio = u.Bio,
+                            Email = u.Email,
                             ProfilePicUrl = u.ProfilePicUrl,
+                            RegistrationTime = u.RegistrationTime,
+                            UserRole = u.UserRole
                         };
 
             return Ok(users);

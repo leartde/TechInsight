@@ -42,7 +42,7 @@ const Profile = () => {
                     <>
                         <img src={user.profilePicUrl} alt="Profile" className="w-48 h-48 mx-auto rounded-full mb-4"/>
                         {
-                            token.id === user.id && (
+                           token && token.id === user.id && (
                                 <Link to={'/editProfile'} className="absolute right-0 top-0 mt-4 mr-4">
                                     <FaEdit className="text-gray-600 text-3xl cursor-pointer"/>
                                 </Link>

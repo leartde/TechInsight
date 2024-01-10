@@ -95,7 +95,7 @@ const Navbar = () => {
         <div className="py-1  w-full">
           <button onClick={() => {
             cookies.remove("token");
-            navigate("/");
+            window.location.reload(false);
             setIsAvatarOpen(false);
           }}
             className="w-full text-left px-4   py-2 text-sm text-gray-700 hover:bg-gray-600  dark:hover:text-white">
