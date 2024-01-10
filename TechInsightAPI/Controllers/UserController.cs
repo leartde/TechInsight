@@ -288,5 +288,37 @@ namespace TechInsightAPI.Controllers
             }
         }
 
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid user data");
+            }
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound($"User with ID {id} not found");
+            }
+            try
+            {
+                foreach (var post in user.Posts.ToList())
+                {
+                    _context.Posts.Remove(post);
+                }
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return Ok($"User with ID {user.Id} deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+
+                return StatusCode(500, $"An error occurred while deleting the user: {ex.Message}");
+            }
+
+
+        }
+
     }
 }

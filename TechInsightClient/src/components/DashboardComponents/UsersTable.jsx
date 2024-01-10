@@ -22,7 +22,7 @@ const UsersTable = () => {
           if (response.ok) {
             const data = await response.json();
             setUsers(data);
-            console.log(data);
+            // console.log(data);
           } else {
             console.log('Error fetching users:', response.statusText);
           }
@@ -31,7 +31,22 @@ const UsersTable = () => {
         }
       };
       fetchUsers();
-    }, []);
+    }, [users]);
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`https://localhost:7265/api/User/delete/${id}`);
+    
+            if (response.status === 200) {
+                console.log('User deleted successfully');
+            } else {
+                console.error('Error deleting user:', response.statusText);
+            }
+        } catch (error) {
+            console.log('Error deleting user', error);
+        }
+    };
+    
   
     const handleSort = (column) => {
       setSortColumn(column);
@@ -65,11 +80,10 @@ const UsersTable = () => {
         typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
-    console.log("MODAL IS OPEN? ", editModal)
+    
   
     return (
       <div className='my-24 mx-auto'>
-        <EditUserModal open={editModal} />
        <div className='pl-4 space-y-4 mb-6'>
        <h1 className='text-2xl font-bold  lg:block hidden text-gray-800  text-left'> Users Table</h1>
        <div className='text-lg font-normal text-gray-600'>
@@ -82,7 +96,7 @@ const UsersTable = () => {
           />
        </div>
        </div>
-        <div className=' max-h-96 overflow-y-scroll'>
+        <div className=' max-h-96 overflow-y-scroll bg-[#F3F8FF]'>
           <table className='table-auto w-full'>
             <thead>
               <tr className='text-left text-base font-light text-gray-400'>
@@ -121,7 +135,9 @@ const UsersTable = () => {
             </thead>
             <tbody>
               {filteredUsers.map((user) => (
+              
                 <tr key={user.id} className='bg-gray-100 text-gray-500'>
+                    
                   <td className='border px-4 py-2'>{user.id}</td>
                   <td onClick={()=>{navigate(`/profile/${user.id}`)}} className='cursor-pointer border px-4 py-2 text-blue-600'>{user.username}</td>
                   <td className='border px-4 py-2'>{user.email}</td>
@@ -132,7 +148,7 @@ const UsersTable = () => {
                   <td className='flex flex-row border space-x-4 text-2xl pl-2  py-2'>
                     <FaEdit className='text-blue-400 cursor-pointer' />
                     
-                    <FaTrash className='text-red-400' />
+                    <FaTrash onClick={()=>handleDelete(user.id)} className='text-red-400 cursor-pointer' />
                   </td>
                 </tr>
               ))}

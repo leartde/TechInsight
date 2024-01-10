@@ -9,7 +9,7 @@ namespace TechInsightAPI.DTOs
         public int Id { get; set; }
         public string? Username { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
+        //[Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
         public string? Email { get; set; }
 

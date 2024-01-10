@@ -31,16 +31,12 @@ namespace TechInsightAPI.Data
         public DbSet<Contact> Contacts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure relationships and keys here
 
-            // Example: Configure the relationship between Post and User
             modelBuilder.Entity<Post>()
-                .HasOne(p => p.User)
-                .WithMany(u => u.Posts)
-                .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Choose the appropriate delete behavior
+            .HasOne(p => p.User)
+            .WithMany(u => u.Posts)
+            .HasForeignKey(p => p.UserId);
 
-            // Example: Configure the many-to-many relationship between Post and Tag through PostTag
             modelBuilder.Entity<PostTag>()
                 .HasKey(pt => new { pt.PostId, pt.TagId });
 
@@ -96,14 +92,14 @@ namespace TechInsightAPI.Data
        .HasOne(p => p.Category)
        .WithMany(c => c.Posts)
        .HasForeignKey(p => p.CategoryId)
-       .OnDelete(DeleteBehavior.Restrict);
+       .OnDelete(DeleteBehavior.Cascade);
 
 
         modelBuilder.Entity<Contact>()
        .HasOne(c => c.User)
        .WithMany(u => u.Contacts)
        .HasForeignKey(c => c.UserId)
-       .OnDelete(DeleteBehavior.Restrict);
+       .OnDelete(DeleteBehavior.Cascade);
 
 
 
