@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { FaDesktop, FaFontAwesome, FaGear, } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import addClick from '../Services.jsx/AddClick';
 
 
-
-const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
+const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize, user}) => {
     const filteredBlogs = blogs.filter((blogs)=> !selectedCategory || blogs.category === selectedCategory )
     .slice((currentPage - 1) * pageSize, currentPage * pageSize );
+
+        
+
+    
+
+    
 
    
   return (
@@ -16,7 +23,7 @@ const BlogCard2 = ({blogs, currentPage, selectedCategory, pageSize}) => {
             filteredBlogs.map((blog)=>(
                 
                 <div key={blog.id} className=" max-h-80 rounded-xl bg-white p-3 pb-5 shadow-sm">
-        <Link to={`/blogs/${blog.id}`} className="block rounded-md overflow-hidden">
+        <Link to={`/blogs/${blog.id}`} onClick={()=>addClick(blog.id,user.id)} className="block rounded-md overflow-hidden">
             <img src={blog.imageURL}
                 className="  w-full h-40 object-cover hover:scale-110 transition duration-500"/>
         </Link>

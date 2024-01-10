@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import addClick from '../../Services.jsx/AddClick';
 
-const OtherBlogsByUserCard = ({userId, currentPostId}) => {
+const OtherBlogsByUserCard = ({userId, currentPostId, currentUser}) => {
   const [blogsBySameUser, setblogsBySameUser]= useState([]);
     useEffect(()=>{
        const fetchOtherBlogs = async () =>{
@@ -26,7 +27,7 @@ const OtherBlogsByUserCard = ({userId, currentPostId}) => {
     <div className="space-y-4">
       {
         blogsBySameUser.map((blog)=>(
-            <Link key={blog.id} to={`/blogs/${blog.id}`} className="flex group">
+            <Link key={blog.id} onClick={()=>addClick(blog.id, currentUser.id)} to={`/blogs/${blog.id}`} className="flex group">
             <div className="flex-shrink-0">
                 <img src={blog.imageURL} className="h-14 w-20 rounded object-cover"/>
             </div>

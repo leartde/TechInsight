@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import addClick from '../../Services.jsx/AddClick';
 
-const RelatedBlogsCard = ({blog, blogId}) => {
+const RelatedBlogsCard = ({blog, blogId, currentUser}) => {
     const [relatedBlogs, setRelatedBlogs]= useState([]);
     useEffect(() => {
     const fetchRelatedBlogs = async () => {
@@ -24,7 +25,7 @@ const RelatedBlogsCard = ({blog, blogId}) => {
     {
         relatedBlogs.map((relatedBlog)=>(
             <div key={relatedBlog.id} className="rounded-sm bg-white p-3 pb-5 shadow-sm">
-        <Link to={`/blogs/${relatedBlog.id}`} className="block rounded-md overflow-hidden">
+        <Link to={`/blogs/${relatedBlog.id}`} onClick={()=>addClick(relatedBlog.id, currentUser.id)} className="block rounded-md overflow-hidden">
             <img src={relatedBlog.imageURL}
                 className="  w-full h-40 object-cover  hover:scale-110 transition duration-500"/>
         </Link>

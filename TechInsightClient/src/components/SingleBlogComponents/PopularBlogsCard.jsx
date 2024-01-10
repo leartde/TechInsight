@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import addClick from '../../Services.jsx/AddClick';
 
-    const PopularBlogsCard = () => {
+    const PopularBlogsCard = ({currentUser}) => {
         const [popularBlogs, setPopularBlogs] = useState([]);
 
         useEffect(() => {
@@ -33,7 +34,7 @@ import { Link } from 'react-router-dom';
                 <div className="space-y-4">
                 {
                     popularBlogs.map((blog)=>(
-                        <Link to={`/blogs/${blog.id}`} key={blog.id} className="flex">
+                        <Link to={`/blogs/${blog.id}`} onClick={()=>addClick(blog.id, currentUser.id)} key={blog.id} className="flex">
                         <div className="flex-shrink-0">
                             <img src={blog.imageURL} className="h-14 w-20 lg:w-14 xl:w-20 rounded object-cover"/>
                         </div>

@@ -5,6 +5,7 @@ import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import ProfileBlogs from '../components/ProfileComponents/ProfileBlogs';
 import Cookies from 'universal-cookie';
 import Pagination from '../components/Pagination';
+import addClick from '../Services.jsx/AddClick';
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
@@ -26,12 +27,12 @@ const Profile = () => {
       });
   }, []);
 
-  // Get current posts
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  // Change page
+
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
@@ -63,7 +64,7 @@ const Profile = () => {
             <hr className="my-5 w-full" />
             {/* Display posts */}
             <div className='max-w-4xl'>
-            <ProfileBlogs blogs={posts} currentPage={currentPage} postsPerPage={postsPerPage} />
+            <ProfileBlogs currentUser={token} blogs={posts} currentPage={currentPage} postsPerPage={postsPerPage} />
             </div>
             <div>
             <Pagination

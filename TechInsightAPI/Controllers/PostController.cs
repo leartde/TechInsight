@@ -42,6 +42,7 @@ namespace TechInsightAPI.Controllers
                                 .Where(t => t.PostId == p.Id)
                                 .Select(pt => pt.TagReference.Name)
                                 .ToList(),
+                            NrClicks = _context.UserClicks.Count(c => c.PostId == p.Id),
                             UserImage = p.User.ProfilePicUrl,
                             CreatedAt = p.CreatedAt
                         };

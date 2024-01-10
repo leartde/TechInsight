@@ -10,9 +10,15 @@ import CommentSection from '../components/SingleBlogComponents/CommentSection';
 import PopularBlogsCard from '../components/SingleBlogComponents/PopularBlogsCard';
 import TagsCard from '../components/SingleBlogComponents/TagsCard';
 
+import Cookies from 'universal-cookie';
+
 const SingleBlog = () => {
+    const cookies = new Cookies();
+    const token = cookies.get("token");
     const blog = useLoaderData();
+
     console.log('data', blog);
+    console.log('token ', token);
   return (
 
 <div className="font-poppins text-gray-600 mt-16" >
@@ -25,7 +31,7 @@ const SingleBlog = () => {
           <CategoriesCard/>
 
             {/*  other by same user posts  */}
-           <OtherBlogsByUserCard userId={blog.userId} currentPostId={blog.iId}/>
+           <OtherBlogsByUserCard currentUser={token} userId={blog.userId} currentPostId={blog.iId}/>
         </div>
 
         {/*  Main content  */}
@@ -44,7 +50,7 @@ const SingleBlog = () => {
             </div>
 
             {/*  similer post  */}
-           <RelatedBlogsCard blog={blog} blogId={blog.id}/>
+           <RelatedBlogsCard blog={blog} blogId={blog.id} currentUser={token}/>
 
             {/*  comment  */}
             <CommentSection blog={blog}/>
@@ -57,7 +63,7 @@ const SingleBlog = () => {
          
 
             {/*  Popular posts  */}
-            <PopularBlogsCard />
+            <PopularBlogsCard currentUser={token} />
 
             {/*  tag 
              categories  */}

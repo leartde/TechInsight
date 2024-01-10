@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const ProfileBlogs = ({ blogs, currentPage, postsPerPage }) => {
+import addClick
+ from '../../Services.jsx/AddClick';
+const ProfileBlogs = ({ blogs, currentPage, postsPerPage, currentUser }) => {
     const startIndex = (currentPage - 1) * postsPerPage;
     const currentPosts = blogs.slice(startIndex, startIndex + postsPerPage);
 
@@ -11,7 +12,7 @@ const ProfileBlogs = ({ blogs, currentPage, postsPerPage }) => {
     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4">
       {currentPosts.map(blog => (
         <div key={blog.id} className="rounded-sm bg-white p-3 pb-5 shadow-sm">
-          <Link to={`/blogs/${blog.id}`} className="block rounded-md overflow-hidden">
+          <Link onClick={()=>addClick(blog.id,currentUser.id)} to={`/blogs/${blog.id}`} className="block rounded-md overflow-hidden">
             <img src={blog.imageURL} className="w-full h-40 object-cover hover:scale-110 transition duration-500" />
           </Link>
           <div className="mt-3">

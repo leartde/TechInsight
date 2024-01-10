@@ -149,7 +149,7 @@ import Cookies from 'universal-cookie';
 
 
                 <div className='flex flex-row gap-12'>
-                <BlogCard2 blogs={blogs} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
+                <BlogCard2 blogs={blogs} user={token} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
                 <div className=' max-xl:hidden max-w-80 mt-8 lg:mt-0'> <Sidebar blogs={blogs}/>  </div>
                 
                 </div>
