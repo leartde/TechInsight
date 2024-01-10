@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { FaArrowsUpDown, FaTrash, FaUpDown } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-
+import fetchUsers from '../../Services.jsx/FetchUsers';
 
 
 
@@ -16,21 +16,12 @@ const UsersTable = () => {
 
   
     useEffect(() => {
-      const fetchUsers = async () => {
-        try {
-          const response = await fetch('https://localhost:7265/api/user');
-          if (response.ok) {
-            const data = await response.json();
-            setUsers(data);
-            // console.log(data);
-          } else {
-            console.log('Error fetching users:', response.statusText);
-          }
-        } catch (error) {
-          console.log('Error fetching users', error);
-        }
+      const fetchData = async () => {
+        const data = await fetchUsers();
+        setUsers(data);
       };
-      fetchUsers();
+  
+      fetchData();
     }, [users]);
 
     const handleDelete = async (id) => {
@@ -83,7 +74,7 @@ const UsersTable = () => {
     
   
     return (
-      <div className='my-24 mx-auto'>
+      <div className='my-2 mx-auto'>
        <div className='pl-4 space-y-4 mb-6'>
        <h1 className='text-2xl font-bold  lg:block hidden text-gray-800  text-left'> Users Table</h1>
        <div className='text-lg font-normal text-gray-600'>
