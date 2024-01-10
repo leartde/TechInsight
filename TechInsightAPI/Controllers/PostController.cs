@@ -294,6 +294,41 @@ namespace TechInsightAPI.Controllers
         }
 
 
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid post data");
+            }
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null)
+            {
+                return NotFound($"Post with ID {id} not found");
+            }
+            try
+            {
+
+
+
+                foreach (var comment in post.Comments.ToList())
+                {
+                    _context.Comments.Remove(comment);
+                };
+
+
+
+                _context.Posts.Remove(post);
+                await _context.SaveChangesAsync();
+                return Ok($"Post with ID {post.Id} deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+
+                return StatusCode(500, $"An error occurred while deleting the post: {ex.Message}");
+            }
+        }
 
 
 
@@ -302,5 +337,7 @@ namespace TechInsightAPI.Controllers
 
 
 
-    }
+
+
+        }
 }

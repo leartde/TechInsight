@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import fetchBlogs from '../../Services.jsx/FetchBlogs';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
+import DeletePost from '../../Services.jsx/DeletePost';
 
 const BlogsTable = () => {
   const [blogs, setBlogs] = useState([]);
@@ -20,19 +21,7 @@ const BlogsTable = () => {
     fetchData();
   }, [blogs]);
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(`https://localhost:7265/api/Blog/delete/${id}`);
-
-      if (response.status === 200) {
-        console.log('Blog deleted successfully');
-      } else {
-        console.error('Error deleting blog:', response.statusText);
-      }
-    } catch (error) {
-      console.log('Error deleting blog', error);
-    }
-  };
+  
 
   const handleSort = (column) => {
     setSortColumn(column);
@@ -144,6 +133,17 @@ const BlogsTable = () => {
                   }`}
                 />
               </th>
+              <th
+                className='px-4 py-2 cursor-pointer'
+                onClick={() => handleSort('id')}
+              >
+                <span>Views</span>
+                <FaUpDown
+                  className={`ml-1 text-gray-600 inline ${
+                    sortColumn === 'id' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                  }`}
+                />
+              </th>
               <th className='px-4 py-2'>Action</th>
             </tr>
           </thead>
@@ -164,10 +164,11 @@ const BlogsTable = () => {
                 <td className='border px-4 py-2'>
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </td>
+                <td className= 'border px-4 py-2'> {blog.nrClicks}</td>
                 <td className=' border space-x-4 text-2xl pl-2  py-2'>
                   
                   <FaTrash
-                    onClick={() => handleDelete(blog.id)}
+                    onClick={() => DeletePost(blog.id)}
                     className='text-red-400 cursor-pointer  mx-auto'
                   />
                 </td>
