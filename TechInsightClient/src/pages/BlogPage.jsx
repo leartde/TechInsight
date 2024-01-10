@@ -142,8 +142,8 @@ import Cookies from 'universal-cookie';
 
     <div className='max-w-7xl mx-auto py-20'>
         <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
-        <div>
-        <button type="button" onClick={()=>{navigate('/addblog')}} class="text-white bg-gradient-to-r from-[#009bd6] to-[#009bd6] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add a blog</button>
+        <div className='mx-4 my-4'>
+        <button type="button" onClick={()=>{navigate('/addblog')}} class="text-white bg-gradient-to-r from-[#009bd6] to-[#4fbfef] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-xl text-sm px-7 py-3.5 text-center me-2 mb-2">Add a blog</button>
              </div>
          <div className='flex flex-col lg:flex-row  gap-12 '> 
 

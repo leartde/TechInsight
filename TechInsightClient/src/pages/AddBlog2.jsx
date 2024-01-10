@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBlog2 = () => {
   const [title, setTitle] = useState("");
@@ -71,7 +73,7 @@ const AddBlog2 = () => {
   useEffect(() => {
     const createBlogPost = async () => {
       if (!title || !content || !category || !tags) {
-        alert("Please fill in all fields.");
+       toast.warning("Please fill in all fields.");
         return;
       }
 
@@ -101,9 +103,7 @@ const AddBlog2 = () => {
         if (response.ok) {
           const responseData = await response.json();
           console.log("Response Data", responseData);
-
-          const post = responseData.post;
-          console.log("Post ", post);
+           toast.success("Blog post created successfully!");
 
           if (post) {
             navigate(`/blogs/${post.id}`);
@@ -114,7 +114,7 @@ const AddBlog2 = () => {
         }
       } catch (error) {
         console.error("Error creating blog post:", error);
-        alert("Error creating blog post. Please try again.");
+        toast.error("Error creating blog post. Please try again.");
       } finally {
         setSubmitting(false);
         setLoading(false);
@@ -127,6 +127,11 @@ const AddBlog2 = () => {
   }, [submitting, title, content, category, tags]);
   return (
     <div className="mt-24 mx-auto max-w-7xl  ">
+      <ToastContainer
+        autoClose={2000}
+        position='top-left'
+        />
+
       {!token && (
         <div className="text-center py-12">
           <h1 className="text-4xl text-blue-400">

@@ -79,14 +79,10 @@ namespace TechInsightAPI.Data
             modelBuilder.Entity<Comment>()
     .HasOne(c => c.User)
     .WithMany(u => u.Comments)
-    .HasForeignKey(c => c.UserId)
-    .OnDelete(DeleteBehavior.Cascade);
+    .HasForeignKey(c => c.UserId);
+    
 
-            modelBuilder.Entity<Comment>()
-    .HasOne(c => c.User)
-    .WithMany(u => u.Comments)
-    .HasForeignKey(c => c.UserId)
-    .OnDelete(DeleteBehavior.Cascade);
+          
 
             modelBuilder.Entity<Post>()
        .HasOne(p => p.Category)
@@ -95,11 +91,11 @@ namespace TechInsightAPI.Data
        .OnDelete(DeleteBehavior.Cascade);
 
 
-        modelBuilder.Entity<Contact>()
-       .HasOne(c => c.User)
-       .WithMany(u => u.Contacts)
-       .HasForeignKey(c => c.UserId)
-       .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Contact>()
+           .HasOne(c => c.User)
+           .WithMany(u => u.Contacts)
+           .HasForeignKey(c => c.UserId);
+     
 
 
 

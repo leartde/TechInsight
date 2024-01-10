@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CommentSection = ({blog}) => {
     const cookies = new Cookies();
@@ -43,7 +44,7 @@ const token = cookies.get("token");
         }
         fetchComments();
         // console.log("Comments ", comments)
-    },[])
+    },[comments])
 
   
     
@@ -88,7 +89,7 @@ const token = cookies.get("token");
             
     
             if (response.ok) {
-              alert('Comment posted successfully!');
+              toast.success('Comment posted successfully!')
               setContent("");
             
             } else {
@@ -113,6 +114,10 @@ const token = cookies.get("token");
         
   return (
     <div className="p-4 bg-white rounded-sm shadow-sm mt-8">
+        <ToastContainer
+        autoClose={2000}
+        position='top-left'
+        />
                 <h4 className="text-base uppercase  font-semibold mb-4 font-roboto">Post a comment</h4>
                 {/* <p className="text-sm text-gray-500 mb-4">12 comments</p> */}
 

@@ -302,10 +302,24 @@ namespace TechInsightAPI.Controllers
             }
             try
             {
+               
+
                 foreach (var post in user.Posts.ToList())
                 {
                     _context.Posts.Remove(post);
-                }
+                };
+
+                foreach (var comment in user.Comments.ToList())
+                {
+                    _context.Comments.Remove(comment);
+                };
+
+                foreach (var contact in user.Contacts.ToList())
+                {
+                    _context.Contacts.Remove(contact);
+                };
+
+
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
                 return Ok($"User with ID {user.Id} deleted successfully");
