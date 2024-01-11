@@ -64,5 +64,34 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, new { ErrorMessage = "An error occurred while saving the contact" });
             }
         }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> DeleteContact(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid contact data");
+            }
+            var contact = await _context.Contacts.FindAsync(id);
+            if (contact == null)
+            {
+                return NotFound($"Post with ID {id} not found");
+            }
+            try
+            {
+
+
+                _context.Contacts.Remove(contact);
+                await _context.SaveChangesAsync();
+                return Ok($"Contact with ID {contact.Id} deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+
+                return StatusCode(500, $"An error occurred while deleting the contact: {ex.Message}");
+            }
+        }
     }
 }

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import fetchBlogs from '../../Services.jsx/FetchBlogs';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
-import DeletePost from '../../Services.jsx/DeletePost';
+
 
 const ContactsTable = () => {
   const [contacts, setContacts] = useState([]);
@@ -15,11 +14,35 @@ const ContactsTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('')
+      try {
+        const response = await axios.get('https://localhost:7265/api/contacts');
+        if (response.status === 200) {
+          const data = response.data;
+          console.log("Data ", data);
+          setContacts(data);
+        } else {
+          console.log('Error fetching contacts:', response.statusText);
+        }
+      } catch (error) {
+        console.log("Error fetching contacts ", error);
+      }
     };
-    fetchData();
-  }, [blogs]);
 
+    fetchData();
+  }, [contacts])
+
+  const handleDelete = async(id)=>{
+    try{
+        const response =  await axios.delete(`https://localhost:7265/api/contacts/delete/${id}`);
+        if(response.ok) console.log("Succesfully deleted contact");
+    }
+    catch(error){
+         console.log("Error deleting contact ", error)
+        }
+    
+  }
+
+//   console.log("Contacts", contacts)
   
 
   const handleSort = (column) => {
@@ -29,14 +52,14 @@ const ContactsTable = () => {
 
   const compareValues = (a, b) => {
     const columnA =
-      sortColumn === 'createdAt'
+      sortColumn === 'submissionTime'
         ? new Date(a[sortColumn])
         : typeof a[sortColumn] === 'string'
         ? a[sortColumn].toLowerCase()
         : a[sortColumn];
 
     const columnB =
-      sortColumn === 'createdAt'
+      sortColumn === 'submissionTime'
         ? new Date(b[sortColumn])
         : typeof b[sortColumn] === 'string'
         ? b[sortColumn].toLowerCase()
@@ -47,10 +70,10 @@ const ContactsTable = () => {
     return 0;
   };
 
-  const sortedBlogs = [...blogs].sort(compareValues);
+  const sortedContacts = [...contacts].sort(compareValues);
 
-  const filteredBlogs = sortedBlogs.filter((blog) => {
-    return Object.values(blog).some(
+  const filteredContacts = sortedContacts.filter((contact) => {
+    return Object.values(contact).some(
       (value) =>
         typeof value === 'string' &&
         value.toLowerCase().includes(searchTerm.toLowerCase())
@@ -61,7 +84,7 @@ const ContactsTable = () => {
     <div className='my-2 mx-auto'>
       <div className='pl-4 space-y-4 mb-6'>
         <h1 className='text-2xl font-bold lg:block hidden text-gray-800 text-left'>
-          Blogs Table
+          Contacts Table
         </h1>
         <div className='text-lg font-normal text-gray-600'>
           <input
@@ -90,45 +113,45 @@ const ContactsTable = () => {
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('title')}
+                onClick={() => handleSort('name')}
               >
-                <span>Title</span>
+                <span>Name</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'title' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'name' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('category')}
+                onClick={() => handleSort('email')}
               >
-                <span>Category</span>
+                <span>Email</span>
                 <FaUpDown
                   className={`ml-1 inline text-gray-600 ${
-                    sortColumn === 'category' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'email' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('tags')}
+                onClick={() => handleSort('subject')}
               >
-                <span>Tags</span>
+                <span>Subject</span>
                 <FaUpDown
                   className={` ml-1 inline text-gray-600 ${
-                    sortColumn === 'tags' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'subject' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('createdAt')}
+                onClick={() => handleSort('message')}
               >
-                <span>Published Date</span>
+                <span>Message</span>
                 <FaUpDown
                   className={`ml-1 inline text-gray-600 ${
-                    sortColumn === 'createdAt' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'message' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
@@ -136,10 +159,10 @@ const ContactsTable = () => {
                 className='px-4 py-2 cursor-pointer'
                 onClick={() => handleSort('id')}
               >
-                <span>Views</span>
+                <span>SubmissionTime</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'id' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'submissionTime' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
@@ -147,27 +170,25 @@ const ContactsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredBlogs.map((blog) => (
-              <tr key={blog.id} className='bg-gray-100 text-gray-500'>
-                <td className='border px-4 py-2'>{blog.id}</td>
+            {filteredContacts.map((contact) => (
+              <tr key={contact.id} className='bg-gray-100 text-gray-500'>
+                <td className='border px-4 py-2'>{contact.id}</td>
                 <td
-                  onClick={() => {
-                    navigate(`/blogs/${blog.id}`);
-                  }}
                   className='cursor-pointer border px-4 py-2 text-blue-600'
                 >
-                  {blog.title}
+                  {contact.email}
                 </td>
-                <td className='border px-4 py-2'>{blog.category}</td>
-                <td className='border px-4 py-2'>{blog.tags}</td>
-                <td className='border px-4 py-2'>
-                  {new Date(blog.createdAt).toLocaleDateString()}
-                </td>
-                <td className= 'border px-4 py-2'> {blog.nrClicks}</td>
+                <td className='border px-4 py-2'>{contact.subject}</td>
+                <td className='border px-4 py-2'>{contact.subject}</td>
+                <td className='border min-h-14 px-4 py-2 w-48 overflow-hidden break-all whitespace-pre-wrap'>
+  {contact.message}
+</td>
+                <td className= 'border px-4 py-2'> {new Date(contact.submissionTime).toLocaleDateString()}</td>
                 <td className=' border space-x-4 text-2xl pl-2  py-2'>
                   
                   <FaTrash
-                    onClick={() => DeletePost(blog.id)}
+                  onClick={()=>handleDelete(contact.id)}
+                  
                     className='text-red-400 cursor-pointer  mx-auto'
                   />
                 </td>
