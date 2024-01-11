@@ -10,7 +10,7 @@ namespace TechInsightAPI.Models
         public string Content { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [Required(ErrorMessage = "UserId is required")]
         public int UserId { get; set; }

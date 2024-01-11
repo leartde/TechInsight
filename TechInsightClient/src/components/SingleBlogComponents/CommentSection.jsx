@@ -30,27 +30,31 @@ const token = cookies.get("token");
         setEditedContent("");
     };
 
+    // console.log("Comments " , comments)
+
     const handleEditSubmit = async (originalComment) => {
         try {
             const updatedComment = {
                 id: originalComment.id,
                 content: editedContent,
-                createdAt: originalComment.createdAt,
-                userId: token.id,
-                postId: blog.id,
-                username: token.username,
-                userImage: token.imageURL ? token.imageURL : "",
-                postTitle: blog.title,
+                userId: originalComment.userId,
+                postId: originalComment.postId
+
             };
     
             const response = await axios.put('https://localhost:7265/api/comments/UpdateComment', updatedComment);
     
             console.log("Updated comment:", updatedComment);
+            console.log("RESPONSE " , response)
     
             if (response.status === 200) {
                 console.log('Comment edited successfully');
+                console.log("Updated comment:", updatedComment);
+                onsole.log("RESPONSE " , response)
             } else {
                 console.error('Error editing comment:', response.statusText);
+                console.log("Updated comment:", updatedComment);
+                onsole.log("RESPONSE " , response)
             }
         } catch (error) {
             console.log('Error editing comment', error);

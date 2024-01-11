@@ -57,7 +57,7 @@ const Sidebar = ({blogs}) => {
 
         fetchTags();
 
-      },[])
+      },[tags])
 
       const getMostPopularTags = (tags) => {
        
@@ -72,7 +72,7 @@ const Sidebar = ({blogs}) => {
       const mostPopularTags = getMostPopularTags(tags);
         const popularTagNames = mostPopularTags.map((tag) => tag.name);
 
-        console.log("popular tag names ", popularTagNames)
+        // console.log("popular tag names ", popularTagNames)
 
    
 

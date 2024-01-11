@@ -11,7 +11,7 @@ namespace TechInsightAPI.Controllers
     public class TagController : Controller
     {
         private readonly ApplicationDbContext _context;
-            public TagController(ApplicationDbContext context)
+        public TagController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,14 +23,15 @@ namespace TechInsightAPI.Controllers
         public IActionResult GetTags()
         {
             var tags = from t in _context.Tags
-                        select new TagDto()
-                        {
-                            Id = t.Id,
-                            Name = t.Name,
-                            PostCount = _context.PostTags.Count(pt => pt.TagId == t.Id)
+                       select new TagDto()
+                       {
+                           Id = t.Id,
+                           Name = t.Name,
+                           PostCount = _context.PostTags.Count(pt => pt.TagId == t.Id)
 
-                        };
+                       };
             return Ok(tags);
         }
     }
+
 }

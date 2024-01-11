@@ -122,7 +122,7 @@ namespace TechInsightAPI.Controllers
             }
 
 
-            var createdCommentDto = new PostDto
+            var createdCommentDto = new CommentDto
             {
                 Content = commentDto.Content,
                 UserId = commentDto.UserId,
@@ -157,7 +157,7 @@ namespace TechInsightAPI.Controllers
                     _context.Comments.Update(comment);
                     await _context.SaveChangesAsync();
 
-                    return Ok(new { message = "comment updated successfully", updatedComment = comment });
+                    return Ok(new { message = "comment updated successfully", updatedComment = commentDto });
                 }
                 catch (Exception ex)
                 {
