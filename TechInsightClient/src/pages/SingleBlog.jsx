@@ -31,7 +31,7 @@ const SingleBlog = () => {
           <CategoriesCard/>
 
             {/*  other by same user posts  */}
-           <OtherBlogsByUserCard currentUser={token} userId={blog.userId} currentPostId={blog.iId}/>
+           <OtherBlogsByUserCard currentUser={token} userId={blog.userId} currentPostId={blog.id}/>
         </div>
 
         {/*  Main content  */}

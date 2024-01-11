@@ -74,9 +74,12 @@ const token = cookies.get("token");
                 const response = await fetch(url);
                 if (response.ok) {
                     const data = await response.json();
+                   
                     setComments(data);
                     // console.log(data);
+               
                 } else {
+                    setComments([]);
                     console.log('Error fetching comments:', response.statusText);
                 }
 

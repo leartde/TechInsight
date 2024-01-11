@@ -19,7 +19,7 @@ const OtherBlogsByUserCard = ({userId, currentPostId, currentUser}) => {
        }
        fetchOtherBlogs();
 
-    },[])
+    },[blogsBySameUser ])
     // console.log('blogsBySameUser ', blogsBySameUser)
   return (
     <div className="w-full mt-8 bg-white shadow-sm rounded-sm p-4 ">

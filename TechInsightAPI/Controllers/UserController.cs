@@ -196,9 +196,8 @@ namespace TechInsightAPI.Controllers
                 Subject = contactDto.Subject,
                 Message = contactDto.Message,
                 SubmissionTime = DateTime.Now,
-                // Assuming you have a logged-in user, set UserId accordingly
-                // You can modify this based on your authentication logic
-                UserId = 1 // Replace with actual user ID or fetch from authentication
+
+                UserId = 1
             };
 
             try
@@ -206,7 +205,7 @@ namespace TechInsightAPI.Controllers
                 _context.Contacts.Add(contact);
                 _context.SaveChanges();
 
-                // You can customize the response based on your needs
+               
                 return Ok(new { Message = "Contact form submitted successfully." });
             }
             catch (Exception ex)
