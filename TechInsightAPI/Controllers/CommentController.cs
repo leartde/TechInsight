@@ -122,7 +122,7 @@ namespace TechInsightAPI.Controllers
             }
 
 
-            var createdCommentDto = new PostDto
+            var createdCommentDto = new CommentDto
             {
                 Content = commentDto.Content,
                 UserId = commentDto.UserId,
