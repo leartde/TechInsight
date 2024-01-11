@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import Cookies from 'universal-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
     const [name, setName] = useState('');
@@ -7,6 +10,9 @@ const Contact = () => {
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
     const [emailError, setEmailError] = useState('');
+    const cookies = new Cookies();
+    const token = cookies.get("token");
+
 
     const handleEmailChange = (e) => {
         const enteredEmail = e.target.value;
@@ -37,10 +43,12 @@ const Contact = () => {
             Email: email,
             Subject: subject,
             Message: message,
+            SubmissionTime: new Date(),
+            UserId: token.id
         };
     
         try {
-            const response = await fetch('https://localhost:7265/api/User/submit', {
+            const response = await fetch('https://localhost:7265/api/contacts/addContact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,9 +60,16 @@ const Contact = () => {
     
             if (response.ok) {
                 console.log('Contact form submitted successfully');
+                toast.success("Contact form submitted successfully");
+                setName('');
+                setEmail('');
+                setSubject('');
+                setMessage('');
+                
                 
             } else {
                 console.error('Error submitting contact form:', response.statusText);
+                toast.error("Error submitting contact form");
                 
             }
         } catch (error) {
@@ -66,6 +81,7 @@ const Contact = () => {
 
     return (
         <div className="my-6">
+            <ToastContainer/>
             <div className="grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-[#333] font-[sans-serif] mt-40">
                 <div>
                     <h1 className="text-3xl font-extrabold">Let's Talk</h1>
