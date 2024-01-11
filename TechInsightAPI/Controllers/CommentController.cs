@@ -135,37 +135,44 @@ namespace TechInsightAPI.Controllers
         }
 
 
-            [HttpPut]
-            [Route("UpdateComment")]
-            public async Task<IActionResult> UpdateComment([FromForm] CommentDto commentDto)
+        [HttpPut]
+        [Route("UpdateComment")]
+        public async Task<IActionResult> UpdateComment([FromForm] CommentDto commentDto)
+        {
+            if (commentDto == null || commentDto.Id <= 0)
             {
-                if (commentDto == null || commentDto.Id <= 0)
-                {
-                    return BadRequest("Invalid comment data");
-                }
-
-                var comment = await _context.Comments.FindAsync(commentDto.Id);
-
-                if (comment == null)
-                {
-                    return NotFound($"Comment with ID {commentDto.Id} not found");
-                }
-
-                try
-                {
-                    comment.Content = commentDto.Content;
-                    _context.Comments.Update(comment);
-                    await _context.SaveChangesAsync();
-
-                    return Ok(new { message = "comment updated successfully", updatedComment = commentDto });
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-
-                    return StatusCode(500, $"An error occurred while updating the comment: {ex.Message}");
-                }
+                return BadRequest("Invalid comment data");
             }
+
+            var comment = await _context.Comments.FindAsync(commentDto.Id);
+
+            if (comment == null)
+            {
+                return NotFound($"Comment with ID {commentDto.Id} not found");
+            }
+
+            try
+            {
+                comment.Content = commentDto.Content;
+                _context.Comments.Update(comment);
+                await _context.SaveChangesAsync();
+
+                
+                Console.WriteLine($"UpdateComment - Success: Comment ID {comment.Id} updated successfully");
+
+                return Ok(new { message = "comment updated successfully", updatedComment = comment });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+
+             
+                Console.WriteLine($"UpdateComment - Error: An error occurred while updating the comment: {ex.Message}");
+
+                return StatusCode(500, $"An error occurred while updating the comment: {ex.Message}");
+            }
+        }
+
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteComment(int id)

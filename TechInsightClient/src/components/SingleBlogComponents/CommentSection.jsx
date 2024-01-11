@@ -34,27 +34,27 @@ const token = cookies.get("token");
 
     const handleEditSubmit = async (originalComment) => {
         try {
-            const updatedComment = {
-                id: originalComment.id,
-                content: editedContent,
-                userId: originalComment.userId,
-                postId: originalComment.postId
 
-            };
+            const formData = new FormData();
+            formData.append('id', originalComment.id);
+            formData.append('content', editedContent);
+            formData.append(' postId',blog.id);
+            
+            
     
-            const response = await axios.put('https://localhost:7265/api/comments/UpdateComment', updatedComment);
+            const response = await axios.put('https://localhost:7265/api/comments/UpdateComment', formData);
     
-            console.log("Updated comment:", updatedComment);
-            console.log("RESPONSE " , response)
+            // Log the entire response object or specific properties
+            console.log("Response:", response);
+            console.log("Response Status:", response.status);
+            console.log("Response Data:", response.data);
     
             if (response.status === 200) {
                 console.log('Comment edited successfully');
-                console.log("Updated comment:", updatedComment);
-                onsole.log("RESPONSE " , response)
+                console.log("Updated comment:", response.data.updatedComment);
             } else {
-                console.error('Error editing comment:', response.statusText);
-                console.log("Updated comment:", updatedComment);
-                onsole.log("RESPONSE " , response)
+                console.error('Error  editing the comment:', response.statusText);
+                console.log("Updated comment:", response.data.updatedComment);
             }
         } catch (error) {
             console.log('Error editing comment', error);
@@ -62,7 +62,7 @@ const token = cookies.get("token");
     
         setEditedCommentId(null);
         setEditedContent("");
-    }
+    };
       
 
       
