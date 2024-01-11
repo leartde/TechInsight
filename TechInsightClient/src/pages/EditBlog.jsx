@@ -90,6 +90,7 @@ const EditBlog = () => {
         formData.append("Content", content);
         formData.append("UserId", token.id);
         formData.append("Author", '');  
+        formData.append("Category",category);
         formData.append("TagsJson", JSON.stringify(tags));
         formData.append("Image", image);
         formData.append("CreatedAt", blog.createdAt);
