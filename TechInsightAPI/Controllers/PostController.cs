@@ -8,6 +8,7 @@ using TechInsightAPI.Models;
 using TechInsightAPI.DTOs;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace TechInsightAPI.Controllers
 {
@@ -329,15 +330,77 @@ namespace TechInsightAPI.Controllers
                 return StatusCode(500, $"An error occurred while deleting the post: {ex.Message}");
             }
         }
+        [HttpPut("update")]
+        public async Task<IActionResult> EditPost([FromForm] PostDto postDto)
+        {
+            if (postDto == null || postDto.Id <= 0)
+            {
+                return BadRequest("Invalid post data");
+            }
 
+            // Find the post by its ID
+            var post = await _context.Posts.FindAsync(postDto.Id);
 
+            if (post == null)
+            {
+                return NotFound($"Post with ID {postDto.Id} not found");
+            }
 
+            try
+            {
+                // Update post properties
+                post.Title = postDto.Title;
+                post.Content = postDto.Content;
 
+                // Update image if provided
+                if (postDto.Image != null)
+                {
+                    var imgResult = await _photoService.AddPhotoAsync(postDto.Image);
+                    if (imgResult.Url == null)
+                    {
+                        return BadRequest("Error uploading post image");
+                    }
+                    post.ImageURL = imgResult.Url.ToString();
+                }
 
+                // Update other properties accordingly
 
+                // Save changes to the database
+                _context.Posts.Update(post);
+                await _context.SaveChangesAsync();
 
+                // Use the values from the updated post to create the DTO
+                var updatedPostDto = new PostDto
+                {
+                    Id = post.Id,
+                    Title = post.Title,
+                    Content = post.Content,
+                    ImageURL = post.ImageURL, // Include the updated ImageURL
+                                              // Update other properties accordingly
+                };
 
-
-
+                return Ok(new { Message = "Post updated successfully", Post = updatedPostDto });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, $"An error occurred while updating the post: {ex.Message}");
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }
