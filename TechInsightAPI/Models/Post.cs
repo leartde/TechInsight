@@ -16,7 +16,7 @@ namespace TechInsightAPI.Models
         public string Content { get; set; }
         public string? ImageURL { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public int UserId { get; set; }
         public virtual User User { get; set; }
         public int CategoryId { get; set; }

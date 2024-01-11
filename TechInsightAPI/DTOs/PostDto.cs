@@ -18,6 +18,6 @@ namespace TechInsightAPI.DTOs
         public List<string>? Tags { get; set; }
         public string? TagsJson { get; set; }
         public int? NrClicks { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
 }

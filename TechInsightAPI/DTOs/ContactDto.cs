@@ -9,7 +9,7 @@ namespace TechInsightAPI.DTOs
         public string Email { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
-        public DateTime SubmissionTime { get; set; } = DateTime.Now;
+        public DateTime? SubmissionTime { get; set; } = DateTime.Now;
         public int UserId { get; set; }
     }
 }

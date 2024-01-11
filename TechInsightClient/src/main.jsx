@@ -20,7 +20,7 @@ import AddBlog2 from './pages/AddBlog2';
 import Contact from './pages/Contact';
 import EditProfile from './pages/EditProfile';
 import AdminDashboard from './pages/AdminDashboard';
-import EditPosts from './pages/EditPosts';
+import EditBlog from './pages/EditBlog';
 
 
 
@@ -80,9 +80,11 @@ const router = createBrowserRouter([
       element:<AdminDashboard/>
     },
     {
-      path: "/editPosts",
-      element: <EditPosts />,
-  },
+      path:"/editBlog/:id",
+      element: <EditBlog/>,
+      loader:({params})=> fetch(`https://localhost:7265/api/posts/${params.id}`)
+    }
+
 
     ]
   }

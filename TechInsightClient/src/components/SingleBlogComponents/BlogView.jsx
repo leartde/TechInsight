@@ -10,6 +10,7 @@ const BlogView = ({blog}) => {
     <div className="p-4 pb-5">
         <h2 className="block text-2xl font-semibold text-gray-700 font-roboto">
             {blog.title}
+            
         </h2>
         <div className="mt-2 flex space-x-4">
             <div className="flex text-gray-400 text-md items-center">

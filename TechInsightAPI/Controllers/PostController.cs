@@ -338,8 +338,13 @@ namespace TechInsightAPI.Controllers
                 return BadRequest("Invalid post data");
             }
 
-            // Find the post by its ID
+           
             var post = await _context.Posts.FindAsync(postDto.Id);
+            List<string> tags = JsonConvert.DeserializeObject<List<string>>(postDto.TagsJson);
+            var existingTags = _context.Tags
+                .Where(t => tags.Contains(t.Name))
+                .ToList();
+
 
             if (post == null)
             {
@@ -348,11 +353,60 @@ namespace TechInsightAPI.Controllers
 
             try
             {
-                // Update post properties
+                
                 post.Title = postDto.Title;
                 post.Content = postDto.Content;
+                if (!string.IsNullOrEmpty(postDto.Category))
+                {
+                    var existingCategory = _context.Categories.FirstOrDefault(c => c.Name == postDto.Category);
 
-                // Update image if provided
+                    post.Category = existingCategory;
+                }
+                var tagsToRemove = post.PostTags.Where(pt => !tags.Contains(pt.TagReference.Name)).ToList();
+                foreach (var tagToRemove in tagsToRemove)
+                {
+                    post.PostTags.Remove(tagToRemove);
+                    
+                }
+
+                foreach (var tagName in tags)
+                {
+                    var existingTag = existingTags.FirstOrDefault(t => t.Name == tagName);
+
+                    if (existingTag != null)
+                    {
+                      
+                        var existingPostTag = post.PostTags.FirstOrDefault(pt => pt.TagId == existingTag.Id);
+
+                        if (existingPostTag != null)
+                        {
+                           
+                            existingPostTag.TagReference = existingTag;
+
+                            
+                            _context.Entry(existingPostTag).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            var newTag = new Tag { Name = tagName };
+                            post.PostTags.Add(new PostTag { TagReference = newTag });
+                            existingTags.Add(newTag);
+                        }
+                    }
+                    else
+                    {
+                      
+                        var newTag = new Tag { Name = tagName };
+                        post.PostTags.Add(new PostTag { TagReference = newTag });
+                        existingTags.Add(newTag);
+                    }
+                }
+
+
+
+
+
+
                 if (postDto.Image != null)
                 {
                     var imgResult = await _photoService.AddPhotoAsync(postDto.Image);
@@ -363,20 +417,20 @@ namespace TechInsightAPI.Controllers
                     post.ImageURL = imgResult.Url.ToString();
                 }
 
-                // Update other properties accordingly
+         
 
-                // Save changes to the database
                 _context.Posts.Update(post);
                 await _context.SaveChangesAsync();
 
-                // Use the values from the updated post to create the DTO
                 var updatedPostDto = new PostDto
                 {
                     Id = post.Id,
                     Title = post.Title,
                     Content = post.Content,
-                    ImageURL = post.ImageURL, // Include the updated ImageURL
-                                              // Update other properties accordingly
+                    UserId = post.UserId,
+                    ImageURL = post.ImageURL,
+                    CreatedAt = post.CreatedAt,
+                    
                 };
 
                 return Ok(new { Message = "Post updated successfully", Post = updatedPostDto });
