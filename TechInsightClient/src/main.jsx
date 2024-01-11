@@ -20,6 +20,7 @@ import AddBlog2 from './pages/AddBlog2';
 import Contact from './pages/Contact';
 import EditProfile from './pages/EditProfile';
 import AdminDashboard from './pages/AdminDashboard';
+import EditPosts from './pages/EditPosts';
 
 
 
@@ -77,7 +78,11 @@ const router = createBrowserRouter([
     {
       path:"/dashboard",
       element:<AdminDashboard/>
-    }
+    },
+    {
+      path: "/editPosts",
+      element: <EditPosts />,
+  },
 
     ]
   }
