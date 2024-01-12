@@ -1,7 +1,9 @@
 import React, { useState , useEffect} from 'react';
 import GoogleLogo from '../assets/Google__G__logo.svg.png';
 import GitHubLogo from '../assets/github-mark-white.png';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,6 +12,9 @@ const SignUp = () => {
     const [user, setUser] = useState(null);
     const [signupStatus, setSignupStatus] = useState(null);
     const [emailError, setEmailError] = useState('');
+    const navigate = useNavigate();
+    const passRegex = '^(?=.*[0-9]).{8,}$';
+
 
     useEffect(() => {
         const signup = async () => {
@@ -23,8 +28,8 @@ const SignUp = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Success:', data);
-                    setSignupStatus('Success');
+                    toast.success("You have succesfully signed up!");
+                    
                 } else {
                     console.log('Error:', response.statusText);
                     setSignupStatus('Error');
@@ -47,7 +52,7 @@ const SignUp = () => {
         const enteredEmail = e.target.value;
         setEmail(enteredEmail);
 
-        // Validate email format
+    
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setEmailError(emailRegex.test(enteredEmail) ? '' : 'Invalid email format');
     };
@@ -83,10 +88,14 @@ const SignUp = () => {
             });
     
             if (response.ok) {
-                // Success handling
-                const data = await response.json();
-                console.log('Success:', data);
+                // const data = await response.json();
                 setSignupStatus('Success');
+                toast.success('You have succesfully signed up ')
+                navigate('/login');
+               
+                setSignupStatus('Success');
+ 
+                
             } else {
                 // Error handling
                 console.log('Error:', response.statusText);
@@ -99,6 +108,7 @@ const SignUp = () => {
     };
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center mt-12">
+            <ToastContainer />
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
                 <div className="lg:w-1/3 xl:w-4/12 p-3 sm:p-6">
                     <div className="text-center">

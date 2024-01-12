@@ -137,7 +137,7 @@ const UsersTable = () => {
                     {new Date(user.registrationTime).toLocaleDateString()}
                   </td>
                   <td className='flex flex-row border space-x-4 text-2xl pl-2  py-2'>
-                    <FaEdit className='text-blue-400 cursor-pointer' />
+                    <FaEdit onClick={()=>navigate(`/edituser/${user.id}`)} className='text-blue-400 cursor-pointer' />
                     
                     <FaTrash onClick={()=>handleDelete(user.id)} className='text-red-400 cursor-pointer' />
                   </td>

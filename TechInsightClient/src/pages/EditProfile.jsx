@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-
+import DefaultUser from '../assets/defaultUser.jpg';
 
 const EditProfile = () => {
     const cookies = new Cookies();
@@ -83,7 +83,7 @@ const EditProfile = () => {
         {loading && <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center"> Loading </div>}
                 {token && (
                     <>
-                        <img src={imagePreview?imagePreview:token.profilePicUrl} alt="Profile" className="w-48 h-48 mx-auto rounded-full mb-4"/>
+                       <div className='block mx-auto h-48 w-48 my-6 '>  <img className='w-full h-full rounded-full' src={(imagePreview?imagePreview:(token.profilePicUrl?token.profilePicUrl:DefaultUser))}/></div>
                       <div className='w-1/3 mx-auto space-y-4'>
                       <form encType="multipart/form-data" method="post" onSubmit={handleSubmit} className='mx-auto w- 1/2 flex flex-col space-y-4' action="">
                       <div className='border-2 border-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-white placeholder-gray-400 text-black dark:focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400'>

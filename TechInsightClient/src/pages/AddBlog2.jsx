@@ -72,12 +72,13 @@ const AddBlog2 = () => {
   console.log("tags array ", tags);
   useEffect(() => {
     const createBlogPost = async () => {
-      if (!title || !content || !category || !tags) {
+      if (!title || !content || !category || !tags || !image) {
        toast.warning("Please fill in all fields.");
         return;
       }
 
       setLoading(true);
+      toast.info("Creating blog post...");
       setSubmitting(true);
 
       try {
@@ -127,11 +128,8 @@ const AddBlog2 = () => {
   }, [submitting, title, content, category, tags]);
   return (
     <div className="mt-24 mx-auto max-w-7xl  ">
-      <ToastContainer
-        autoClose={2000}
-        position='top-left'
-        />
-
+      
+    <ToastContainer/>
       {!token && (
         <div className="text-center py-12">
           <h1 className="text-4xl text-blue-400">
@@ -145,15 +143,11 @@ const AddBlog2 = () => {
           </h1>
         </div>
       )}
+       <ToastContainer/>
       {token && (
         <div className="pt-24 border bg-stone-50  flex flex-row pb-24 ">
           <div className="mx-32  w-1/3 ">
-            {loading && (
-              <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center">
-                {" "}
-                Loading{" "}
-              </div>
-            )}
+
             <h2 className="text-3xl font-semibold text-cyan-900">
               {" "}
               Create your blog
