@@ -140,7 +140,7 @@ const BlogsTable = () => {
                 <span>Views</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'id' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'views' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
