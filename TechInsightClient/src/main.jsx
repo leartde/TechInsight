@@ -7,12 +7,10 @@ import {
 import './index.css';
 import App from './App';
 import Home from './pages/Home';
-import Example from './pages/Example';
 import BlogPage from './pages/BlogPage';
 import Login from './pages/Login';
 import SingleBlog from './pages/SingleBlog';
 import SignUp from './pages/SignUp';
-import AddBlog from './pages/AddBlog';
 import Profile from './pages/Profile';
 import About1 from './pages/About';
 import DiscoverUsers from './pages/DiscoverUsers';
@@ -21,6 +19,7 @@ import Contact from './pages/Contact';
 import EditProfile from './pages/EditProfile';
 import AdminDashboard from './pages/AdminDashboard';
 import EditBlog from './pages/EditBlog';
+import EditUser from './components/DashboardComponents/EditUser';
 
 
 
@@ -83,6 +82,11 @@ const router = createBrowserRouter([
       path:"/editBlog/:id",
       element: <EditBlog/>,
       loader:({params})=> fetch(`https://localhost:7265/api/posts/${params.id}`)
+    },
+    {
+      path:"/edituser/:id",
+      element: <EditUser/>,
+      loader:({params})=> fetch(`https://localhost:7265/api/User/${params.id}`)
     }
 
 

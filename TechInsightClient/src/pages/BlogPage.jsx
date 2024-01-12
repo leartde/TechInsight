@@ -108,7 +108,7 @@ import Cookies from 'universal-cookie';
           };
         
           const handleSearch = (e) => {
-            e.preventDefault()
+            e.preventDefault();
             const trimmedInput = searchInput.trim();
             const url = trimmedInput ? `/blogs?tag=${encodeURIComponent(trimmedInput)}` : '/blogs';
            navigate(url);
@@ -182,7 +182,7 @@ import Cookies from 'universal-cookie';
                 
                 </div>
             </div>
-            <div>
+            <div className='mr-96'>
             <Pagination onPageChange={handlePageChange} currentPage={currentPage} blogs={blogs} pageSize={pageSize}/>
             </div>
     </div>
