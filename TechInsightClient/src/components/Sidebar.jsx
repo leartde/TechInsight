@@ -1,124 +1,117 @@
-import { DatePicker } from '@mui/x-date-pickers';
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import TagsCard from './SingleBlogComponents/TagsCard';
+import { DatePicker } from "@mui/x-date-pickers";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import TagsCard from "./SingleBlogComponents/TagsCard";
 
+const Sidebar = ({ blogs }) => {
+  const [cleared, setCleared] = useState(false);
+  const [date, setDate] = useState(null);
+  const [blogsByDate, setBlogsByDate] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [topTags, setTopTags] = useState([]);
 
-const Sidebar = ({blogs}) => {
-    const [cleared, setCleared] = useState(false);
-    const [date, setDate] = useState(null);
-    const [blogsByDate, setBlogsByDate] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [topTags, setTopTags] = useState([]);
+  useEffect(() => {
+    const filterBlogsByDate = () => {
+      if (date) {
+        const year = new Date(date).getFullYear();
+        const month = new Date(date).getMonth() + 1;
 
-    useEffect(() => {
-        const filterBlogsByDate = () => {
+        const filteredBlogs = blogs.filter((blog) => {
+          const blogYear = new Date(blog.createdAt).getFullYear();
+          const blogMonth = new Date(blog.createdAt).getMonth() + 1;
 
-          if (date) {
-            const year = new Date(date).getFullYear();
-            const month = new Date(date).getMonth() + 1; 
-    
+          return blogYear === year && blogMonth === month;
+        });
 
-            const filteredBlogs = blogs.filter((blog) => {
-              const blogYear = new Date(blog.createdAt).getFullYear();
-              const blogMonth = new Date(blog.createdAt).getMonth() + 1
-    
-              return blogYear === year && blogMonth === month;
-            });
-    
-            setBlogsByDate(filteredBlogs.slice(0,4));
-          } else {
-            setBlogsByDate(blogs.slice(0,4));
-          }
-        };
-    
-        filterBlogsByDate();
-      }, [date, blogs]); 
-    
-  
+        setBlogsByDate(filteredBlogs.slice(0, 4));
+      } else {
+        setBlogsByDate(blogs.slice(0, 4));
+      }
+    };
 
-      useEffect(()=>{
-        const fetchTags = async () => {
-            try {
-                let url = `https://localhost:7265/api/tags`;
-                const response = await fetch(url);
+    filterBlogsByDate();
+  }, [date, blogs]);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setTags(data);
-                    // console.log(data);
-                } else {
-                    console.log('Error fetching tags:', response.statusText);
-                }
-            } catch (error) {
-                console.log('Error fetching tags', error);
-            }
-        };
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        let url = `https://localhost:7265/api/tags`;
+        const response = await fetch(url);
 
-        fetchTags();
+        if (response.ok) {
+          const data = await response.json();
+          setTags(data);
+          // console.log(data);
+        } else {
+          console.log("Error fetching tags:", response.statusText);
+        }
+      } catch (error) {
+        console.log("Error fetching tags", error);
+      }
+    };
 
-      },[tags])
+    fetchTags();
+  }, [tags]);
 
-      const getMostPopularTags = (tags) => {
-       
-        const sortedTags = tags
-          .slice() 
-          .sort((a, b) => b.postCount - a.postCount)
-          .slice(0, 8);
-      
-        return sortedTags;
-      };
+  const getMostPopularTags = (tags) => {
+    const sortedTags = tags
+      .slice()
+      .sort((a, b) => b.postCount - a.postCount)
+      .slice(0, 8);
 
-      const mostPopularTags = getMostPopularTags(tags);
-        const popularTagNames = mostPopularTags.map((tag) => tag.name);
+    return sortedTags;
+  };
 
-        // console.log("popular tag names ", popularTagNames)
+  const mostPopularTags = getMostPopularTags(tags);
+  const popularTagNames = mostPopularTags.map((tag) => tag.name);
 
-   
-
-
-
-      
+  // console.log("popular tag names ", popularTagNames)
 
   return (
     <div className="w-full  bg-white shadow-sm rounded-md p-4 space-y-2 ">
-                <h3 className="text-lg font-semibold text-gray-700 mb-3 font-roboto">Sort blogs by month and year</h3>
-                <DatePicker
-                views={['month', 'year']}
-                value={date} onChange={(newDate) => setDate(newDate)}
-                />
-                <div className="space-y-4">
-                {
-                    blogsByDate.map((blog)=>(
-                        <Link to={`/blogs/${blog.id}`} key={blog.id} className="flex">
-                        <div className="flex-shrink-0">
-                            <img src={blog.imageURL} className="h-14 w-20 lg:w-14 xl:w-20 rounded object-cover"/>
-                        </div>
-                        <div className="flex-grow pl-3">
-                            <h5
-                                className="text-md leading-5 block font-roboto font-semibold  transition group-hover:text-blue-500">
-                                {blog.title}
-                            </h5>
-                            <div className="flex text-gray-400 text-sm items-center">
-                                <span className="mr-1 text-xs"><i className="far fa-clock"></i></span>
-                                {new Date(blog.createdAt).toLocaleString()}
-                            </div>
-                        </div>
-                    </Link>
-                    ))
-                }
-                   
-                   
-                </div>
-                <TagsCard bg='bg-[#eef8fe]' header={'Popular tags'} tags={popularTagNames}/>
+      <h3 className="text-lg font-semibold text-gray-700 mb-3 font-roboto">
+        Sort blogs by month and year
+      </h3>
+      <DatePicker
+        views={["month", "year"]}
+        value={date}
+        onChange={(newDate) => setDate(newDate)}
+      />
+   <div className="space-y-4">
+  {blogsByDate.map((blog) => (
+    <Link to={`/blogs/${blog.id}`} key={blog.id} className="flex items-start">
+      <div className="flex-shrink-0">
+        <img
+          src={blog.imageURL}
+          className="h-14 w-20 lg:w-14 xl:w-20 rounded object-cover"
+          alt={blog.title}
+        />
+      </div>
+      <div className="flex-grow pl-3 w-3/4">
+        <h5 className="text-md leading-5 block font-roboto font-semibold break-words  transition group-hover:text-blue-500 overflow-hidden">
+          {blog.title}
+        </h5>
+        <div className="flex text-gray-400 text-sm items-center">
+          <span className="mr-1 text-xs">
+            <i className="far fa-clock"></i>
+          </span>
+          {new Date(blog.createdAt).toLocaleString()}
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>
 
 
-                <div>
-                   
-                </div>
-            </div>
-    
-  )
-}
+      <TagsCard
+        bg="bg-[#eef8fe]"
+        header={"Popular tags"}
+        tags={popularTagNames}
+      />
 
-export default Sidebar
+      <div></div>
+    </div>
+  );
+};
+
+export default Sidebar;

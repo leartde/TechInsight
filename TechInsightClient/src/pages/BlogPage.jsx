@@ -20,6 +20,7 @@ import Cookies from 'universal-cookie';
         const [activeCategory, setActiveCategory] = useState(null);
         const cookies = new Cookies();
         const token = cookies.get("token");
+        const [searchInput, setSearchInput] = useState('');
         if(token){
           console.log(" token " , token)
        console.log("USER ID" , token.id);
@@ -77,7 +78,7 @@ import Cookies from 'universal-cookie';
               try {
                
                 const tagParam = new URLSearchParams(location.search).get('tag');
-                setTag(tagParam || '');
+                
         
                 let url = `https://localhost:7265/api/posts/tag/${tagParam}`;
                 const response = await fetch(url);
@@ -102,6 +103,17 @@ import Cookies from 'universal-cookie';
             };
           }, [location.search]);
 
+          const handleInputChange = (e) => {
+            setSearchInput(e.target.value);
+          };
+        
+          const handleSearch = (e) => {
+            e.preventDefault()
+            const trimmedInput = searchInput.trim();
+            const url = trimmedInput ? `/blogs?tag=${encodeURIComponent(trimmedInput)}` : '/blogs';
+           navigate(url);
+          };
+
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setActiveCategory(category);
@@ -122,6 +134,7 @@ import Cookies from 'universal-cookie';
     }
 
       const handleTagChange = (tag)=>{
+        
         setTag(tag);
         setSearchParams((prevParams) => {
           const newSearchParams = new URLSearchParams(prevParams);
@@ -142,13 +155,28 @@ import Cookies from 'universal-cookie';
 
     <div className='max-w-7xl mx-auto py-20'>
         <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
-        <div className='mx-4 my-4'>
-        <button type="button" onClick={()=>{navigate('/addblog')}} class="text-white bg-gradient-to-r from-[#009bd6] to-[#4fbfef] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-xl text-sm px-7 py-3.5 text-center me-2 mb-2">Add a blog</button>
+        <div className='mx-4 my-4 flex flex-row space-x-6 '>
+        <div className='rounded-xl'>
+        <form onSubmit={handleSearch}>
+      <input
+        type="text"
+        placeholder="Search by tag"
+        value={searchInput}
+        onChange={handleInputChange}
+        className='border-2 border-gray-400 text-sm rounded-lg block w-full px-2.5 py-2 bg-white placeholder-gray-400 text-black focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400'
+      />
+    </form>
+            
+          </div>
+          
+        {/* <button type="button" onClick={()=>{navigate('/addblog')}} class="text-white bg-gradient-to-r from-[#009bd6] to-[#4fbfef] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-xl text-sm px-7 py-3.5 text-center me-2 mb-2">Add a blog</button> */}
              </div>
+             
          <div className='flex flex-col lg:flex-row  gap-12 '> 
 
 
                 <div className='flex flex-row gap-12'>
+              
                 <BlogCard2 blogs={blogs} user={token} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
                 <div className=' max-xl:hidden max-w-80 mt-8 lg:mt-0'> <Sidebar blogs={blogs}/>  </div>
                 
