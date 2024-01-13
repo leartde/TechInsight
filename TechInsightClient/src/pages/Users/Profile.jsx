@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaLinkedin, FaTwitter, FaGithub, FaEdit } from 'react-icons/fa';
-import BlogCard2 from '../components/BlogCard2';
+import BlogCard2 from '../../components/BlogComponents/BlogCard2';
 import { Link, useLoaderData, useLocation } from 'react-router-dom';
-import ProfileBlogs from '../components/ProfileComponents/ProfileBlogs';
+import ProfileBlogs from '../../components/ProfileComponents/ProfileBlogs';
 import Cookies from 'universal-cookie';
-import Pagination from '../components/Pagination';
-import addClick from '../Services.jsx/AddClick';
+import Pagination from '../../components/BlogComponents/Pagination';
+import addClick from '../../Services.jsx/AddClick';
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
@@ -67,12 +67,7 @@ const Profile = () => {
             <ProfileBlogs currentUser={token} blogs={posts} currentPage={currentPage} postsPerPage={postsPerPage} />
             </div>
             <div>
-            <Pagination
-            onPageChange={paginate}
-            currentPage={currentPage}
-            blogs={posts}
-            pageSize={postsPerPage}
-             />
+           {posts.length > 0 && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />}
             </div>
         </div>
     );

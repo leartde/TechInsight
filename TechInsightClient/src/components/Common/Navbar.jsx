@@ -4,6 +4,7 @@ import { FaDribbble} from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import Cookies from "universal-cookie";
+import DefaultUser from '../../assets/defaultUser.jpg';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,7 +68,7 @@ const Navbar = () => {
         data-dropdown-placement="bottom-start"
         ref={dropdownRef}
         className="w-10 h-10 rounded-full cursor-pointer"
-        src={token.profilePicUrl}
+        src={token.profilePicUrl?token.profilePicUrl:DefaultUser}
         alt="User dropdown"
         onClick={() => setIsAvatarOpen(!isAvatarOpen)}
         onClickAway={() => setIsAvatarOpen(!isAvatarOpen)}

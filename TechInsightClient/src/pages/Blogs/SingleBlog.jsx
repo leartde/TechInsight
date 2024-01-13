@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { FaUser } from 'react-icons/fa';
-import CategoriesCard from '../components/SingleBlogComponents/CategoriesCard';
-import OtherBlogsByUserCard from '../components/SingleBlogComponents/OtherBlogsByUserCard';
-import BlogView from '../components/SingleBlogComponents/BlogView';
-import RelatedBlogsCard from '../components/SingleBlogComponents/RelatedBlogsCard';
-import CommentSection from '../components/SingleBlogComponents/CommentSection';
-import PopularBlogsCard from '../components/SingleBlogComponents/PopularBlogsCard';
-import TagsCard from '../components/SingleBlogComponents/TagsCard';
+import CategoriesCard from '../../components/SingleBlogComponents/CategoriesCard';
+import OtherBlogsByUserCard from '../../components/SingleBlogComponents/OtherBlogsByUserCard';
+import BlogView from '../../components/SingleBlogComponents/BlogView';
+import RelatedBlogsCard from '../../components/SingleBlogComponents/RelatedBlogsCard';
+import CommentSection from '../../components/SingleBlogComponents/CommentSection';
+import PopularBlogsCard from '../../components/SingleBlogComponents/PopularBlogsCard';
+import TagsCard from '../../components/SingleBlogComponents/TagsCard';
 
 import Cookies from 'universal-cookie';
 

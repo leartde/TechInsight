@@ -7,18 +7,18 @@ import {
 import './index.css';
 import App from './App';
 import Home from './pages/Home';
-import BlogPage from './pages/BlogPage';
-import Login from './pages/Login';
-import SingleBlog from './pages/SingleBlog';
-import SignUp from './pages/SignUp';
-import Profile from './pages/Profile';
+import BlogPage from './pages/Blogs/BlogPage';
+import Login from './pages/Users/Login';
+import SingleBlog from './pages/Blogs/SingleBlog';
+import SignUp from './pages/Users/SignUp';
+import Profile from './pages/Users/Profile';
 import About1 from './pages/About';
-import DiscoverUsers from './pages/DiscoverUsers';
-import AddBlog2 from './pages/AddBlog2';
+import DiscoverUsers from './pages/Users/DiscoverUsers';
+import AddBlog2 from './pages/Blogs/AddBlog';
 import Contact from './pages/Contact';
-import EditProfile from './pages/EditProfile';
+import EditProfile from './pages/Users/EditProfile';
 import AdminDashboard from './pages/AdminDashboard';
-import EditBlog from './pages/EditBlog';
+import EditBlog from './pages/Blogs/EditBlog';
 import EditUser from './components/DashboardComponents/EditUser';
 
 

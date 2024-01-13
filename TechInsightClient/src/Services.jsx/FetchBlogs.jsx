@@ -5,11 +5,11 @@ const fetchBlogs = async () => {
         const data = await response.json();
         return data; 
       } else {
-        console.log('Error fetching users:', response.statusText);
+        console.log('Error fetching blogs:', response.statusText);
         return [];
       }
     } catch (error) {
-      console.log('Error fetching users', error);
+      console.log('Error fetching blogs', error);
       return [];
     }
   };

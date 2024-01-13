@@ -1,8 +1,8 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import TagsCard from "./SingleBlogComponents/TagsCard";
-
+import TagsCard from "../SingleBlogComponents/TagsCard";
+import fetchTags from "../../Services.jsx/FetchTags";
 const Sidebar = ({ blogs }) => {
   const [cleared, setCleared] = useState(false);
   const [date, setDate] = useState(null);
@@ -33,24 +33,11 @@ const Sidebar = ({ blogs }) => {
   }, [date, blogs]);
 
   useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        let url = `https://localhost:7265/api/tags`;
-        const response = await fetch(url);
-
-        if (response.ok) {
-          const data = await response.json();
-          setTags(data);
-          // console.log(data);
-        } else {
-          console.log("Error fetching tags:", response.statusText);
-        }
-      } catch (error) {
-        console.log("Error fetching tags", error);
-      }
+    const fetchData = async () => {
+      const data = await fetchTags();
+      setTags(data);
     };
-
-    fetchTags();
+    fetchData();
   }, [tags]);
 
   const getMostPopularTags = (tags) => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import DefaultUser from '../assets/defaultUser.jpg';
+import DefaultUser from '../../assets/defaultUser.jpg';
 
 const EditProfile = () => {
     const cookies = new Cookies();

@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from 'react';
-import GoogleLogo from '../assets/Google__G__logo.svg.png';
-import GitHubLogo from '../assets/github-mark-white.png';
+import GoogleLogo from '../../assets/Google__G__logo.svg.png';
+import GitHubLogo from '../../assets/github-mark-white.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';

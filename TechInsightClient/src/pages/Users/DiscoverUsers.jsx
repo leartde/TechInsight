@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import ProfileCard from '../components/ProfileComponents/ProfileCard';
+import ProfileCard from '../../components/ProfileComponents/ProfileCard';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import fetchUsers from '../Services.jsx/FetchUsers';
+import fetchUsers from '../../Services.jsx/FetchUsers';
 
 const DiscoverUsers = () => {
   const [users, setUsers] = useState([]);

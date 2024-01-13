@@ -4,6 +4,7 @@ import UsersTable from '../components/DashboardComponents/UsersTable';
 import BlogsTable from '../components/DashboardComponents/BlogsTable';
 import ContactsTable from '../components/DashboardComponents/ContactsTable';
 import CommentsTable from '../components/DashboardComponents/CommentsTable';
+import TagsTable from '../components/DashboardComponents/TagsTable';
 
 
 const AdminDashboard = () => {
@@ -23,12 +24,14 @@ const AdminDashboard = () => {
         <option value="blogs">Blogs</option>
         <option value="contacts">Contacts</option>
         <option value="comments">Comments</option>
+        <option value="tags">Tags</option>
       </select>
     </div>
       {table === 'users' && <UsersTable />}
       {table === 'blogs' && <BlogsTable />}
       {table ==='contacts' && <ContactsTable/>}
       {table ==='comments' && <CommentsTable/>}
+      {table ==='tags' && <TagsTable/>}
     </div>
   );
 };

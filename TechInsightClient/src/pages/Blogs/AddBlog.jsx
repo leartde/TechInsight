@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddBlog2 = () => {
+const AddBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
@@ -246,4 +246,4 @@ const AddBlog2 = () => {
   );
 };
 
-export default AddBlog2;
+export default AddBlog;

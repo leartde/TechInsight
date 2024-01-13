@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import addClick from '../Services.jsx/AddClick';
+import addClick from '../../Services.jsx/AddClick';
 
 const BlogCard2 = ({ blogs, currentPage, selectedCategory, pageSize, user }) => {
   const filteredBlogs = blogs
