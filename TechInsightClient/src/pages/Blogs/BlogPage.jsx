@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import BlogCard from '../../components/BlogComponents/BlogCard';
 import Pagination from '../../components/BlogComponents/Pagination';
 import CategorySelector from '../../components/BlogComponents/CategorySelector';
-import BlogCard2 from '../../components/BlogComponents/BlogCard2';
+import BlogCard from '../../components/BlogComponents/BlogCard';
 import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Sidebar from '../../components/BlogComponents/Sidebar';
 import Cookies from 'universal-cookie';
+import BlogCard2 from '../../components/BlogComponents/BlogCard2';
 
 
     const BlogPage = () => {

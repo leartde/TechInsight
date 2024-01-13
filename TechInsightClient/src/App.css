@@ -52,33 +52,32 @@ color: #fff;
 color: #009bd6;
 
 }
-
-.Devices{
-  background: linear-gradient(to bottom, #2F80ED, #56CCF2);
-color: #fff; 
+.Devices {
+  background: linear-gradient(to bottom, #1E3A6B, #446CB3);
+  color: #fff;
 }
 
-.Code{
-  background: linear-gradient(to bottom, #424769, #7077A1);
-color: #fff; 
+.Code {
+  background: linear-gradient(to bottom, #232634, #434A5E);
+  color: #fff;
 }
 
-.Innovation{
-  background: linear-gradient(to bottom, #C6A969, #F1E4C3);
-color: #fff; 
+.Innovation {
+  background: linear-gradient(to bottom, #8E734B, #F5E6B7);
+  color: #fff;
 }
 
-.Cybersecurity{
-  background: linear-gradient(to bottom, #EA906C, #EEE2DE);
-color: #fff; 
+.Cybersecurity {
+  background: linear-gradient(to bottom, #B6513A, #F1DDD9);
+  color: #fff;
 }
 
-.Trends{
-  background: linear-gradient(to bottom, #820300, #B80000);
-color: #fff; 
+.Trends {
+  background: linear-gradient(to bottom, #680000, #AB0000);
+  color: #fff;
 }
 
-.AI{
-  background: linear-gradient(to bottom, #65B741, #C1F2B0);
-color: #fff; 
+.AI {
+  background: linear-gradient(to bottom, #4A8849, #9BDC9B);
+  color: #fff;
 }

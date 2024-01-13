@@ -55,7 +55,7 @@ const Sidebar = ({ blogs }) => {
   // console.log("popular tag names ", popularTagNames)
 
   return (
-    <div className="w-full  bg-white shadow-sm rounded-md p-4 space-y-2 ">
+    <div className="w-full ml-24  bg-white shadow-sm rounded-md p-4 space-y-2 ">
       <h3 className="text-lg font-semibold text-gray-700 mb-3 font-roboto">
         Sort blogs by month and year
       </h3>
