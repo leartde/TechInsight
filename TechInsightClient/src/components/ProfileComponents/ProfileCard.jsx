@@ -1,36 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FaFacebook, FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import DefaultUser from '../../assets/defaultUser.jpg';
 
-const ProfileCard = ({user}) => {
+const ProfileCard = ({ user }) => {
   return (
-    <div className="bg-white p-4 shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-xs rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4">
-      <div className="flex flex-col items-center">
-        <img src={user.profilePicUrl} className="w-24 h-w-24 rounded-full" alt="User image" />
-        <div className="mt-4 text-center">
-          <p className="text-lg text-[#333] font-extrabold">{user.username}</p>
-          <p className="text-sm text-gray-500 mt-2">{user.bio}</p>
+    <div className="w-2/3 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+      <div className="flex flex-col items-center  space-y-4 pb-4 pt-6 text-center">
+        <div className='w-24 h-24 border-gray-200 '> <img className="w-full h-full mb-2 rounded-full " src={user.profilePicUrl?user.profilePicUrl:DefaultUser} alt={`${user.username}'s profile`} /></div>
+        <div>
+          <h5 className="text-xl font-bold text-[#009bd6]">{user.username}</h5>
+          <p className="text-sm text-gray-600">{user.bio}</p>
         </div>
-      </div>
-      <div className="mt-6 flex justify-between">
-        <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer mx-1">
-          <FaFacebook size={16} color='#000000' />
+        <div className="flex mt-4 md:mt-6">
+          <Link
+            to={`/profile/${user.id}`}
+            className="inline-flex items-center justify-center py-2 px-4 text-sm font-medium text-white bg-[#009bd6] rounded-full hover:bg-opacity-90"
+          >
+            View Profile
+          </Link>
         </div>
-        <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer mx-1">
-          <FaLinkedin size={16} color='#000000' />
+        <div className="text-sm text-gray-600">
+          <p>{user.postCount} blogs</p>
+          <p>Joined at {new Date(user.registrationTime).toLocaleDateString()}</p>
         </div>
-        <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer mx-1">
-          <FaInstagram size={16} color='#000000' />
-        </div>
-        <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer mx-1">
-          <FaGithub size={16} color='#000000' />
-        </div>
-      </div>
-      <div className="flex mt-4 md:mt-6 justify-center">
-        <Link to={`/profile/${user.id}`} className="inline-flex items-center justify-center py-2 text-sm font-medium text-center text-white border border-transparent rounded-full px-4 bg-[#009bd6] hover:bg-opacity-90">View Profile</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileCard
+export default ProfileCard;

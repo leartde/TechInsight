@@ -76,7 +76,7 @@ const token = cookies.get("token");
                 
                 let url = `https://localhost:7265/api/comments/post/${blog.id}`;
                 const response = await fetch(url);
-                if (response.ok) {
+                if (response.ok ) {
                     const data = await response.json();
                    
                     setComments(data);
@@ -96,7 +96,7 @@ const token = cookies.get("token");
         }
         fetchComments();
         // console.log("Comments ", comments)
-    },[comments])
+    },[blog.id, comments])
 
   
     

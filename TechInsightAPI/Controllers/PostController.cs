@@ -116,8 +116,8 @@ namespace TechInsightAPI.Controllers
             return Ok(selectedPosts);
         }
 
-        [HttpGet("user/{userId}")]
-        [ProducesResponseType(200, Type = typeof(Post))]
+        [HttpGet("user/{userId}")]  
+        [ProducesResponseType(200, Type = typeof(PostDto))]
         [ProducesResponseType(400)]
         public IActionResult GetPosts(int userId)
         {

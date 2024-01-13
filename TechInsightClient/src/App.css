@@ -53,31 +53,31 @@ color: #009bd6;
 
 }
 .Devices {
-  background: linear-gradient(to bottom, #1E3A6B, #446CB3);
+  background: #3498db;
   color: #fff;
 }
 
 .Code {
-  background: linear-gradient(to bottom, #232634, #434A5E);
+  background: #2ecc71;
   color: #fff;
 }
 
 .Innovation {
-  background: linear-gradient(to bottom, #8E734B, #F5E6B7);
+  background: #f39c12;
   color: #fff;
 }
 
 .Cybersecurity {
-  background: linear-gradient(to bottom, #B6513A, #F1DDD9);
+  background: #e74c3c;
   color: #fff;
 }
 
 .Trends {
-  background: linear-gradient(to bottom, #680000, #AB0000);
+  background:  #8e44ad;
   color: #fff;
 }
 
 .AI {
-  background: linear-gradient(to bottom, #4A8849, #9BDC9B);
+  background:#3498db;
   color: #fff;
 }

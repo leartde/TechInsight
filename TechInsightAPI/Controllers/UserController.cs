@@ -168,7 +168,8 @@ namespace TechInsightAPI.Controllers
                             Email = u.Email,
                             ProfilePicUrl = u.ProfilePicUrl,
                             RegistrationTime = u.RegistrationTime,
-                            UserRole = u.UserRole
+                            UserRole = u.UserRole,
+                            postCount = _context.Posts.Count(p => p.UserId == u.Id)
                         };
 
             return Ok(users);
@@ -231,7 +232,8 @@ namespace TechInsightAPI.Controllers
                 Bio = user.Bio,
                 ProfilePicUrl = user.ProfilePicUrl,
                 UserRole = user.UserRole,
-                RegistrationTime = user.RegistrationTime
+                RegistrationTime = user.RegistrationTime,
+                postCount = _context.Posts.Count(p => p.UserId == user.Id)
             };
         }
 

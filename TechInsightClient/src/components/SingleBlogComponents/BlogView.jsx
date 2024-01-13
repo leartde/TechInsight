@@ -1,10 +1,14 @@
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import DeletePost from '../../Services.jsx/DeletePost'
+import { ToastContainer } from 'react-toastify'
 
 const BlogView = ({blog, user}) => {
+    const navigate = useNavigate();
   return (
     <div className="rounded-sm overflow-hidden bg-white shadow-sm">
+        <ToastContainer/>
     <div className="">
         <img src={blog.imageURL} className="w-full h-96 object-fill"/>
     </div>
@@ -28,7 +32,11 @@ const BlogView = ({blog, user}) => {
             </div>
         </div>
 
-       {blog.userId == user.id && <Link to={`/editblog/${blog.id}`} className="text-white py-1 px-3 rounded-sm uppercase text-sm bg-blue-500 border border-blue-500 hover:text-blue-500 hover:bg-transparent transition"> Edit </Link>}
+      <div className='flex flex-row mt-4 space-x-4'>
+      {user && blog.userId == user.id && <Link to={`/editblog/${blog.id}`} className="text-white py-1  px-6 rounded-sm uppercase text-sm bg-blue-500 border border-blue-500 hover:text-blue-500 hover:bg-transparent transition"> Edit </Link>}
+      {user && (blog.userId == user.id || user.userRole == 1) && <Link onClick={()=>{DeletePost(blog.id);
+        navigate('/blogs')}} className="text-white py-1  px-4 rounded-sm uppercase text-sm bg-red-500 border border-red-500 hover:text-red-500 hover:bg-transparent transition"> Delete </Link>}
+      </div>
 
         <p className="text-gray-500 text-base mt-5">
            {blog.content}

@@ -28,7 +28,7 @@ const DiscoverUsers = () => {
   return (
     <div className='max-w-7xl mx-auto py-20'>
 
-      <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8'> 
+      <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 '> 
       {
           users.map((user)=>(
             <ProfileCard user={user} key={user.id} />

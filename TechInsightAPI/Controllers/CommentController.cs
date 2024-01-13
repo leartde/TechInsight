@@ -87,7 +87,7 @@ namespace TechInsightAPI.Controllers
 
             if (selectedComments.Count == 0)
             {
-                return NotFound();
+                return Ok(new List<Comment>());
             }
 
             return Ok(selectedComments);

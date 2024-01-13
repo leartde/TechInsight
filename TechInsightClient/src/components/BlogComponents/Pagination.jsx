@@ -1,8 +1,15 @@
 import React from 'react'
 
 function Pagination({onPageChange, currentPage, blogs, pageSize}) {
-    const totalPages = Math.ceil(blogs.length / pageSize);
+    let totalPages = 0;
+    
     const renderPaginationLinks = () => {
+        if (blogs.length === 0) {
+            return null;}
+        else{
+            totalPages = Math.ceil(blogs.length / pageSize);
+        }
+
         return Array.from({length : totalPages},  (_, i)=> i+1).map((pageNumber)=>(
             <li 
                 className={`border-gray-200 shadow p-2 w-8 bg-white item-center ${pageNumber === currentPage? "activePagination": ""}`} 

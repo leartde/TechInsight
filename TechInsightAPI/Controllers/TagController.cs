@@ -32,6 +32,21 @@ namespace TechInsightAPI.Controllers
                        };
             return Ok(tags);
         }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+
+        public IActionResult DeleteTag(int id)
+        {
+            var tag = _context.Tags.Find(id);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            _context.Tags.Remove(tag);
+            _context.SaveChanges();
+            return Ok($"Tag {tag.Name} with ID {tag.Id} deleted successfully");
+        }
     }
 
 }

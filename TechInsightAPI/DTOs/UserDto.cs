@@ -16,10 +16,11 @@ namespace TechInsightAPI.DTOs
         public string? Bio { get; set; }
         public IFormFile? Image { get; set; }
         public string? ProfilePicUrl { get; set; }
-
+        
         public string? Password { get; set; }
 
         public UserRole UserRole { get; set; }
         public DateTime? RegistrationTime { get; set; }
+        public int postCount { get; set; }  
     }
 }

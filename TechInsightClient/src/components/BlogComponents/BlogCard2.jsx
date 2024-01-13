@@ -17,7 +17,7 @@ const BlogCard2 = ({ blogs, currentPage, selectedCategory, pageSize, user }) => 
             <div className="absolute inset-0 bg-cover bg-center transition-all duration-350 ease-in-out opacity-0 group-hover:opacity-100" style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65)), url(${blog.imageURL})` }}></div>
             <div className="p-4 transition-all duration-200 ease-in-out flex-grow">
               <div className="flex justify-between items-center pb-2 transition-all duration-200 ease-in-out">
-                <a href="#" className={`px-2 py-1 text-xs text-center text-white uppercase  ${blog.category}`}>{blog.category}</a>
+                <a href="#" className={`px-2 py-1 text-xs rounded-xl text-center text-white uppercase  ${blog.category}`}>{blog.category}</a>
                 <div className="text-sm">{new Date(blog.createdAt).toLocaleDateString().toUpperCase()}</div>
               </div>
               <h1 className="text-md pb-2 transition-all duration-350 ease-in-out">{blog.title}</h1>
