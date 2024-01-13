@@ -5,8 +5,10 @@ import fetchBlogs from '../../Services.jsx/FetchBlogs';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
 import DeletePost from '../../Services.jsx/DeletePost';
+import addClick from '../../Services.jsx/AddClick';
 
-const BlogsTable = () => {
+
+const BlogsTable = ({currentUser}) => {
   const [blogs, setBlogs] = useState([]);
   const [sortDirection, setSortDirection] = useState('asc');
   const [sortColumn, setSortColumn] = useState('id');
@@ -129,7 +131,7 @@ const BlogsTable = () => {
               >
                 <span>Published Date</span>
                 <FaUpDown
-                  className={`ml-1 inline text-gray-600 ${
+                  className={`ml-1 c text-gray-600 inline ${
                     sortColumn === 'createdAt' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
@@ -140,7 +142,7 @@ const BlogsTable = () => {
               >
                 <span>Views</span>
                 <FaUpDown
-                  className={`ml-1 text-gray-600 inline ${
+                  className={`ml-1 inline text-gray-600${
                     sortColumn === 'nrClicks' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
@@ -155,6 +157,8 @@ const BlogsTable = () => {
                 <td
                   onClick={() => {
                     navigate(`/blogs/${blog.id}`);
+                    addClick(blog.id,currentUser.id);
+
                   }}
                   className='cursor-pointer border px-4 py-2 text-blue-600'
                 >

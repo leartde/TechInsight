@@ -4,7 +4,7 @@ const CategorySelector = ({ onSelectCategory, activeCategory }) => {
   const categories = ["Devices", "Code", "Innovation", "Cybersecurity", "Trends", "AI"];
 
   return (
-    <div className="relative mt-6 h-10 w-72 min-w-[200px]">
+    <div className="max-lg:mx-auto relative mt-6 h-10 w-72 min-w-48">
   <select
   value={activeCategory || "All"} 
      onChange={(e) => onSelectCategory(e.target.value === "All" ? null : e.target.value)}

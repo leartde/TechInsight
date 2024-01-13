@@ -45,7 +45,7 @@ import addClick from '../../Services.jsx/AddClick';
                             </h5>
                             <div className="flex text-gray-400 text-sm items-center">
                                 <span className="mr-1 text-xs"><i className="far fa-clock"></i></span>
-                                {new Date(blog.createdAt).toLocaleString()}
+                                {new Date(blog.createdAt).toLocaleString().replace(/(.*)\D\d+/, '$1')}
                             </div>
                         </div>
                     </Link>

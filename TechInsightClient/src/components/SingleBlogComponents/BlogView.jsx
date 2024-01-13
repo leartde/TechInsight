@@ -18,17 +18,17 @@ const BlogView = ({blog, user}) => {
             
         </h2>
         <div className="mt-2 flex space-x-4">
-            <div className="flex text-gray-400 text-md items-center">
+            <div onClick={()=>navigate(`/profile/${user.id}`)} className="flex text-gray-400 text-md items-center cursor-pointer">
                 <span className="mr-2 text-xs">
                     <FaUser/>
                 </span>
                 {blog.author}
             </div>
-            <div className="flex text-gray-400 text-sm items-center">
+            <div  className="flex text-gray-400 text-sm items-center">
                 <span className="mr-2 text-xs">
                     <i className="far fa-clock"></i>
                 </span>
-                {new Date(blog.createdAt).toLocaleString()}
+                {new Date(blog.createdAt).toLocaleString().replace(/(.*)\D\d+/, '$1')}
             </div>
         </div>
 

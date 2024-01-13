@@ -4,7 +4,7 @@ import DefaultUser from '../../assets/defaultUser.jpg';
 
 const ProfileCard = ({ user }) => {
   return (
-    <div className="w-2/3 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+    <div className="w-2/3 max-w-sm  bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
       <div className="flex flex-col items-center  space-y-4 pb-4 pt-6 text-center">
         <div className='w-24 h-24 border-gray-200 '> <img className="w-full h-full mb-2 rounded-full " src={user.profilePicUrl?user.profilePicUrl:DefaultUser} alt={`${user.username}'s profile`} /></div>
         <div>

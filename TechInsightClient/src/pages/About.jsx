@@ -42,17 +42,15 @@ const About1 = () => {
                   About Us
                 </span>
                 <h2 className="mb-5 text-3xl font-bold text-black sm:text-[40px]/[48px]">
-                  More About Us
+                More About TechInsight
                 </h2>
                 <p className="mb-5 text-base text-body-color dark:text-dark-6">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less.
+                TechInsight is your go-to destination for in-depth explorations of the latest tech trends, innovations, and insights. 
+              Whether you're a tech enthusiast or a professional in the industry, our mission is to provide you with comprehensive and insightful content that goes beyond the surface. 
                 </p>
                 <p className="mb-8 text-base text-body-color dark:text-dark-6">
-                  A domain name is one of the first steps to establishing your
-                  brand. Secure a consistent brand image with a domain name that
-                  matches your business.
+                Dive into our thought-provoking articles, stay ahead of the curve with reviews of the latest gadgets, and join our community of tech enthusiasts. 
+              TechInsight is not just a website; it's a place where curiosity meets expertise, and where the possibilities of technology are uncovered.
                 </p>
                 <a
                     href="/"
