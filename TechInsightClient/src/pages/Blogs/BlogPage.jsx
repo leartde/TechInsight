@@ -154,9 +154,9 @@ import BlogCard2 from '../../components/BlogComponents/BlogCard2';
   return (
 
     <div className='max-w-7xl mx-auto py-20'>
-        <div> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
+        <div className='mx-4'> <CategorySelector onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory}  activeCategory={activeCategory}/></div>
         <div className='mx-4 my-4 flex flex-row space-x-6 '>
-        <div className='rounded-xl'>
+        <div className='rounded-xl absolute mt-4 lg:block hidden'>
         <form onSubmit={handleSearch}>
       <input
         type="text"
@@ -169,7 +169,7 @@ import BlogCard2 from '../../components/BlogComponents/BlogCard2';
             
           </div>
           
-        {/* <button type="button" onClick={()=>{navigate('/addblog')}} class="text-white bg-gradient-to-r from-[#009bd6] to-[#4fbfef] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-xl text-sm px-7 py-3.5 text-center me-2 mb-2">Add a blog</button> */}
+     
              </div>
              
          <div className='flex flex-col lg:flex-row  gap-12 '> 

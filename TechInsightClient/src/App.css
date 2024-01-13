@@ -8,6 +8,18 @@ body{
   background-color: rgb(243 244 246)
 }
 
+::-webkit-scrollbar {
+  width: 0.9rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #c8c8cb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #60a5fa;
+}
+
 .active{
   @apply text-[#009bd6] 
 }
