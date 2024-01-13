@@ -11,7 +11,7 @@ body{
 .active{
   @apply text-[#009bd6] 
 }
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
 
 .pagination{
 display: flex;

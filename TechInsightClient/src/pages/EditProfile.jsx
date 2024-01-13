@@ -14,6 +14,7 @@ const EditProfile = () => {
     const [imagePreview, setImagePreview] = useState();
     const [submitting, setSubmitting] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [remember, setRemember] = useState(false);
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -37,14 +38,9 @@ const EditProfile = () => {
               reader.readAsDataURL(selectedFile);
             }
     };
-    const formData = new FormData();
-    formData.append('id', token.id);
-    formData.append('username', username);
-    formData.append('bio', bio);
-    formData.append('registrationTime', token.registrationTime);
-    formData.append('image', image);
 
-    console.log("Form data: ", JSON.stringify(formData));
+
+    // console.log("Form data: ", JSON.stringify(formData));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,6 +61,11 @@ const EditProfile = () => {
     
             if (response.status === 200) {
                 console.log('Profile updated successfully');
+                const updatedToken = JSON.stringify(response.data.updatedUser);
+                cookies.set('token', updatedToken, {
+                  path: '/',
+                  expires: remember ? undefined : new Date(Date.now() + 86400000),
+                });
                 navigate(`/profile/${token.id}`);
             } else {
                 console.error('Error updating profile:', response.statusText);

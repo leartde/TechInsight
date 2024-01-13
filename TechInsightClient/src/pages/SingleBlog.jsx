@@ -38,8 +38,8 @@ const SingleBlog = () => {
         <div className="xl:w-6/12 lg:w-9/12 w-full  xl:ml-6 lg:mr-6">
 
             {/*  post view  */}
-           <BlogView blog={blog}/>
-
+           <BlogView blog={blog} user={token}/>
+        
             {/*  title  */}
             <div className="flex bg-white px-3 py-2 justify-between items-center rounded-sm mt-8">
                 <h5 className="text-base uppercase font-semibold font-roboto">Related blogs</h5>

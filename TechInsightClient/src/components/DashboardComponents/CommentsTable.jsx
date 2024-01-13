@@ -3,10 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
+import DeleteComment from '../../Services.jsx/DeleteComment';
 
 
-const ContactsTable = () => {
-  const [contacts, setContacts] = useState([]);
+const CommentsTable = () => {
+  const [comments, setComments] = useState([]);
   const [sortDirection, setSortDirection] = useState('asc');
   const [sortColumn, setSortColumn] = useState('id');
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,34 +16,24 @@ const ContactsTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7265/api/contacts');
+        const response = await axios.get('https://localhost:7265/api/comments');
         if (response.status === 200) {
           const data = response.data;
-          // console.log("Data ", data);
-          setContacts(data);
+          console.log("Data ", data);
+          setComments(data);
         } else {
-          console.log('Error fetching contacts:', response.statusText);
+          console.log('Error fetching comments:', response.statusText);
         }
       } catch (error) {
-        console.log("Error fetching contacts ", error);
+        console.log("Error fetching comments ", error);
       }
     };
 
     fetchData();
-  }, [contacts])
+  }, [comments])
 
-  const handleDelete = async(id)=>{
-    try{
-        const response =  await axios.delete(`https://localhost:7265/api/contacts/delete/${id}`);
-        if(response.ok) console.log("Succesfully deleted contact");
-    }
-    catch(error){
-         console.log("Error deleting contact ", error)
-        }
-    
-  }
 
-//   console.log("Contacts", contacts)
+
   
 
   const handleSort = (column) => {
@@ -70,10 +61,10 @@ const ContactsTable = () => {
     return 0;
   };
 
-  const sortedContacts = [...contacts].sort(compareValues);
+  const sortedComments = [...comments].sort(compareValues);
 
-  const filteredContacts = sortedContacts.filter((contact) => {
-    return Object.values(contact).some(
+  const filteredComments = sortedComments.filter((comment) => {
+    return Object.values(comment).some(
       (value) =>
         typeof value === 'string' &&
         value.toLowerCase().includes(searchTerm.toLowerCase())
@@ -84,7 +75,7 @@ const ContactsTable = () => {
     <div className='my-2 mx-auto'>
       <div className='pl-4 space-y-4 mb-6'>
         <h1 className='text-2xl font-bold lg:block hidden text-gray-800 text-left'>
-          Contacts Table
+          Comments Table
         </h1>
         <div className='text-lg font-normal text-gray-600'>
           <input
@@ -113,56 +104,46 @@ const ContactsTable = () => {
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('name')}
+                onClick={() => handleSort('username')}
               >
-                <span>Name</span>
+                <span>Username</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'name' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'username' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('email')}
+                onClick={() => handleSort('content')}
               >
-                <span>Email</span>
+                <span>Content</span>
                 <FaUpDown
                   className={`ml-1 inline text-gray-600 ${
-                    sortColumn === 'email' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'content' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('subject')}
+                onClick={() => handleSort('postTitle')}
               >
-                <span>Subject</span>
+                <span>Blog Title</span>
                 <FaUpDown
                   className={` ml-1 inline text-gray-600 ${
-                    sortColumn === 'subject' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'postTitle' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
+
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('message')}
+                onClick={() => handleSort('createdAt')}
               >
-                <span>Message</span>
-                <FaUpDown
-                  className={`ml-1 inline text-gray-600 ${
-                    sortColumn === 'message' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
-                  }`}
-                />
-              </th>
-              <th
-                className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('id')}
-              >
-                <span>SubmissionTime</span>
+                <span>Submission Time</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'submissionTime' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'createdAt' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
@@ -170,24 +151,23 @@ const ContactsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredContacts.map((contact) => (
-              <tr key={contact.id} className='bg-gray-100 text-gray-500'>
-                <td className='border px-4 py-2'>{contact.id}</td>
+            {filteredComments.map((comment) => (
+              <tr key={comment.id} className='bg-gray-100 text-gray-500'>
+                <td className='border px-4 py-2'>{comment.id}</td>
                 <td
                   className='cursor-pointer border px-4 py-2 text-blue-600'
+                  onClick={()=>{navigate(`/profile/${comment.userId}`)}}
                 >
-                  {contact.name}
+                  {comment.username}
                 </td>
-                <td className='border px-4 py-2'>{contact.email}</td>
-                <td className='border px-4 py-2'>{contact.subject}</td>
-                <td className='border min-h-14 px-4 py-2 w-48 overflow-hidden break-all whitespace-pre-wrap'>
-  {contact.message}
-</td>
-                <td className= 'border px-4 py-2'> {new Date(contact.submissionTime).toLocaleDateString()}</td>
+                <td className='border px-4 py-2'>{comment.content}</td>
+                <td className='border px-4 py-2'>{comment.postTitle}</td>
+
+                <td className= 'border px-4 py-2'> {new Date(comment.createdAt).toLocaleDateString()}</td>
                 <td className=' border space-x-4 text-2xl pl-2  py-2'>
                   
                   <FaTrash
-                  onClick={()=>handleDelete(contact.id)}
+                  onClick={()=>DeleteComment(comment.id)}
                   
                     className='text-red-400 cursor-pointer  mx-auto'
                   />
@@ -201,4 +181,4 @@ const ContactsTable = () => {
   );
 };
 
-export default ContactsTable;
+export default CommentsTable;

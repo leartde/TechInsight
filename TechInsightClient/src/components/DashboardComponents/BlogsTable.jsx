@@ -28,27 +28,28 @@ const BlogsTable = () => {
     setSortDirection((prevDirection) => (prevDirection === 'asc' ? 'desc' : 'asc'));
   };
 
-  const compareValues = (a, b) => {
+  const compareValues = (a, b, column) => {
     const columnA =
-      sortColumn === 'createdAt'
-        ? new Date(a[sortColumn])
-        : typeof a[sortColumn] === 'string'
-        ? a[sortColumn].toLowerCase()
-        : a[sortColumn];
-
+      column === 'createdAt'
+        ? new Date(a[column])
+        : typeof a[column] === 'string'
+        ? a[column].toLowerCase()
+        : a[column];
+  
     const columnB =
-      sortColumn === 'createdAt'
-        ? new Date(b[sortColumn])
-        : typeof b[sortColumn] === 'string'
-        ? b[sortColumn].toLowerCase()
-        : b[sortColumn];
-
+      column === 'createdAt'
+        ? new Date(b[column])
+        : typeof b[column] === 'string'
+        ? b[column].toLowerCase()
+        : b[column];
+  
     if (columnA < columnB) return sortDirection === 'asc' ? -1 : 1;
     if (columnA > columnB) return sortDirection === 'asc' ? 1 : -1;
     return 0;
   };
+  
 
-  const sortedBlogs = [...blogs].sort(compareValues);
+  const sortedBlogs = [...blogs].sort((a, b) => compareValues(a, b, sortColumn));
 
   const filteredBlogs = sortedBlogs.filter((blog) => {
     return Object.values(blog).some(
@@ -135,12 +136,12 @@ const BlogsTable = () => {
               </th>
               <th
                 className='px-4 py-2 cursor-pointer'
-                onClick={() => handleSort('id')}
+                onClick={() => handleSort('nrClicks')}
               >
                 <span>Views</span>
                 <FaUpDown
                   className={`ml-1 text-gray-600 inline ${
-                    sortColumn === 'views' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
+                    sortColumn === 'nrClicks' ? (sortDirection === 'desc' ? 'rotate-180' : '') : ''
                   }`}
                 />
               </th>
