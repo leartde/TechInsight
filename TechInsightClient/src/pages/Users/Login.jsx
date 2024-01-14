@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +41,7 @@ const Login = () => {
 
       if (!response.ok) {
         const errorResponse = await response.json();
-        setError(`Login failed: ${errorResponse.title}`);
+        toast.error(`Login failed: ${errorResponse.title}`);
         return;
       }
 
@@ -59,12 +61,14 @@ const Login = () => {
       setError('');
     } catch (error) {
       console.error('Error:', error);
+      toast.error('An error occurred while processing your request.');
       setError('An error occurred while processing your request.');
     }
   };
 
   return (
     <div className="flex items-center justify-center mt-40">
+      <ToastContainer/>
      {token?(<h1 className='text-xl font-semibold text-blue-500'>You are already logged in</h1>):(
        <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
        <div className="w-full">
