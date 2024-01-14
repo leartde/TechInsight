@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
 import fetchTags from "../../Services.jsx/FetchTags";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TagsTable = () => {
   const [tags, setTags] = useState([]);
@@ -22,13 +24,19 @@ const TagsTable = () => {
 
   const handleDelete = async(id)=>{
     try{
-        const response =  await axios.delete(`https://localhost:7265/api/tags/delete/${id}`);
-        if(response.ok) console.log("Succesfully deleted tag");
+      const response =  await axios.delete(`https://localhost:7265/api/tags/delete/${id}`);
+      if(response.status === 200) {
+        console.log("Succesfully deleted tag");
+        toast.success('Succesfully deleted tag');
+      } else {
+        console.error('Error deleting tag:', response.statusText);
+        toast.error('Error deleting tag: ' + response.statusText);
+      }
     }
     catch(error){
-         console.log("Error deleting tag ", error)
-        }
-    
+      console.log("Error deleting tag ", error);
+      toast.error('Error deleting tag: ' + error.message);
+    }
   }
 
 
@@ -71,6 +79,7 @@ const TagsTable = () => {
 
   return (
     <div className='my-2 mx-auto'>
+      <ToastContainer/>
       <div className='pl-4 space-y-4 mb-6'>
         <h1 className='text-2xl font-bold lg:block hidden text-gray-800 text-left'>
           Tags Table

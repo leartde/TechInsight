@@ -4,6 +4,8 @@ import { FaEdit } from 'react-icons/fa';
 import { FaArrowsUpDown, FaTrash, FaUpDown } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import fetchUsers from '../../Services.jsx/FetchUsers';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -25,19 +27,21 @@ const UsersTable = () => {
     }, [users]);
 
     const handleDelete = async (id) => {
-        try {
-            const response = await axios.delete(`https://localhost:7265/api/User/delete/${id}`);
-    
-            if (response.status === 200) {
-                console.log('User deleted successfully');
-            } else {
-                console.error('Error deleting user:', response.statusText);
-            }
-        } catch (error) {
-            console.log('Error deleting user', error);
-        }
-    };
-    
+      try {
+          const response = await axios.delete(`https://localhost:7265/api/User/delete/${id}`);
+  
+          if (response.status === 200) {
+              console.log('User deleted successfully');
+              toast.success('User deleted successfully');
+          } else {
+              console.error('Error deleting user:', response.statusText);
+              toast.error('Error deleting user: ' + response.statusText);
+          }
+      } catch (error) {
+          console.log('Error deleting user', error);
+          toast.error('Error deleting user: ' + error.message);
+      }
+  };
   
     const handleSort = (column) => {
       setSortColumn(column);
@@ -75,6 +79,7 @@ const UsersTable = () => {
   
     return (
       <div className='my-2 mx-auto'>
+        <ToastContainer/>
        <div className='pl-4 space-y-4 mb-6'>
        <h1 className='text-2xl font-bold  lg:block hidden text-gray-800  text-left'> Users Table</h1>
        <div className='text-lg font-normal text-gray-600'>

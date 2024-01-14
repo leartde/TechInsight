@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactsTable = () => {
   const [contacts, setContacts] = useState([]);
@@ -33,13 +34,19 @@ const ContactsTable = () => {
 
   const handleDelete = async(id)=>{
     try{
-        const response =  await axios.delete(`https://localhost:7265/api/contacts/delete/${id}`);
-        if(response.ok) console.log("Succesfully deleted contact");
+      const response =  await axios.delete(`https://localhost:7265/api/contacts/delete/${id}`);
+      if(response.status === 200) {
+        console.log("Succesfully deleted contact");
+        toast.success('Succesfully deleted contact');
+      } else {
+        console.error('Error deleting contact:', response.statusText);
+        toast.error('Error deleting contact: ' + response.statusText);
+      }
     }
     catch(error){
-         console.log("Error deleting contact ", error)
-        }
-    
+      console.log("Error deleting contact ", error);
+      toast.error('Error deleting contact: ' + error.message);
+    }
   }
 
 //   console.log("Contacts", contacts)
@@ -82,6 +89,7 @@ const ContactsTable = () => {
 
   return (
     <div className='my-2 mx-auto'>
+      <ToastContainer />
       <div className='pl-4 space-y-4 mb-6'>
         <h1 className='text-2xl font-bold lg:block hidden text-gray-800 text-left'>
           Contacts Table
