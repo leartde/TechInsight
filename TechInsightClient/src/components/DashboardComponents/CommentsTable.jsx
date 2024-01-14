@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaUpDown } from 'react-icons/fa6';
 import { FaTrash } from 'react-icons/fa';
 import DeleteComment from '../../Services.jsx/DeleteComment';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const CommentsTable = () => {
@@ -73,6 +75,7 @@ const CommentsTable = () => {
 
   return (
     <div className='my-2 mx-auto'>
+      <ToastContainer/>
       <div className='pl-4 space-y-4 mb-6'>
         <h1 className='text-2xl font-bold lg:block hidden text-gray-800 text-left'>
           Comments Table

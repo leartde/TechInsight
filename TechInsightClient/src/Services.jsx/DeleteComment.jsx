@@ -1,4 +1,6 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeleteComment = async (id) => {
     try {
@@ -6,13 +8,16 @@ const DeleteComment = async (id) => {
 
         if (response.status === 200) {
             console.log('Comment deleted successfully');
+            toast.success('Comment deleted successfully');
             return;
         } else {
             console.error('Error deleting comment:', response.statusText);
+            toast.error('Error deleting comment: ' + response.statusText);
             return;
         }
     } catch (error) {
         console.log('Error deleting comment', error);
+        toast.error('Error deleting comment: ' + error.message);
         return;
     }
 };
