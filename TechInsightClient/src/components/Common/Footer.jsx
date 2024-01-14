@@ -11,16 +11,16 @@ const Footer = () => {
                     <div className="text-sm uppercase text-[#009bd6] font-bold">Menu</div>
                     <ul>
                         <li className="my-2">
-                            <a className="hover:text-[#009bd6]" href="#">Home</a>
+                            <a className="hover:text-[#009bd6]" href="/">Home</a>
                         </li>
                         <li className="my-2">
-                            <a className="hover:text-[#009bd6]" href="#">About</a>
+                            <a className="hover:text-[#009bd6]" href="/about">About</a>
                         </li>
                         <li className="my-2">
-                            <a className="hover:text-[#009bd6]" href="#">Posts</a>
+                            <a className="hover:text-[#009bd6]" href="/blogs">Posts</a>
                         </li>
                         <li className="my-2">
-                            <a className="hover:text-[#009bd6]" href="#">Contact</a>
+                            <a className="hover:text-[#009bd6]" href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
