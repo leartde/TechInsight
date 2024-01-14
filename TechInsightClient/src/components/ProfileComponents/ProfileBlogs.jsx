@@ -24,8 +24,7 @@ const ProfileBlogs = ({ blogs, currentPage, postsPerPage, currentUser }) => {
               <h1 className="text-md pb-2 transition-all duration-350 ease-in-out">{blog.title}</h1>
               <div className="pb-2 transition-all duration-250 ease-in-out">By <Link className ='text-gray-600' to={`/profile/${blog.userId}`}>{blog.author}</Link></div>
               <div className="mt-4">
-                <p className="text-gray-200 text-sm">{blog.description}</p>
-                <p className="text-gray-200 text-sm mt-2">{blog.content}</p>
+                <p className="text-gray-400 text-sm mt-2 hidden">{blog.content}</p>
               </div>
             </div>
           </div>

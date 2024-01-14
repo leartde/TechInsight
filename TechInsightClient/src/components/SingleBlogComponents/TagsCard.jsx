@@ -11,7 +11,7 @@ const TagsCard = ({header, tags}) => {
                    {
                     tags.map((tag)=>(
                         <Link key={tag}  to={{ pathname: '/blogs', search: `?tag=${tag}` }}
-                        className="px-3 py-1 capitalize text-sm border border-gray-200 rounded-sm transition hover:bg-blue-500 hover:text-white">{tag}</Link>
+                        className="px-3 py-1 capitalize text-sm border border-gray-200 rounded-sm transition hover:bg-blue-500 hover:text-white hover:scale-110">{tag}</Link>
 
                     ))
                    }

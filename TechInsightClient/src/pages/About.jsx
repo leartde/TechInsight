@@ -54,7 +54,7 @@ const About1 = () => {
                 </p>
                 <a
                     href="/"
-                    className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-[#009bd6] hover:bg-opacity-90"
+                    className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-[#009bd6] hover:bg-opacity-90 hover:scale-105 transition duration-300 ease-in-out"
                 >
                     Get Started
                 </a>

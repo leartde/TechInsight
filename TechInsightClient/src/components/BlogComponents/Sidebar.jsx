@@ -66,11 +66,11 @@ const Sidebar = ({ blogs }) => {
       />
    <div className="space-y-4">
   {blogsByDate.map((blog) => (
-    <Link to={`/blogs/${blog.id}`} key={blog.id} className="flex items-start">
+    <Link to={`/blogs/${blog.id}`} key={blog.id} className="flex items-start hover:scale-110">
       <div className="flex-shrink-0">
         <img
           src={blog.imageURL}
-          className="h-14 w-20 lg:w-14 xl:w-20 rounded object-cover"
+          className="h-14 w-20 lg:w-14 xl:w-20 rounded object-cover hover:scale-110"
           alt={blog.title}
         />
       </div>

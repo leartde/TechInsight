@@ -11,7 +11,7 @@ const BlogCard2 = ({ blogs, currentPage, selectedCategory, pageSize, user }) => 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mt-12 max-md:max-w-lg mx-auto">
       {filteredBlogs.map((blog) => (
         <div onClick={()=>navigate(`/blogs/${blog.id}`)} key={blog.id} className="relative group w-72 m-4 h-80">
-          <div className="flex-shrink-0 w-full bg-white relative flex flex-col transition-all duration-300 ease-in-out hover:cursor-pointer hover:shadow-md hover:transform hover:scale-105 h-full">
+          <div className="flex-shrink-0 w-full bg-white relative flex flex-col transition-all duration-1000 ease-in-out hover:cursor-pointer hover:shadow-sm hover:transform hover:scale-105 h-full">
             <div className="h-40 bg-cover bg-center" style={{ backgroundImage: `url(${blog.imageURL})` }}></div>
             <a href="#" className="absolute inset-0"></a>
             <div className="absolute inset-0 bg-cover bg-center transition-all duration-350 ease-in-out opacity-0 group-hover:opacity-100" style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65)), url(${blog.imageURL})` }}></div>
