@@ -25,8 +25,9 @@ namespace TechInsightAPI.Controllers
                          {
                              PostId = uc.PostId,
                              UserId = uc.UserId,
+                             UserName = uc.ClickingUser.Username,
                              ClickedAt = uc.ClickedAt,
-
+                             postTitle = uc.ClickedPost.Title
                          };
             return Ok(clicks);
         }
