@@ -8,7 +8,7 @@ const BlogView = ({blog, user}) => {
     const navigate = useNavigate();
   return (
     <div className="rounded-sm overflow-hidden bg-white shadow-sm">
-        <ToastContainer/>
+    
     <div className="">
         <img src={blog.imageURL} className="w-full h-96 object-fill"/>
     </div>

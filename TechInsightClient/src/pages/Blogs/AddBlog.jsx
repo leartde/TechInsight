@@ -129,7 +129,7 @@ const AddBlog = () => {
   return (
     <div className="mt-24 mx-auto max-w-7xl  ">
       
-    <ToastContainer/>
+   
       {!token && (
         <div className="text-center py-12">
           <h1 className="text-4xl text-blue-400">
@@ -143,7 +143,7 @@ const AddBlog = () => {
           </h1>
         </div>
       )}
-       <ToastContainer/>
+    
       {token && (
         <div className="pt-24 border bg-stone-50  flex flex-row pb-24 ">
           <div className="mx-32  w-1/3 ">

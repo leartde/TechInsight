@@ -127,10 +127,7 @@ const EditBlog = () => {
   }, [submitting, title, content, category, tags]);
   return (
     <div className="mt-24 mx-auto max-w-7xl  ">
-      <ToastContainer
-        autoClose={2000}
-        position='top-left'
-        />
+
 
       {!token && (
         <div className="text-center py-12">

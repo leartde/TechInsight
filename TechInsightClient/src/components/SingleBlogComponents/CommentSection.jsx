@@ -11,7 +11,7 @@ const CommentSection = ({blog}) => {
 const token = cookies.get("token");
     const [comments, setComments] = useState([]);
     const [content, setContent] = useState();
-    const [submitting, setSubmitting] = useState(false);
+    // const [submitting, setSubmitting] = useState(false);
     const [editMode, setEditMode] = useState(false);    
     const [editedCommentId, setEditedCommentId] = useState(null);
     const [editedContent, setEditedContent] = useState("");
@@ -102,11 +102,8 @@ const token = cookies.get("token");
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitting(true);
-    }
-
-    useEffect(() => {
-        const addComment = async () => {
+       
+  
             const comment = {
                 content: content,
                 createdAt: new Date(),
@@ -125,51 +122,31 @@ const token = cookies.get("token");
           console.log("Comment ", JSON.stringify(comment));
     
          
-    
-  
-          setSubmitting(true);
-         
           try {
-            const response = await fetch('https://localhost:7265/api/comments/AddComment', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(comment)
-            });
+            const response = await axios.post('https://localhost:7265/api/comments/AddComment',comment);
     
-            
-    
-            if (response.ok) {
-              toast.success('Comment posted successfully!')
+            if (response.status === 200) {
+              
               setContent("");
+              toast.success('Comment posted successfully!')
             
             } else {
-              alert('Failed to post comment.');
+                toast.error('Failed to post comment.');
             }
           } catch (error) {
             console.error('Error creating comment:', error);
-            alert('Error creating comment. Please try again.');
-          } finally {
-          
-            setSubmitting(false);
-          }
+            toast.error('Error creating comment. Please try again.');
         };
     
-        
-        if (submitting) {
-            addComment();
-        }
-      }, [submitting, content]);
+
+      }
+    
         
     
         
   return (
     <div className="p-4 bg-white rounded-sm shadow-sm mt-8">
-        <ToastContainer
-        autoClose={2000}
-        position='top-left'
-        />
+
                 <h4 className="text-base uppercase  font-semibold mb-4 font-roboto">Post a comment</h4>
                 {/* <p className="text-sm text-gray-500 mb-4">12 comments</p> */}
 

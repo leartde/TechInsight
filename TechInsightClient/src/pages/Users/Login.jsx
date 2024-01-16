@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center mt-40">
-      <ToastContainer/>
+    
      {token?(<h1 className='text-xl font-semibold text-blue-500'>You are already logged in</h1>):(
        <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
        <div className="w-full">

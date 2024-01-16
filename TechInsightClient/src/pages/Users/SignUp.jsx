@@ -90,7 +90,7 @@ const SignUp = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center mt-12">
-            <ToastContainer />
+           
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
                 <div className="lg:w-1/3 xl:w-4/12 p-3 sm:p-6">
                     <div className="text-center">

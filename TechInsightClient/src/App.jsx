@@ -5,13 +5,25 @@ import Navbar from "./components/Common/Navbar";
 import Footer from "./components/Common/Footer";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
     return ( 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Navbar/>
-        <Outlet/>
-        <Footer/>
-        </LocalizationProvider >
+       
+       <div>
+         <LocalizationProvider dateAdapter={AdapterDayjs}>
+            
+            <Navbar/>
+            <Outlet/>
+            <Footer/>
+            
+            </LocalizationProvider >
+            <ToastContainer
+        autoClose={2000}
+        position='top-left'
+        />
+       </div>
+        
     );
 }
  
