@@ -8,7 +8,7 @@ import DeletePost from '../../Services.jsx/DeletePost';
 import addClick from '../../Services.jsx/AddClick';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BarChart from './BarChart';
+import BlogsBarChart from './BlogsBarChart';
 
 
 const BlogsTable = ({currentUser}) => {
@@ -188,7 +188,7 @@ const BlogsTable = ({currentUser}) => {
         </table>
       </div>
       <div className='mt-24 w-2/3 block mx-auto'>
-        <BarChart/>
+        <BlogsBarChart/>
       </div>
     </div>
   );

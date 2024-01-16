@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import fetchUsers from '../../Services.jsx/FetchUsers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UsersBarChart from './UsersBarChart';
 
 
 
@@ -151,6 +152,9 @@ const UsersTable = () => {
             </tbody>
           </table>
         </div>
+        <div className='mt-24 w-2/3 block mx-auto'>
+        <UsersBarChart/>
+      </div>
       </div>
     );
   };

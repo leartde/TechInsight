@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Bar} from 'react-chartjs-2'
 import fetchUserClicks from '../../Services.jsx/FetchUserClicks';
 import {Chart as ChartJS} from  'chart.js/auto' 
-const BarChart = () => {
+const BlogsBarChart = () => {
     const [userClicks, setUserClicks] = useState({
         labels: [],
         datasets: [{
@@ -53,4 +53,4 @@ const BarChart = () => {
   )
 }
 
-export default BarChart
+export default BlogsBarChart
