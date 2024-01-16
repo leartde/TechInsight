@@ -23,7 +23,6 @@ namespace TechInsightAPI.Models
         public virtual Category? Category { get; set; } 
         public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();
         public virtual ICollection<PostTag>? PostTags { get; set; } = new List<PostTag>();
-        public virtual ICollection<Like>? Likes { get; set; } = new List<Like>();
         public  virtual ICollection<UserClick>? UserClicks { get; set; } = new List<UserClick>();
     }
 

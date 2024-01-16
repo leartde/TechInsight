@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Pagination from '../../components/BlogComponents/Pagination';
 import CategorySelector from '../../components/BlogComponents/CategorySelector';
-import BlogCard from '../../components/BlogComponents/BlogCard';
 import { Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Sidebar from '../../components/BlogComponents/Sidebar';
 import Cookies from 'universal-cookie';
-import BlogCard2 from '../../components/BlogComponents/BlogCard2';
+import BlogCard from '../../components/BlogComponents/BlogCard';
 
 
     const BlogPage = () => {
@@ -15,7 +14,7 @@ import BlogCard2 from '../../components/BlogComponents/BlogCard2';
         const location = useLocation();
         const [tag, setTag] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
-        const pageSize = 12; //number of blogs per page;
+        const pageSize = 9; //number of blogs per page;
         const [selectedCategory, setSelectedCategory] = useState(null);
         const [activeCategory, setActiveCategory] = useState(null);
         const cookies = new Cookies();
@@ -177,7 +176,7 @@ import BlogCard2 from '../../components/BlogComponents/BlogCard2';
 
                 <div className='flex flex-row gap-12'>
               
-                <BlogCard2 blogs={blogs} user={token} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
+                <BlogCard blogs={blogs} user={token} currentPage={currentPage} selectedCategory ={selectedCategory} pageSize={pageSize} />
                 <div className=' max-xl:hidden max-w-80 mt-8 lg:mt-0'> <Sidebar blogs={blogs}/>  </div>
                 
                 </div>

@@ -30,8 +30,7 @@ namespace TechInsightAPI.Models
         public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
         [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        [JsonIgnore]
-        public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
+
         [JsonIgnore]
         public virtual ICollection<UserClick> UserClicks { get; set; } = new List<UserClick>();
         [JsonIgnore]

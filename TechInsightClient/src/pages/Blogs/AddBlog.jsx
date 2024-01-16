@@ -103,22 +103,25 @@ const AddBlog = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("Response Data", responseData);
-           toast.success("Blog post created successfully!");
-
-          if (post) {
-            navigate(`/blogs/${post.id}`);
-          } else {
+          toast.success("Succesfully published blog.")
+          const newBlogId = responseData.post.id;
+          setTimeout(() => {
+            navigate(`/blogs/${newBlogId}`);
+          }, 500);
+        }
+           else {
             console.error("No post found in the response data");
             alert("Failed to create blog post.");
+            toast.error("Error creating blog post. Please try again.");
           }
-        }
+        
       } catch (error) {
         console.error("Error creating blog post:", error);
-        toast.error("Error creating blog post. Please try again.");
+      
       } finally {
         setSubmitting(false);
         setLoading(false);
+        
       }
     };
 

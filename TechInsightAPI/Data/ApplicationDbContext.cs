@@ -16,13 +16,13 @@ namespace TechInsightAPI.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies(); // Enable lazy loading
-                                                    // Other configuration options
+                                                   
         }
 
         public DbSet<Example> Examples { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Like> Likes { get; set; }
+ 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -56,12 +56,14 @@ namespace TechInsightAPI.Data
             modelBuilder.Entity<UserClick>()
                 .HasOne(uc => uc.ClickedPost)
                 .WithMany(p => p.UserClicks)
-                .HasForeignKey(uc => uc.PostId);
+                .HasForeignKey(uc => uc.PostId)
+            .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<UserClick>()
                 .HasOne(uc => uc.ClickingUser)
                 .WithMany(u => u.UserClicks)
-                .HasForeignKey(uc => uc.UserId);
+                .HasForeignKey(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Post>()
                 .HasMany(p => p.Comments)
@@ -69,20 +71,16 @@ namespace TechInsightAPI.Data
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Post>()
-                .HasMany(p => p.Likes)
-                .WithOne(c => c.Post)
-                .HasForeignKey(c => c.PostId)
-                .OnDelete(DeleteBehavior.Cascade);
-
+       
 
             modelBuilder.Entity<Comment>()
-    .HasOne(c => c.User)
-    .WithMany(u => u.Comments)
-    .HasForeignKey(c => c.UserId);
-    
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
-          
+
+
 
             modelBuilder.Entity<Post>()
        .HasOne(p => p.Category)

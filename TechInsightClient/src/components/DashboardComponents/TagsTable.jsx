@@ -8,6 +8,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagsChart from './TagsChart';
 
+
+
 const TagsTable = () => {
   const [tags, setTags] = useState([]);
   const [sortDirection, setSortDirection] = useState('asc');

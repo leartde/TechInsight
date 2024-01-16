@@ -30,9 +30,8 @@ namespace TechInsightAPI.Services.cs
                 using var stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {
-                    File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation()
-                        .Height(400).Width(400).Crop("fill").Gravity("face")
+                    File = new FileDescription(file.FileName, stream)
+      
                 };
 
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);

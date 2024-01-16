@@ -29,7 +29,7 @@ const OtherBlogsByUserCard = ({userId, currentPostId, currentUser}) => {
         blogsBySameUser.map((blog)=>(
             <Link key={blog.id} onClick={()=>addClick(blog.id, currentUser.id)} to={`/blogs/${blog.id}`} className="flex group">
             <div className="flex-shrink-0">
-                <img src={blog.imageURL} className="h-14 w-20 rounded object-cover"/>
+                <img src={`${blog.imageURL}`} className="h-14 w-20 rounded object-cover"/>
             </div>
             <div className="flex-grow pl-3">
                 <h5

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CategorySelector = ({ onSelectCategory, activeCategory }) => {
-  const categories = ["Devices", "Code", "Innovation", "Cybersecurity", "Trends", "AI"];
+  const categories = ["Devices", "Software", "Innovation", "Cybersecurity", "Business", "AI"];
 
   return (
     <div className="max-lg:mx-auto relative mt-6 h-10 w-72 min-w-48">
