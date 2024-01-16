@@ -22,7 +22,7 @@ const DiscoverUsers = () => {
       };
     }
     fetchData();
-  }, [users]);
+  }, []);
 
 
   return (
