@@ -6,6 +6,7 @@ import { FaTrash } from 'react-icons/fa';
 import fetchTags from "../../Services.jsx/FetchTags";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TagsChart from './TagsChart';
 
 const TagsTable = () => {
   const [tags, setTags] = useState([]);
@@ -158,6 +159,11 @@ const TagsTable = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className='block mx-auto mt-24 w-full h-64 text-center'>
+        <h2 className='text-gray-600 text-2xl text-bold'> Most popular tags</h2>
+        <TagsChart/>
       </div>
     </div>
   );
