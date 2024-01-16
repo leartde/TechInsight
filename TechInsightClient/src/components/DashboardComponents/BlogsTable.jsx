@@ -8,6 +8,7 @@ import DeletePost from '../../Services.jsx/DeletePost';
 import addClick from '../../Services.jsx/AddClick';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BarChart from './BarChart';
 
 
 const BlogsTable = ({currentUser}) => {
@@ -16,6 +17,7 @@ const BlogsTable = ({currentUser}) => {
   const [sortColumn, setSortColumn] = useState('id');
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const [clicks, setClicks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -184,6 +186,9 @@ const BlogsTable = ({currentUser}) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className='mt-24 w-2/3 block mx-auto'>
+        <BarChart/>
       </div>
     </div>
   );

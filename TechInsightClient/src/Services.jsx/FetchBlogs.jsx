@@ -5,7 +5,7 @@ const fetchBlogs = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Fetched Blogs:', data);
+      // console.log('Fetched Blogs:', data);
       return data;
     } else {
       console.log('Error fetching blogs:', response.statusText);
