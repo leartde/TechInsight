@@ -4,6 +4,7 @@ import {Bar} from 'react-chartjs-2'
 import {Chart as ChartJS} from  'chart.js/auto' 
 
 const UsersBarChart = () => {
+  
     const [users,setUsers] = useState({
         labels: [],
         datasets: [{
@@ -59,7 +60,9 @@ const UsersBarChart = () => {
         
     },[]);
   return (
-    <Bar data={users} options={{}} />
+   <div>
+     <Bar data={users} options={{}} />
+   </div>
   )
 }
 

@@ -21,14 +21,7 @@ const AddBlog = () => {
 
   console.log("tags ", tags);
 
-  const categories = [
-    "Devices",
-    "Code",
-    "Innovation",
-    "Cybersecurity",
-    "Trends",
-    "AI",
-  ];
+  const categories = ["Devices", "Software", "Innovation", "Cybersecurity", "Business", "AI"];
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);

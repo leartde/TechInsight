@@ -14,7 +14,7 @@ import BlogCard from '../../components/BlogComponents/BlogCard';
         const location = useLocation();
         const [tag, setTag] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
-        const pageSize = 9; //number of blogs per page;
+        const pageSize = 9; 
         const [selectedCategory, setSelectedCategory] = useState(null);
         const [activeCategory, setActiveCategory] = useState(null);
         const cookies = new Cookies();
@@ -29,7 +29,7 @@ import BlogCard from '../../components/BlogComponents/BlogCard';
         }
 
         
-        const [searchParams, setSearchParams] = useSearchParams(); // useSearchParams without initial values
+        const [searchParams, setSearchParams] = useSearchParams(); 
 
         useEffect(() => {
             const fetchData = async () => {
@@ -181,7 +181,7 @@ import BlogCard from '../../components/BlogComponents/BlogCard';
                 
                 </div>
             </div>
-            <div className='mr-96'>
+            <div className='lg:mr-96' >
             <Pagination onPageChange={handlePageChange} currentPage={currentPage} blogs={blogs} pageSize={pageSize}/>
             </div>
     </div>
