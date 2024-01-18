@@ -132,9 +132,8 @@ import BlogCard from '../../components/BlogComponents/BlogCard';
       });
     }
 
-      const handleTagChange = (tag)=>{
-        
-        setTag(tag);
+      const handleTagChange = ()=>{
+ 
         setSearchParams((prevParams) => {
           const newSearchParams = new URLSearchParams(prevParams);
   

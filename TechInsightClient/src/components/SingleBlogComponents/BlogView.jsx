@@ -18,7 +18,7 @@ const BlogView = ({blog, user}) => {
             
         </h2>
         <div className="mt-2 flex space-x-4">
-            <div onClick={()=>navigate(`/profile/${user.id}`)} className="flex text-gray-400 text-md items-center cursor-pointer">
+            <div onClick={()=>navigate(`/profile/${blog.userId}`)} className="flex text-gray-400 text-md items-center cursor-pointer">
                 <span className="mr-2 text-xs">
                     <FaUser/>
                 </span>

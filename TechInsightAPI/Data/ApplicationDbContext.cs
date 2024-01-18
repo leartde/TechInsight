@@ -57,13 +57,13 @@ namespace TechInsightAPI.Data
                 .HasOne(uc => uc.ClickedPost)
                 .WithMany(p => p.UserClicks)
                 .HasForeignKey(uc => uc.PostId)
-            .OnDelete(DeleteBehavior.ClientCascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserClick>()
                 .HasOne(uc => uc.ClickingUser)
                 .WithMany(u => u.UserClicks)
                 .HasForeignKey(uc => uc.UserId)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Post>()
                 .HasMany(p => p.Comments)

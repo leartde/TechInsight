@@ -39,7 +39,7 @@ const Profile = () => {
   
       return (
           <div className="flex justify-center items-center flex-col mt-28">
-              <div className="bg-white p-8 shadow-md rounded-lg text-center w-1/2 relative">
+              <div className="bg-white p-8 shadow-md rounded-lg text-center w-1/2 relative max-md:w-96">
                   {user && (
                       <>
                           <img src={user.profilePicUrl?user.profilePicUrl:DefaultUser} alt="Profile" className="w-48 h-48 mx-auto rounded-full mb-4"/>
