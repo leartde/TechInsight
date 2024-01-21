@@ -317,6 +317,11 @@ namespace TechInsightAPI.Controllers
                     _context.Comments.Remove(comment);
                 };
 
+                var userClicksToDelete = _context.UserClicks.Where(uc => uc.PostId == post.Id);
+
+                _context.UserClicks.RemoveRange(userClicksToDelete);
+                
+
 
 
                 _context.Posts.Remove(post);

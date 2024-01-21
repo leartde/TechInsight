@@ -315,6 +315,9 @@ namespace TechInsightAPI.Controllers
                 {
                     _context.Contacts.Remove(contact);
                 };
+                var userClicksToDelete = _context.UserClicks.Where(uc => uc.UserId == user.Id);
+
+                _context.UserClicks.RemoveRange(userClicksToDelete);
 
 
                 _context.Users.Remove(user);
