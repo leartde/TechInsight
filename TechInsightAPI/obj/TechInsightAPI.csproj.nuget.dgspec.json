@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {}
+    "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {
+    "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
+        "projectUniqueName": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
         "projectName": "TechInsightAPI",
-        "projectPath": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
-        "packagesPath": "C:\\Users\\drinv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drinv\\OneDrive\\Desktop\\techinsight\\TechInsight\\TechInsightAPI\\obj\\",
+        "projectPath": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
+        "packagesPath": "C:\\Users\\leart\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\drinv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\leart\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +43,10 @@
             "BCrypt.Net": {
               "target": "Package",
               "version": "[0.1.0, )"
+            },
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.25.0, )"
             },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
@@ -100,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

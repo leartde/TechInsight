@@ -53,7 +53,7 @@ const SingleBlog = () => {
            <RelatedBlogsCard blog={blog} blogId={blog.id} currentUser={token}/>
 
             {/*  comment  */}
-            <CommentSection blog={blog}/>
+            <CommentSection  blog={blog}/>
             
 
         </div>

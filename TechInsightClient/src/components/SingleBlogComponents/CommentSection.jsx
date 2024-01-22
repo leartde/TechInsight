@@ -146,7 +146,7 @@ const token = cookies.get("token");
         
   return (
     <div className="p-4 bg-white rounded-sm shadow-sm mt-8">
-
+              
                 <h4 className="text-base uppercase  font-semibold mb-4 font-roboto">Post a comment</h4>
                 {/* <p className="text-sm text-gray-500 mb-4">12 comments</p> */}
 

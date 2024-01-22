@@ -7832,11 +7832,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\leart\\OneDrive\\Desktop\\new repo\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
+      "projectUniqueName": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
       "projectName": "TechInsightAPI",
-      "projectPath": "C:\\Users\\leart\\OneDrive\\Desktop\\new repo\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
+      "projectPath": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\TechInsightAPI.csproj",
       "packagesPath": "C:\\Users\\leart\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leart\\OneDrive\\Desktop\\new repo\\TechInsight\\TechInsightAPI\\obj\\",
+      "outputPath": "C:\\Users\\leart\\OneDrive\\Desktop\\UBT\\Semestri 5\\Zhvillimi dhe Dizajnimi i Web\\TechInsight\\TechInsightAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\leart\\AppData\\Roaming\\NuGet\\NuGet.Config",
