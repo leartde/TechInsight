@@ -18,20 +18,22 @@ namespace TechInsightAPI.Controllers
 
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(TagDto))]
+        [ProducesResponseType(200, Type = typeof(List<TagDto>))]
         [ProducesResponseType(400)]
         public IActionResult GetTags()
         {
-            var tags = from t in _context.Tags
-                       select new TagDto()
-                       {
-                           Id = t.Id,
-                           Name = t.Name,
-                           PostCount = _context.PostTags.Count(pt => pt.TagId == t.Id)
+            var tags = _context.Tags
+                .Select(t => new TagDto
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    PostCount = _context.PostTags.Count(pt => pt.TagId == t.Id)
+                })
+                .ToList();
 
-                       };
             return Ok(tags);
         }
+
 
         [HttpDelete]
         [Route("delete/{id}")]

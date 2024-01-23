@@ -38,7 +38,7 @@ const Sidebar = ({ blogs }) => {
       setTags(data);
     };
     fetchData();
-  }, [tags]);
+  }, []);
 
   const getMostPopularTags = (tags) => {
     const sortedTags = tags
